@@ -1,0 +1,98 @@
+.wrap {
+  text-align: center;
+  border-radius: 4px;
+  padding: 22px 0px;
+  margin-bottom: 1.25rem;
+  border: 4px dotted #1b9ad4;
+  border-radius: 10px;
+}
+
+.wrap h4 {
+  font-size: 1.2rem;
+  color: #1b9ad4;
+  font-weight: 500;
+  padding-bottom: 0.4rem;
+}
+.wrap h6 {
+  font-size: 8px;
+  text-align: left;
+  margin-top: -10px;
+  color: #1b9ad4;
+}
+
+.file {
+  position: relative;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  width: 100%;
+  max-width: 80%;
+  margin: auto;
+}
+
+.file__input,
+.file__value {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  margin-bottom: 0.875rem;
+  color: black;
+  padding: 6px 10px;
+}
+
+.file__input--file {
+  position: absolute;
+  opacity: 0;
+  font-size: 0px;
+  width: 20px;
+}
+
+.file__input--label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1b9ad4;
+}
+
+.file__input--label:after {
+  content: attr(data-text-btn);
+  border-radius: 3px;
+  background-color: #1b9ad4;
+  color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.18);
+  padding: 6px 10px;
+  margin: -0.9375rem -1.0625rem;
+  cursor: pointer;
+}
+
+.file__value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1b9ad4;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* .file__value:after {
+  content: "X";
+  cursor: pointer;
+} */
+
+.file__value:after:hover {
+  color: white;
+}
+
+.file__remove {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000;
+}
+.form-control-label {
+  display: inline-block;
+  padding-bottom: 0.6rem;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,39 @@
+/* This file is reserved for overriding and extending the template styles. */
+.CircularProgressbar .CircularProgressbar-text {
+    font-size: 2em !important;
+  }
+
+  ::-webkit-scrollbar Dropdown.Menu {
+    display: none;
+}
+
+.link-disable {
+      pointer-events: none;
+      cursor: default;
+    }
+    
+.css-yk16xz-control{
+    outline: none;
+      border-color: none;
+      box-shadow: none;
+}
+.css-yk16xz-control:hover{
+  outline: none;
+  border-color: none;
+  box-shadow: none;
+}
+
+.tab-scroll {
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.tab-scroll::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
+}
+html[data-navcolor=light] .nav-container {
+  background: var(--foreground);
+}
