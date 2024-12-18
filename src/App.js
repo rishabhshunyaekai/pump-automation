@@ -27,7 +27,7 @@
                 <>
                     <ToastContainer />
                     <Layout>
-                    <RouteIdentifier routes={routes} fallback={<Loading />} />
+                        <RouteIdentifier routes={routes} fallback={<Loading />} />
                     </Layout>
                 </>
             );

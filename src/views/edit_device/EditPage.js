@@ -116,7 +116,7 @@
         const [coords, setCoords] = React.useState([]);
         const [redius, setReduis] = React.useState(0);
         const [shapetype, setShapeType] = React.useState();
-        const title = "Edit Device";
+        const title = "Edit Pump";
         const { isLoaded } = useJsApiLoader({
             id               : "google-map-script",
             googleMapsApiKey : "AIzaSyDvqub0gVMyj_O-pMmLRkQQKP_UsCMKFXQ",
@@ -222,7 +222,7 @@
                         }}
                     >
                         <Card.Body>
-                        <h1>Edit Device</h1>
+                        <h1>Edit Pump</h1>
                         <hr style={{ width: "100%", opacity: "0.2" }} />
                         <Form onSubmit={handleSubmit}>
                             <Row className="g-3 pt-5 pb-5">
@@ -233,7 +233,7 @@
                                         fontSize: "0.8rem",
                                         fontFamily: "inherit",
                                     }}
-                                    > Device ID </Form.Label>
+                                    > Pump ID </Form.Label>
                                     <div>
                                         <Form.Control type="text" name="deviceId" value={deviceData.deviceid} disabled onChange={changeHandler} />
                                     </div>
@@ -250,7 +250,7 @@
                                             fontSize   : "0.8rem",
                                             fontFamily : "inherit",
                                         }}
-                                    > Device Name </Form.Label>
+                                    > Pump Name </Form.Label>
                                     <div>
                                         <Form.Control type="text" name="devicename" value={deviceData.devicename} placeholder="Enter the device name" onChange={changeHandler} />
                                     </div>

@@ -50,7 +50,7 @@ const AddDevice = () => {
   // Popup Code End from here
 
   const newdate = moment().format("L");
-  const title = "Add Device";
+  const title = "Add Pump";
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDvqub0gVMyj_O-pMmLRkQQKP_UsCMKFXQ",
@@ -263,17 +263,17 @@ const AddDevice = () => {
             }}
           >
             <Card.Body>
-              <h1>Device Register</h1>
+              <h1>Pump Register</h1>
               <hr style={{ width: "100%", opacity: "0.2" }} />
 
               <Form onSubmit={handleSubmit}>
                 <Row className="g-3 pt-5 pb-5">
                   <Col lg="8" className="mx-auto">
-                    <Form.Label>Device Id</Form.Label>
+                    <Form.Label>Pump Id</Form.Label>
                     <div className="">
                       <Form.Control
                         type="text"
-                        placeholder="Enter the device id"
+                        placeholder="Enter the Pump id"
                         name="deviceid"
                         value={values.deviceid}
                         onChange={handleChange}
@@ -291,12 +291,12 @@ const AddDevice = () => {
                         fontFamily: "inherit",
                       }}
                     >
-                      Device Name
+                      Pump Name
                     </Form.Label>
                     <div>
                       <Form.Control
                         type="text"
-                        placeholder="Enter the device name"
+                        placeholder="Enter the Pump name"
                         name="devicename"
                         value={values.devicename}
                         onChange={handleChange}

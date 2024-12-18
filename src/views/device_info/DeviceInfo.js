@@ -24,7 +24,7 @@
     const DeviceInfo = () => {
         let { id } = useParams();
         const [isConnected, setIsConnected] = useState(SocketIo.connected);
-        const title = "Device Information";
+        const title = "Pump Information";
         const description = "Ecommerce Customer Detail Page";
         const [details, SetDetails] = useState(0);
         const [loading, SetLoading] = useState(false);
@@ -193,7 +193,7 @@
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
-                                    Device ID
+                                    Pump ID
                                 </div>
                                 </Col>
                                 <Col xs="auto">
@@ -219,7 +219,7 @@
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
-                                    Device Name
+                                    Pump Name
                                 </div>
                                 </Col>
                                 <Col xs="auto">
@@ -484,7 +484,7 @@
                             className="d-flex flex-column pe-1 justify-content-center"
                         >
                             <div className="text-muted text-medium cursor-pointer ">
-                            Device Name
+                            Pump Name
                             </div>
                         </Col>
                         <Col

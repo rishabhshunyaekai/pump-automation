@@ -68,62 +68,77 @@
                     { path : "/create_area", label : "Create Area", component : area.detail },
                     { path : "/area_list",   label : "Area list",   component : area.list },
                 ],
-            }, {
-                path     : `${appRoot}/alert`,
-                exact    : true,
-                redirect : true,
-                to       : `${appRoot}/alert/list`,
-                label    : "Alert",
-                icon     : "warning-hexagon",
-                subs : [
-                    { path : "/active-alert",  label : "Active alert",  component : alert.list },
-                    { path : "/alert-history", label : "Alert history", component : alert.detail },
-                ],
-            }, {
+            }, 
+            // {
+            //     path     : `${appRoot}/alert`,
+            //     exact    : true,
+            //     redirect : true,
+            //     to       : `${appRoot}/alert/list`,
+            //     label    : "Alert",
+            //     icon     : "warning-hexagon",
+            //     subs : [
+            //         { path : "/active-alert",  label : "Active alert",  component : alert.list },
+            //         { path : "/alert-history", label : "Alert history", component : alert.detail },
+            //     ],
+            // }, 
+            // {
+            //     path     : `${appRoot}/device_configure`, // Configure Attachment
+            //     exact    : true,
+            //     redirect : true,
+            //     to       : `${appRoot}/configure/list`,
+            //     label    : "Configure",
+            //     icon     : "grid-2",
+            //     // icon: "spinner",
+            //     subs : [
+            //         { path : "/add_device", label : "Add device", component : configure.list },
+            //         { path : "/parameters", label : "Parameters", component : configure.detail },
+            //     ],
+            // },  
+            {
                 path     : `${appRoot}/device_configure`, // Configure Attachment
                 exact    : true,
                 redirect : true,
                 to       : `${appRoot}/configure/list`,
-                label    : "Configure",
+                label    : "Pump",
                 icon     : "grid-2",
                 // icon: "spinner",
                 subs : [
-                    { path : "/add_device", label : "Add device", component : configure.list },
-                    { path : "/parameters", label : "Parameters", component : configure.detail },
+                    { path : "/add_pump", label : "Add Pump", component : configure.list },
+                    { path : "/pump_list", label : "Pump List", component : configure.detail },
                 ],
             },  
-            {
-                path     : `${appRoot}/member`,
-                exact    : true,
-                redirect : true,
-                to       : `${appRoot}/member`,
-                label    : "Member",
-                icon     : "collapse",
-                subs : [
-                    {
-                        path      : "/create_member",
-                        label     : "Create member",
-                        component : member.detail,
-                    },
-                    { path : "/member_list", label : "Member list", component : member.list },
-                ],
-            },
-            {
-                path     : `${appRoot}/team`,
-                exact    : true,
-                redirect : true,
-                to       : `${appRoot}/team`,
-                label    : "Team",
-                icon     : "diagram-2",
-                subs : [
-                    {
-                        path      : "/create_team",
-                        label     : "Create team",
-                        component : team.detail,
-                    },
-                    { path : "/team_list", label : "Team list", component : team.list },
-                ],
-            },
+            // {
+            //     path     : `${appRoot}/member`,
+            //     exact    : true,
+            //     redirect : true,
+            //     to       : `${appRoot}/member`,
+            //     label    : "Member",
+            //     icon     : "collapse",
+            //     subs : [
+            //         {
+            //             path      : "/create_member",
+            //             label     : "Create member",
+            //             component : member.detail,
+            //         },
+            //         { path : "/member_list", label : "Member list", component : member.list },
+            //     ],
+            // },
+            // {
+            //     path     : `${appRoot}/team`,
+            //     exact    : true,
+            //     redirect : true,
+            //     to       : `${appRoot}/team`,
+            //     label    : "Team",
+            //     icon     : "diagram-2",
+            //     subs : [
+            //         {
+            //             path      : "/create_team",
+            //             label     : "Create team",
+            //             component : team.detail,
+            //         },
+            //         { path : "/team_list", label : "Team list", component : team.list },
+            //     ],
+            // },
             {
                 path      : `${appRoot}/edit-team/:id`,
                 component : edit_team,
@@ -141,15 +156,16 @@
                 path      : `${appRoot}/member-information/:id`,
                 component : member_info,
             },
+            // {
+            //     path      : `${appRoot}/device-list`,
+            //     component : settings.home,
+            //     label     : "Device",
+            //     icon      : "list",
+            //     subs : [
+            //         { path : "/general", component : settings.general, hideInMenu : true },
+            //     ],
+            // },  
             {
-                path      : `${appRoot}/device-list`,
-                component : settings.home,
-                label     : "Device",
-                icon      : "list",
-                subs : [
-                    { path : "/general", component : settings.general, hideInMenu : true },
-                ],
-            },  {
                 path      : `${appRoot}/real_time_data`,
                 component : real_time_data,
                 label     : "Real_time_data",
@@ -183,12 +199,14 @@
                 component : area_device_list,
                 //label   : 'menu.area_device_list',
                 icon      : "bell",
-            }, {
-                path: `${appRoot}/Invoice`,
-                component: Invoice,
-                label: "Invoice",
-                icon: "invoice",
-            },  {
+            }, 
+            // {
+            //     path: `${appRoot}/Invoice`,
+            //     component: Invoice,
+            //     label: "Invoice",
+            //     icon: "invoice",
+            // },  
+            {
                 path      : `${appRoot}/Logout`,
                 component : logout,
                 label     : "Logout",

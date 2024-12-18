@@ -45,7 +45,7 @@ const RealTime = () => {
 let myuuid = uuidv4();
 
   const[uuidgen]=useState(uuidv4())
-  const title = 'Real Time Device Monitoring';
+  const title = 'Real Time Pump Monitoring';
   const description = 'Ecommerce Customer Detail Page';
   const [details, SetDetails] = useState();
   const [list, SeLists] = useState([]);
@@ -285,7 +285,7 @@ let myuuid = uuidv4();
                         <Col className="ps-3">
                           <Row className="g-0">
                             <Col>
-                              {item.count_temp == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Temperature</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Temperature</div>}
+                              {item.count_temp == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Temperature</div>}
                             </Col>
                             <Col xs="auto">
                               <div className="sh-5 d-flex align-items-center">
@@ -327,7 +327,7 @@ let myuuid = uuidv4();
                           <Row className="g-0">
                             <Col>
                               {/* <div className="sh-5 d-flex align-items-center lh-1-25">Humidity</div> */}
-                              {item.count_humi == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Humidity</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Humidity</div>}
+                              {item.count_humi == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Humidity</div>}
 
                             </Col>
 
@@ -369,7 +369,7 @@ let myuuid = uuidv4();
                           <Row className="g-0">
                             <Col>
                               {/* <div className="sh-5 d-flex align-items-center lh-1-25">Moisture</div> */}
-                              {item.count_moist == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Moisture</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Moisture</div>}
+                              {item.count_moist == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Moisture</div>}
 
                             </Col>
                             <Col xs="auto">
@@ -429,6 +429,25 @@ let myuuid = uuidv4();
                             <Col xs="auto">
                               <div className="sh-5 d-flex align-items-center">
                                 {item.AreaName}
+                              </div>
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row>
+                      <Row className="g-0 align-items-center mb-0">
+                        <Col className="ps-2">
+                          <Row className="g-0">
+                            <Col>
+                              {/* <div className="sh-5 d-flex align-items-center lh-1-25">Device Status</div> */}
+                            </Col>
+                            <Col xs="auto">
+                              {/* <div className="sh-5 d-flex align-items-center"> 
+                              {item.devicestatus==0?"Active":"Inactive"}
+                              </div> */}
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                                      style={{width: "2rem", height: "1rem", transform: "scale(1.5)"}} />
+                                {/* <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> */}
                               </div>
                             </Col>
                           </Row>
