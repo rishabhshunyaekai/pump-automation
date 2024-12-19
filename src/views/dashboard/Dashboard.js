@@ -101,7 +101,8 @@ const Dashboard = () => {
       <Row className="mb-5 g-2">
         {/* Card One */}
         <Col xs="6" md="4" lg="4">
-          <NavLink to="device-list">
+          {/* <NavLink to="device-list"> */}
+          <NavLink to="pump/pump_list">
             <Card className="h-100 hover-scale-up cursor-pointer">
               <Card.Body className="d-flex flex-column align-items-center">
                 <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">

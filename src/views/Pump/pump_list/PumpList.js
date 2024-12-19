@@ -338,115 +338,122 @@ if (areanumber !== 0)
                 cellClassName   : "text-alternate",
             },
             {
-                Header   : "Temperature Alert",
-                accessor : "temperature",
-                Cell     : (cell) => {
-                    return (
-                        <> 
-                        { cell.row.original.alerttypetemp === 2 ? 
-                            ( <span>{cell.row.original.mintemprange} - {cell.row.original.maxtemprange} </span>)
-                        : 
-                        (<>
-                            <span className="">
-                                {cell.row.original.alerttemp}
-                                <span>
-                                    { cell.row.original.alerttypetemp === 1 ? <ArrowDropUpIcon style={{ color: "green" }} /> : <ArrowDropDownIcon style={{ color: "red" }} /> }
-                                </span>
-                            </span>
-                        </>)
-                        }
-                    </>
-                    );
-                },
+                Header          : "Pump Capacity",
+                accessor        : "devicecapacity",
                 sortable        : true,
-                headerClassName : "text-muted text-small text-uppercase w-10",
+                headerClassName : "text-muted text-small text-uppercase w-10 px-3",
                 cellClassName   : "text-alternate",
             },
-            {
-                Header   : "Humadity Alert",
-                accessor : "humidity",
-                Cell     : (cell) => {
-                    return (
-                        <> 
-                            { cell.row.original.alerttypehumi === 2 ? 
-                                ( <span>{cell.row.original.minhumirange} - {cell.row.original.maxhumirange} </span>)
-                            : 
-                            (<>
-                                <span className="">
-                                    {cell.row.original.alerthumi}
-                                    <span>
-                                        { cell.row.original.alerttypehumi === 1 ? <ArrowDropUpIcon style={{ color: "green" }} /> : <ArrowDropDownIcon style={{ color: "red" }} /> }
-                                    </span>
-                                </span>
-                            </>)
-                            }
-                        </>
-                    );
-                },
-                sortable        : true,
-                headerClassName : "text-muted text-small text-uppercase w-10 ",
-                cellClassName   : "text-alternate",
-            },
-            {
-                Header   : "Moisture Alert",
-                accessor : "moisture",
-                Cell     : (cell) => {
-                    return (
-                        <> 
-                            { cell.row.original.alerttypemoisture === 2 ? 
-                                ( <span>{cell.row.original.minmoistrange} - {cell.row.original.maxmoistrange} </span> )
-                            : 
-                            (<>
-                                <span className="">
-                                    {cell.row.original.alertmoisture}
-                                    <span>
-                                        {cell.row.original.alerttypemoisture === 1 ? <ArrowDropUpIcon style={{ color: "green" }} /> : <ArrowDropDownIcon style={{ color: "red" }} />}
-                                    </span>
-                                </span>
-                            </>)
-                            }
-                        </>
-                    );
-                },
-                sortable        : true,
-                headerClassName : "text-muted text-small text-uppercase w-10 ",
-                cellClassName   : "text-alternate",
-            },
-            {
-                Header : 'Fire Alert', accessor: 'fire',
-                Cell   : (row) => {
-                    return (
-                        <>
-                            {row.row.original.fire == 1 || row.row.original.fire == '1' ? <span style={{ color: "red" }}>Detected </span> : "Not Detected"}
-                        </>
-                    );
-                },
-                sortable        : true,
-                headerClassName : "text-muted text-small text-uppercase w-10 px-4 ",
-                cellClassName   : "text-alternate",
-            },
-            {
-                Header   : "Area Re-Assign",
-                accessor : "areaid",
-                sortable : false,
-                Cell     : (cell) => (
-                    <Button variant="primary"
-                        style={{
-                            fontSize     : "12px",
-                            padding      : "4px 30px",
-                            borderRadius : "5px",
-                            marginLeft   : "-1.5rem",
-                        }}
-                        onClick={() => {
-                            handleShow(cell.row.original);
-                        }}
-                    >
-                        Re-Assign
-                    </Button>
-                ),
-                headerClassName : "text-muted text-small text-uppercase w-10 px-2",
-                cellClassName   : "text-alternate",
-            },
+            // {
+            //     Header   : "Pump Capacity",
+            //     accessor : "temperature",
+            //     Cell     : (cell) => {
+            //         return (
+            //             <> 
+            //             { cell.row.original.alerttypetemp === 2 ? 
+            //                 ( <span>{cell.row.original.mintemprange} - {cell.row.original.maxtemprange} </span>)
+            //             : 
+            //             (<>
+            //                 <span className="">
+            //                     {cell.row.original.alerttemp}
+            //                     <span>
+            //                         { cell.row.original.alerttypetemp === 1 ? <ArrowDropUpIcon style={{ color: "green" }} /> : <ArrowDropDownIcon style={{ color: "red" }} /> }
+            //                     </span>
+            //                 </span>
+            //             </>)
+            //             }
+            //         </>
+            //         );
+            //     },
+            //     sortable        : true,
+            //     headerClassName : "text-muted text-small text-uppercase w-10",
+            //     cellClassName   : "text-alternate",
+            // },
+            // {
+            //     Header   : "Humadity Alert",
+            //     accessor : "humidity",
+            //     Cell     : (cell) => {
+            //         return (
+            //             <> 
+            //                 { cell.row.original.alerttypehumi === 2 ? 
+            //                     ( <span>{cell.row.original.minhumirange} - {cell.row.original.maxhumirange} </span>)
+            //                 : 
+            //                 (<>
+            //                     <span className="">
+            //                         {cell.row.original.alerthumi}
+            //                         <span>
+            //                             { cell.row.original.alerttypehumi === 1 ? <ArrowDropUpIcon style={{ color: "green" }} /> : <ArrowDropDownIcon style={{ color: "red" }} /> }
+            //                         </span>
+            //                     </span>
+            //                 </>)
+            //                 }
+            //             </>
+            //         );
+            //     },
+            //     sortable        : true,
+            //     headerClassName : "text-muted text-small text-uppercase w-10 ",
+            //     cellClassName   : "text-alternate",
+            // },
+            // {
+            //     Header   : "Moisture Alert",
+            //     accessor : "moisture",
+            //     Cell     : (cell) => {
+            //         return (
+            //             <> 
+            //                 { cell.row.original.alerttypemoisture === 2 ? 
+            //                     ( <span>{cell.row.original.minmoistrange} - {cell.row.original.maxmoistrange} </span> )
+            //                 : 
+            //                 (<>
+            //                     <span className="">
+            //                         {cell.row.original.alertmoisture}
+            //                         <span>
+            //                             {cell.row.original.alerttypemoisture === 1 ? <ArrowDropUpIcon style={{ color: "green" }} /> : <ArrowDropDownIcon style={{ color: "red" }} />}
+            //                         </span>
+            //                     </span>
+            //                 </>)
+            //                 }
+            //             </>
+            //         );
+            //     },
+            //     sortable        : true,
+            //     headerClassName : "text-muted text-small text-uppercase w-10 ",
+            //     cellClassName   : "text-alternate",
+            // },
+            // {
+            //     Header : 'Fire Alert', accessor: 'fire',
+            //     Cell   : (row) => {
+            //         return (
+            //             <>
+            //                 {row.row.original.fire == 1 || row.row.original.fire == '1' ? <span style={{ color: "red" }}>Detected </span> : "Not Detected"}
+            //             </>
+            //         );
+            //     },
+            //     sortable        : true,
+            //     headerClassName : "text-muted text-small text-uppercase w-10 px-4 ",
+            //     cellClassName   : "text-alternate",
+            // },
+            // {
+            //     Header   : "Area Re-Assign",
+            //     accessor : "areaid",
+            //     sortable : false,
+            //     Cell     : (cell) => (
+            //         <Button variant="primary"
+            //             style={{
+            //                 fontSize     : "12px",
+            //                 padding      : "4px 30px",
+            //                 borderRadius : "5px",
+            //                 marginLeft   : "-1.5rem",
+            //             }}
+            //             onClick={() => {
+            //                 handleShow(cell.row.original);
+            //             }}
+            //         >
+            //             Re-Assign
+            //         </Button>
+            //     ),
+            //     headerClassName : "text-muted text-small text-uppercase w-10 px-2",
+            //     cellClassName   : "text-alternate",
+            // },
             {
                 Header   : "Action",
                 accessor : "",

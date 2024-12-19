@@ -317,7 +317,7 @@
 
                 <Col xl="8">
                     {/* Status Start */}
-                    <h2 className="small-title">Current Status</h2>
+                    {/* <h2 className="small-title">Current Status</h2>
                     <Row className="g-2 mb-5">
                     <Col sm="6">
                         <Card className="sh-13 sh-lg-15 sh-xl-14">
@@ -465,7 +465,7 @@
                         </Card.Body>
                         </Card>
                     </Col>
-                    </Row>
+                    </Row> */}
                     {/* Status End */}
 
                     {/* Recent Orders Start */}
@@ -487,7 +487,7 @@
                             Pump Name
                             </div>
                         </Col>
-                        <Col
+                        {/* <Col
                             lg="2"
                             className="d-flex flex-column pe-1 justify-content-center"
                         >
@@ -518,13 +518,21 @@
                             <div className="text-muted text-medium cursor-pointer ">
                             Fire
                             </div>
-                        </Col>
+                        </Col> */}
                         <Col
                             lg="2"
                             className="d-flex flex-column mb-lg-0 pe-3 d-flex"
                         >
                             <div className="text-muted text-medium cursor-pointer ">
                             Updated Date
+                            </div>
+                        </Col>
+                        <Col
+                            lg="2"
+                            className="d-flex flex-column mb-lg-0 pe-3 d-flex"
+                        >
+                            <div className="text-muted text-medium cursor-pointer ">
+                            Pump Capacity
                             </div>
                         </Col>
                         </Row>
@@ -551,7 +559,7 @@
                                             </span>
                                         </div>
                                         </Col>
-                                        <Col
+                                        {/* <Col
                                         xs="6"
                                         md="2"
                                         className="d-flex flex-column justify-content-center mb-2 mb-md-0"
@@ -628,7 +636,7 @@
                                             <span>Not Detected</span>
                                             )}
                                         </div>
-                                        </Col>
+                                        </Col> */}
                                         <Col
                                         xs="6"
                                         md="2"

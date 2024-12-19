@@ -78,6 +78,7 @@ const AddPump = () => {
     deviceid: "",
     userid: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id,
     devicename: "",
+    devicecapacity: "",
     areaid: areanumber,
     regisdate: newdate,
     latitude: "",
@@ -178,8 +179,9 @@ const AddPump = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    deviceid: Yup.string().required("deviceId is required"),
-    devicename: Yup.string().required("deviceName is required"),
+    deviceid: Yup.string().required("pumpId is required"),
+    devicename: Yup.string().required("pumpName is required"),
+    devicecapacity: Yup.string().required("pumpCapacity is required"),
     latitude: Yup.string().required("latitude is required"),
     longitude: Yup.string().required("longitude is required"),
   });
@@ -263,7 +265,7 @@ const AddPump = () => {
             }}
           >
             <Card.Body>
-              <h1>Pump Register</h1>
+              <h1>Register Pump</h1>
               <hr style={{ width: "100%", opacity: "0.2" }} />
 
               <Form onSubmit={handleSubmit}>
@@ -304,6 +306,32 @@ const AddPump = () => {
                       {errors.devicename && touched.devicename && (
                         <div className="d-block invalid-tooltip">
                           {errors.devicename}
+                        </div>
+                      )}
+                    </div>
+                  </Col>
+
+                  <Col lg="8" className="mx-auto">
+                    <Form.Label
+                      style={{
+                        marginLeft: "5px",
+                        fontSize: "0.8rem",
+                        fontFamily: "inherit",
+                      }}
+                    >
+                      Pump Capacity
+                    </Form.Label>
+                    <div>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter the Pump Capacity"
+                        name="devicecapacity"
+                        value={values.devicecapacity}
+                        onChange={handleChange}
+                      />
+                      {errors.devicecapacity && touched.devicecapacity && (
+                        <div className="d-block invalid-tooltip">
+                          {errors.devicecapacity}
                         </div>
                       )}
                     </div>
@@ -454,7 +482,7 @@ const AddPump = () => {
                       marginTop: "3rem",
                     }}
                   >
-                    <Button className="btn-icon btn-icon-end" variant="primary" type="reset" href="/device-list">
+                    <Button className="btn-icon btn-icon-end" variant="primary" type="reset" href='/dashboard'>
                       Cancel <CsLineIcons icon="chevron-right" />
                     </Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -550,7 +578,7 @@ const AddPump = () => {
               zIndex={2}
             />
 
-            {shapetype == "circle" ? (
+            {shapetype === "circle" ? (
               <Circle
                 center={coords[0]}
                 options={{

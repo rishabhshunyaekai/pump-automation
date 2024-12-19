@@ -1,6 +1,6 @@
     import React, { useEffect, useState } from "react";
     import moment from "moment";
-    import { NavLink, useLocation, useParams, } from "react-router-dom";
+    import { NavLink, useLocation, useParams, useHistory  } from "react-router-dom";
     
     import Select from "react-select";
     import { Row, Col, Button, Form, Card, Modal, Dropdown, Tooltip, OverlayTrigger, } from "react-bootstrap";
@@ -23,6 +23,7 @@
     const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
     const EditPage = () => {
+        const historys = useHistory ();
         let { id } = useParams();
         // Popup Code start from here
         const [show, setShow] = useState(false);
@@ -52,6 +53,7 @@
         // Popup Code End from here
         const [deviceId, setDeviceID]     = useState();
         const [deviceName, setDeviceName] = useState();
+        const [deviceCapacity, setDeviceCapacity] = useState();
         const [areaName, setareaName]     = useState();
         const [areanumber, setAreaNumber] = React.useState();
         const [regisdate, setRegisDate]   = useState();
@@ -61,6 +63,7 @@
             deviceid   : "",
             userid     : DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id,
             devicename : "",
+            devicecapacity: "",
             areaid     : "",
             latitude,
             longitude
@@ -68,6 +71,10 @@
 
         const [error, setError] = useState(false);
         const [reset, setreset] = useState("");
+
+        function backToPumpList () {
+            historys.push('/pump/pump_list');
+        }
 
         React.useEffect(() => {
             SingleDeviceDataService(
@@ -253,9 +260,26 @@
                                         }}
                                     > Pump Name </Form.Label>
                                     <div>
-                                        <Form.Control type="text" name="devicename" value={deviceData.devicename} placeholder="Enter the device name" onChange={changeHandler} />
+                                        <Form.Control type="text" name="devicename" value={deviceData.devicename} placeholder="Enter the Pump name" onChange={changeHandler} />
                                     </div>
                                     {error && deviceName.length <= 0 ? (
+                                        <label style={{ color: "red" }}>
+                                            area device can't be empty
+                                        </label>
+                                    ) : ( "" )}
+                                </Col>
+                                <Col lg="10" className="mx-auto">
+                                    <Form.Label
+                                        style={{
+                                            marginLeft : "5px",
+                                            fontSize   : "0.8rem",
+                                            fontFamily : "inherit",
+                                        }}
+                                    > Pump Capacity </Form.Label>
+                                    <div>
+                                        <Form.Control type="text" name="devicecapacity" value={deviceData.devicecapacity} placeholder="Enter the Pump Capacity" onChange={changeHandler} />
+                                    </div>
+                                    {error && deviceCapacity.length <= 0 ? (
                                         <label style={{ color: "red" }}>
                                             area device can't be empty
                                         </label>
@@ -361,7 +385,7 @@
                                         marginTop      : "3rem",
                                     }}
                                 >
-                                    <Button className="btn-icon btn-icon-end" variant="primary" type="reset" href="/device-list">
+                                    <Button className="btn-icon btn-icon-end" variant="primary" type="reset" onClick={backToPumpList}>
                                         Cancel <CsLineIcons icon="chevron-right" />
                                     </Button>
                                     {/* <a href="/device-list" className="btn-icon btn-icon-end" style={{backgroundColor: '#1b98d0'}}> Cancel </a> */}

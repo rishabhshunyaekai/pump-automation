@@ -79,7 +79,7 @@ const RecentHistory = (props) => {
 
     return [
       {
-        Header: 'Device ID', accessor: 'deviceid', sortable: true,
+        Header: 'Pump ID', accessor: 'deviceid', sortable: true,
         headerClassName: 'text-muted text-small text-uppercase w-8 p-4', Cell: (cell) => {
           return (
             <>
@@ -91,52 +91,53 @@ const RecentHistory = (props) => {
         },
       },
 
-      { Header: 'Device Name', accessor: 'devicename', sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-2 ', cellClassName: 'text-alternate' },
+      { Header: 'Pump Name', accessor: 'devicename', sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-2 ', cellClassName: 'text-alternate' },
+      { Header: 'Pump Capacity', accessor: 'devicecapacity', sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-2 ', cellClassName: 'text-alternate' },
 
-      { Header: 'Temperature Alert', accessor: 'temperature', 
-      Cell: (row) => {
-        return (
+      // { Header: 'Temperature Alert', accessor: 'temperature', 
+      // Cell: (row) => {
+      //   return (
 
-          <span>
-            {row.row.original.count_temp == 1 || row.row.original.count_temp == '1' ? <span style={{ color: "red" }}> {row.row.original.temperature} &#8451;</span> : <span>   {row.row.original.temperature}  &#8451;</span>}
-          </span>
-        );
-      },
-      sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-2', cellClassName: 'text-alternate' },
+      //     <span>
+      //       {row.row.original.count_temp == 1 || row.row.original.count_temp == '1' ? <span style={{ color: "red" }}> {row.row.original.temperature} &#8451;</span> : <span>   {row.row.original.temperature}  &#8451;</span>}
+      //     </span>
+      //   );
+      // },
+      // sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-2', cellClassName: 'text-alternate' },
 
-      { Header: 'Humidity Alert', accessor: 'humidity', 
-      Cell: (row) => {
-        return (
-          <span>
-            {row.row.original.count_humi == 1 || row.row.original.count_humi == '1' ? <span style={{ color: "red" }}> {row.row.original.humidity}{'%'}</span> : <span> {row.row.original.humidity}{'%'}</span>}
-          </span>
+      // { Header: 'Humidity Alert', accessor: 'humidity', 
+      // Cell: (row) => {
+      //   return (
+      //     <span>
+      //       {row.row.original.count_humi == 1 || row.row.original.count_humi == '1' ? <span style={{ color: "red" }}> {row.row.original.humidity}{'%'}</span> : <span> {row.row.original.humidity}{'%'}</span>}
+      //     </span>
 
-        );
-      },
-      sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 ', cellClassName: 'text-alternate', },
+      //   );
+      // },
+      // sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 ', cellClassName: 'text-alternate', },
 
-      { Header: 'Moisture Alert', accessor: 'moisture',
-      Cell: (row) => {
-        return (
-          <span>
-            {row.row.original.count_moist == 1 || row.row.original.count_moist == '1' ? <span style={{ color: "red" }}>{row.row.original.moisture}{'%'}</span> : <span>{row.row.original.moisture}{'%'}</span>}
-          </span>
-        );
-      },
-      sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 ', cellClassName: 'text-alternate', },
+      // { Header: 'Moisture Alert', accessor: 'moisture',
+      // Cell: (row) => {
+      //   return (
+      //     <span>
+      //       {row.row.original.count_moist == 1 || row.row.original.count_moist == '1' ? <span style={{ color: "red" }}>{row.row.original.moisture}{'%'}</span> : <span>{row.row.original.moisture}{'%'}</span>}
+      //     </span>
+      //   );
+      // },
+      // sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 ', cellClassName: 'text-alternate', },
 
-      { Header: 'Fire Alert', accessor: 'fire',
-      Cell: (row) => {
-        return (
-          <>
-            {row.row.original.fire == 1 || row.row.original.fire == '1' ? <span style={{ color: "red" }}>Detected </span> : "Not Detected"}
+      // { Header: 'Fire Alert', accessor: 'fire',
+      // Cell: (row) => {
+      //   return (
+      //     <>
+      //       {row.row.original.fire == 1 || row.row.original.fire == '1' ? <span style={{ color: "red" }}>Detected </span> : "Not Detected"}
 
-          </>
+      //     </>
 
 
-        );
-      },
-      sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-4', cellClassName: 'text-alternate', },
+      //   );
+      // },
+      // sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-4', cellClassName: 'text-alternate', },
 
       {
         Header: 'Action', accessor: 'action', sortable: false, Cell: (cell) => {

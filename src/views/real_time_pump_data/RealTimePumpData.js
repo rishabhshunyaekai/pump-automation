@@ -409,7 +409,7 @@ let myuuid = uuidv4();
                           <Row className="g-0">
                             <Col>
                               {/* <div className="sh-5 d-flex align-items-center lh-1-25">Fire</div> */}
-                              {item.fire == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Fire</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Fire</div>}
+                              {item.fire == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Capacity</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Fire</div>}
 
                             </Col>
                             <Col xs="auto">
@@ -438,7 +438,7 @@ let myuuid = uuidv4();
                         <Col className="ps-2">
                           <Row className="g-0">
                             <Col>
-                              {/* <div className="sh-5 d-flex align-items-center lh-1-25">Device Status</div> */}
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Status</div>
                             </Col>
                             <Col xs="auto">
                               {/* <div className="sh-5 d-flex align-items-center"> 
