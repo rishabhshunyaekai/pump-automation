@@ -6,9 +6,10 @@ import 'firebase/compat/database';
  import CryptoJS from 'crypto-js';
 // import crypto from 'crypto';
  //import AesCrypto from 'react-native-aes-crypto';
+ const firebaseApiKey = process.env.REACT_APP_FIREBASE_KEY;
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCcnlAx9XxydyXSp2Jp9EvPEW0TrIzfchc",
+    apiKey: firebaseApiKey,
     authDomain: "bdiskoveredapp-6eb80.firebaseapp.com",
     databaseURL: "https://bdiskoveredapp-6eb80-default-rtdb.firebaseio.com",
     projectId: "bdiskoveredapp-6eb80",

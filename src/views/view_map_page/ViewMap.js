@@ -17,13 +17,15 @@
     let user_id          = sessionStorage.getItem("user_id")
     let lib              = ["places", "geometry", "visualization", "drawing"];
     const google         = (window.google = window.google ? window.google : {});
+    const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+    
     const ViewMap = () => {
         let { id }                          = useParams();
         const [isConnected, setIsConnected] = useState(SocketIo.connected);
         const title                         = "View Map";
         const { isLoaded } = useJsApiLoader({
             id               : "google-map-script",
-            googleMapsApiKey : "AIzaSyDvqub0gVMyj_O-pMmLRkQQKP_UsCMKFXQ",
+            googleMapsApiKey : googleMapApiKey,
             libraries        : lib,
         });
         const [coords, setCoords]           = React.useState([]);

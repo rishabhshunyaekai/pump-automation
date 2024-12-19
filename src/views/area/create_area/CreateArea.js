@@ -17,6 +17,7 @@ const center = {
   lat: 28.6139,
   lng: 77.209,
 };
+const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 //const google = window.google;
 let lib = ["places", "geometry", "visualization", "drawing"];
@@ -26,7 +27,7 @@ const CreateArea = () => {
   const title = "Create Area";
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDvqub0gVMyj_O-pMmLRkQQKP_UsCMKFXQ",
+    googleMapsApiKey: googleMapApiKey,
     libraries: lib,
   });
 

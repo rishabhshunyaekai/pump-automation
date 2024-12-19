@@ -42,7 +42,7 @@ let lib = ["places", "geometry", "visualization", "drawing"];
 const google = (window.google = window.google ? window.google : {});
 const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-const AddDevice = () => {
+const AddPump = () => {
   // Popup Code start from here
   const [show, setShow] = useState(false);
   const history = useHistory()
@@ -602,6 +602,4 @@ const AddDevice = () => {
   );
 };
 
-export default AddDevice;
-
-
+export default AddPump;

@@ -20,6 +20,7 @@ const center = {
   lng: 55.2708,
 };
 let lib = ["places", "geometry", "visualization", "drawing"];
+const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const Dashboard = () => {
 
@@ -27,7 +28,7 @@ const Dashboard = () => {
   const description = "Ecommerce Dashboard Page";
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDvqub0gVMyj_O-pMmLRkQQKP_UsCMKFXQ",
+    googleMapsApiKey: googleMapApiKey,
     libraries: lib,
   });
   const [coords, setCoords] = React.useState([]);

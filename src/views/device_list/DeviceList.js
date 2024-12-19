@@ -23,6 +23,7 @@
     const center = { lat: 28.6139, lng: 77.209, };
     let lib      = ["places", "geometry", "visualization", "drawing"];
     const google = (window.google = window.google ? window.google : {});
+    const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
     const ControlsSearch = ({ tableInstance }) => {
         const { setGlobalFilter, state: { globalFilter }, } = tableInstance;
@@ -139,7 +140,7 @@
 
         const title        = "Device List";
         const description  = "Ecommerce Discount Page";
-        const { isLoaded } = useJsApiLoader({ id: "google-map-script", googleMapsApiKey: "AIzaSyDvqub0gVMyj_O-pMmLRkQQKP_UsCMKFXQ", libraries: lib, });
+        const { isLoaded } = useJsApiLoader({ id: "google-map-script", googleMapsApiKey: googleMapApiKey, libraries: lib, });
 
         const [coords, setCoords] = React.useState([]);
 

@@ -3,6 +3,7 @@ import React from "react";
 import "../configure/parameters/ProductDetails.css";
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const Map = () => {
   const defaultProps = {
@@ -19,7 +20,7 @@ const Map = () => {
     <div className="map-container">
       <div style={{ width: "100%", height: "100%" }}>
         {/* <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyDvqub0gVMyj_O-pMmLRkQQKP_UsCMKFXQ' }}
+          bootstrapURLKeys={{ key: googleMapApiKey }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
         >

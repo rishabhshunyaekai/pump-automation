@@ -13,7 +13,7 @@ import classNames from "classnames";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 //import { DEFAULT_USER } from "config";
-import "./ProductDetails.css";
+import "./PumpList.css";
 import { postRequest } from "@mock-api/data/datatable";
 import Pagination from "Pagination";
 // import "../configure/parameters/ProductDetails.css";
@@ -111,7 +111,7 @@ const Table = ({ tableInstance, className }) => {
     );
 };
 
-const AreaList = () => {
+const PumpList = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => {
         seDevicePoint("");
@@ -720,7 +720,7 @@ return isLoaded ? (
     <></>
 );
 };
-export default AreaList;
+export default PumpList;
 
 
 // import React, { useState } from "react";
