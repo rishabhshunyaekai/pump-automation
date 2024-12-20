@@ -235,7 +235,7 @@ let myuuid = uuidv4();
                           <Row className="g-0">
                             <Col>
                               {/* <NavLink to={`device-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25"> */}
-                              <NavLink to={`device-pump/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25">
+                              <NavLink to={`pump-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25">
                                 {item.devicename}
                                 {/* Device Name </div> */}
                               </NavLink>

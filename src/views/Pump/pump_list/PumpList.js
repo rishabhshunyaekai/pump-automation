@@ -321,7 +321,8 @@ if (areanumber !== 0)
                 headerClassName : "text-muted text-small text-uppercase w-10 px-3",
                 Cell : ({ cell }) => {
                     return (
-                        <NavLink to={`/device-information/${cell.row.original.deviceid}`}>
+                        // <NavLink to={`/device-information/${cell.row.original.deviceid}`}>
+                        <NavLink to={`/pump-information/${cell.row.original.deviceid}`}>
                             {cell.row.original.deviceid}
                         </NavLink>
                     );

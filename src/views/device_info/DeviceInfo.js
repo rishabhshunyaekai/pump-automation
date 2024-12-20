@@ -101,7 +101,8 @@
                         >
                             <div className="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100">
                             <div style={{ width: "95%" }}>
-                                <NavLink to={`/edit-device/${details.deviceid}`}>
+                                {/* <NavLink to={`/edit-device/${details.deviceid}`}> */}
+                                <NavLink to={`/edit-pump/${details.deviceid}`}>
                                 <Button variant="primary" className="w-100 me-2">
                                     Edit
                                 </Button>

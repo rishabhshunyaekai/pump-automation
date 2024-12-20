@@ -84,7 +84,7 @@
                     <Row className="g-0">
                         {/* Title Start */}
                         <Col className="col-auto mb-3 mb-sm-0 me-auto">
-                            <NavLink className="muted-link pb-1 d-inline-block hidden breadcrumb-back" to="/area_list" >
+                            <NavLink className="muted-link pb-1 d-inline-block hidden breadcrumb-back" to="/area/area_list" >
                                 <CsLineIcons icon="chevron-left" size="13" />
                                 <span className="align-middle text-small ms-1">Aear List</span>
                             </NavLink>
