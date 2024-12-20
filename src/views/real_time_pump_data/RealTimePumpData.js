@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {v4 as uuidv4} from 'uuid';
-
 import Select from 'react-select'
 import { NavLink } from 'react-router-dom';
 // import material ui
@@ -17,16 +16,14 @@ import { useParams } from "react-router";
 import HtmlHead from 'components/html-head/HtmlHead';
 import CsLineIcons from 'cs-line-icons/CsLineIcons';
 import { DeviceDetailsService, ListAreaService } from "../../@mock-api/data/datatable"
-import DeviceThermostatRoundedIcon from '@mui/icons-material/DeviceThermostatRounded';
-import SpeedRoundedIcon from '@mui/icons-material/SpeedRounded';
-import OpacityOutlinedIcon from '@mui/icons-material/OpacityOutlined';
-import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined';
 import {SocketIo,DEFAULT_USER } from 'config.js';
-import io from 'socket.io-client';
-
 import Pagination from "../../Pagination";
-import RealTimeNotification from "../../@mock-api/data/notifications";
-
+// import DeviceThermostatRoundedIcon from '@mui/icons-material/DeviceThermostatRounded';
+// import SpeedRoundedIcon from '@mui/icons-material/SpeedRounded';
+// import OpacityOutlinedIcon from '@mui/icons-material/OpacityOutlined';
+// import LocalFireDepartmentOutlinedIcon from '@mui/icons-material/LocalFireDepartmentOutlined';
+// import io from 'socket.io-client';
+// import RealTimeNotification from "../../@mock-api/data/notifications";
 // Import react-circular-progressbar module and styles
 import {
   CircularProgressbar,
@@ -38,7 +35,6 @@ import "react-circular-progressbar/dist/styles.css";
 const RealTimePumpData = () => {
   let { id } = useParams();
   //SocketIo.connect(`ws://192.168.1.22:8000/users/${DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id}`)
-  
   //let SocketIo=io.connect(`http://192.168.1.22:8000/users/${DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id}`);
   const [isConnected, setIsConnected] = useState(SocketIo.connected);
 
@@ -53,8 +49,6 @@ let myuuid = uuidv4();
   const [listData, setListData] = React.useState([]);
   const [selectedItem, setSelectedItem] = React.useState("");
   const [selectedItemValue, setSelectedItemValue] = React.useState(0);
-
-
   const [itemPerPage, setItemPerpage] = useState(10);
   const [totalrecord, setTotalrecoard] = useState(1);
   const [totalpage, setTotalpage] = useState(0);
@@ -64,10 +58,7 @@ let myuuid = uuidv4();
     areanumber: 0,
     devicestatus: 2
   });
-
-
   const { currentPage, limit, areanumber, devicestatus } = state;
-
 
   const handlePagination = (current) => {
     setstate({ ...state, currentPage: current });
@@ -75,13 +66,13 @@ let myuuid = uuidv4();
          SocketIo.emit('onrealtimedata', ({ userId: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id, currentPage: current, limit: limit, areanumber: areanumber, devicestatus: devicestatus,groupid:uuidgen }));
     }
   };
+
   const Listdatanew = (filter) => {
     ListAreaService(filter, res => {
       setListData(current => [...current, { id: 0, value: "", label: "All Items", AreaNumber: "0" }]);
       setListData(current => [...current, ...res.data.result.areaList]);
     });
   }
-
 
   const singledatanew = (filter) => {
     DeviceDetailsService(filter, res => {
@@ -92,33 +83,28 @@ let myuuid = uuidv4();
 
     });
   }
+
   React.useEffect(() => {
      singledatanew({ "deviceid": id, "userid": DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id });
     Listdatanew({ userid: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id });
   }, []);
 
-
   useEffect(() => {
-   
     SeLists([]);
-  
     if (isConnected) {
        SocketIo.emit('onrealtimedata',({ userId: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id, currentPage: currentPage, limit: limit, areanumber: areanumber, devicestatus: devicestatus,groupid:uuidgen  }));
-
-      SocketIo.on('deviceData', (result) => {
-       // console.log("wanha par")
-        if (result.length !== 0) {
-          SeLists(result.deviceList);
-          setTotalrecoard(result.totalrecoard);
-          setTotalpage(result.totalpage);
-        } else {
-          SeLists([]);
-          setTotalrecoard(0);
-          setTotalpage(0);
-        }
-
-      });
-
+        SocketIo.on('deviceData', (result) => {
+        // console.log("wanha par")
+          if (result.length !== 0) {
+            SeLists(result.deviceList);
+            setTotalrecoard(result.totalrecoard);
+            setTotalpage(result.totalpage);
+          } else {
+            SeLists([]);
+            setTotalrecoard(0);
+            setTotalpage(0);
+          }
+        });
     }
 
     return () => {
@@ -152,6 +138,7 @@ let myuuid = uuidv4();
           {title}
         </h1>
       </div>
+
       <Row className="mb-3">
         {/* Title End */}
         <Col md="12" lg="12" xxl="12" sm="12">
@@ -237,42 +224,36 @@ let myuuid = uuidv4();
 
       <Row>
         {
-          list.length != 0 ?
+          list.length !== 0 ?
             list.map((item) => {
               return (
                 <Col xl="3" key={item.id}>
                   <Card className="mb-5" style={item.count_temp == 1 || item.count_moist == 1 || item.count_humi == 1 || item.fire == 1 ? { border: "2px solid red" } : { border: "none" }}>
                     <Card.Header  >
                       <Row className="g-0 align-items-center mb-0">
-
                         <Col className="ps-2">
                           <Row className="g-0">
                             <Col>
-                              <NavLink to={`device-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25">
+                              {/* <NavLink to={`device-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25"> */}
+                              <NavLink to={`device-pump/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25">
                                 {item.devicename}
                                 {/* Device Name </div> */}
                               </NavLink>
                             </Col>
                             <Col xs="auto">
                               <div className="sh-5 d-flex align-items-center">
-                                {item.devicestatus == 0 ? <Badge pill={true} bg="success">Active</Badge> : <Badge pill={true} bg="danger">Inactive</Badge>}
+                                {item.devicestatus === 0 ? <Badge pill={true} bg="success">Active</Badge> : <Badge pill={true} bg="danger">Inactive</Badge>}
                                 {/* {item.deviceid} */}
-
                               </div>
                             </Col>
-
-
                           </Row>
-
                         </Col>
-
                       </Row>
-
-
                     </Card.Header>
+
                     <Card.Body className="mb-0">
                       <Row className="g-0 align-items-center mb-2">
-                        <Col xs="auto">
+                        {/* <Col xs="auto">
                           {item.count_temp == 0 ?
                             <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                               <DeviceThermostatRoundedIcon className="text-primary" />  </div> :
@@ -280,17 +261,20 @@ let myuuid = uuidv4();
                               <DeviceThermostatRoundedIcon className="text-danger" />
                             </div>
                           }
-                        </Col>
+                        </Col> */}
 
                         <Col className="ps-3">
                           <Row className="g-0">
                             <Col>
-                              {item.count_temp == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Temperature</div>}
+                                <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div>
+                              {/* {item.count_temp === 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Temperature</div>} */}
                             </Col>
                             <Col xs="auto">
+                              <div className="sh-5 d-flex align-items-center lh-1-25"></div> 
+                            </Col>
+                            {/* <Col xs="auto">
                               <div className="sh-5 d-flex align-items-center">
                                 <div style={{ width: 45, height: 45 }}>
-
                                   <CircularProgressbar
                                     value={parseInt(item.temperature)}
                                     text={`${parseInt(item.temperature)}.C`}
@@ -300,38 +284,35 @@ let myuuid = uuidv4();
                                       trailColor: "pink"
                                     })}
                                   />
-
                                 </div>
-
                               </div>
-                            </Col>
+                            </Col> */}
                           </Row>
                         </Col>
                       </Row>
                       <Row className="g-0 align-items-center mb-2">
                         <Col xs="auto">
-
-
-                          {item.count_humi == 0 ?
+                          {/* {item.count_humi == 0 ?
                             <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                               <OpacityOutlinedIcon className="text-primary" />
                             </div> :
                             <div className="border border-danger sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                               <OpacityOutlinedIcon className="text-danger" />
                             </div>
-                          }
-
+                          } */}
                         </Col>
 
                         <Col className="ps-3">
                           <Row className="g-0">
                             <Col>
-                              {/* <div className="sh-5 d-flex align-items-center lh-1-25">Humidity</div> */}
-                              {item.count_humi == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Humidity</div>}
-
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div>
+                              {/* {item.count_humi === 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Humidity</div>} */}
+                            </Col>
+                            <Col xs="auto">
+                              <div className="sh-5 d-flex align-items-center lh-1-25"></div> 
                             </Col>
 
-                            <Col xs="auto">
+                            {/* <Col xs="auto">
                               <div className="sh-5 d-flex align-items-center">
                                 <div style={{ width: 45, height: 45 }}>
                                   <CircularProgressbar value={parseInt(item.humidity)} text={`${parseInt(item.humidity)}%`}
@@ -346,7 +327,7 @@ let myuuid = uuidv4();
                                   />
                                 </div>
                               </div>
-                            </Col>
+                            </Col> */}
                           </Row>
                         </Col>
                       </Row>
@@ -355,38 +336,38 @@ let myuuid = uuidv4();
                           {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                         <SpeedRoundedIcon  className="text-primary" />
                       </div> */}
-                          {item.count_moist == 0 ?
+                          {/* {item.count_moist == 0 ?
                             <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                               <SpeedRoundedIcon className="text-primary" />
                             </div> :
                             <div className="border border-danger sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                               <SpeedRoundedIcon className="text-danger" />
                             </div>
-                          }
+                          } */}
                         </Col>
 
                         <Col className="ps-3">
                           <Row className="g-0">
                             <Col>
-                              {/* <div className="sh-5 d-flex align-items-center lh-1-25">Moisture</div> */}
-                              {item.count_moist == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Moisture</div>}
-
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div>
+                              {/* {item.count_moist === 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Moisture</div>} */}
                             </Col>
                             <Col xs="auto">
+                              <div className="sh-5 d-flex align-items-center lh-1-25"></div> 
+                            </Col>
+                            {/* <Col xs="auto">
                               <div className="sh-5 d-flex align-items-center">
                                 <div style={{ width: 45, height: 45 }}>
                                   <CircularProgressbar value={parseInt(item.moisture)} text={`${parseInt(item.moisture)}%`}
                                     styles={{
-                                      // Customize the text
                                       text: {
-                                        // Text size
                                         fontSize: '2em !important',
                                       },
 
                                     }}
                                   />
                                 </div> </div>
-                            </Col>
+                            </Col> */}
                           </Row>
                         </Col>
                       </Row>
@@ -395,30 +376,33 @@ let myuuid = uuidv4();
                           {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                         <LocalFireDepartmentOutlinedIcon   className="text-primary" />
                       </div> */}
-                          {item.fire == 0 ?
+                          {/* {item.fire == 0 ?
                             <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                               <LocalFireDepartmentOutlinedIcon className="text-primary" />
                             </div> :
                             <div className="border border-danger sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                               <LocalFireDepartmentOutlinedIcon className="text-danger" />
                             </div>
-                          }
+                          } */}
                         </Col>
 
                         <Col className="ps-3">
                           <Row className="g-0">
                             <Col>
-                              {/* <div className="sh-5 d-flex align-items-center lh-1-25">Fire</div> */}
-                              {item.fire == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Capacity</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Fire</div>}
-
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Capacity</div>
+                              {/* {item.fire == 0 ? <div className="sh-5 d-flex align-items-center lh-1-25">Pump Capacity</div> : <div style={{ color: "red" }} className="sh-5 d-flex blink align-items-center lh-1-25">Fire</div>} */}
                             </Col>
                             <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center">{parseInt(item.fire) == 0 ? "Not Detected" : "Detected"}</div>
+                              <div className="sh-5 d-flex align-items-center lh-1-25"></div> 
                             </Col>
+                            {/* <Col xs="auto">
+                              <div className="sh-5 d-flex align-items-center">{parseInt(item.fire) == 0 ? "Not Detected" : "Detected"}</div>
+                            </Col> */}
                           </Row>
                         </Col>
                       </Row>
                     </Card.Body>
+
                     <Card.Footer>
                       <Row className="g-0 align-items-center mb-0">
                         <Col className="ps-2">
@@ -467,28 +451,24 @@ let myuuid = uuidv4();
                         </div>
                       </Col>
                     </Row>
-                  </Col>
-            </Row> */}
+                    </Col>
+                   </Row> */}
                     </Card.Footer>
                   </Card>
                 </Col>)
-            })
-            :
+            }) :
             <span>No Record</span>
-
         }
-
       </Row>
+
       <Row>
         <Col className='d-flex justify-content-center'>
           {
-
             totalpage > 0 ? <Pagination
               total={totalpage}
               current={currentPage}
               pagination={(crPage) => handlePagination(crPage)}
             /> : null
-
           }
         </Col>
       </Row>

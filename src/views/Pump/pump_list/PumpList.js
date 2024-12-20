@@ -144,9 +144,7 @@ const PumpList = () => {
     const title        = "Pump List";
     const description  = "Ecommerce Discount Page";
     const { isLoaded } = useJsApiLoader({ id: "google-map-script", googleMapsApiKey: googleMapApiKey, libraries: lib, });
-
     const [coords, setCoords] = React.useState([]);
-
     const [redius, setReduis] = React.useState(0);
     const [shapetype, setShapeType] = React.useState();
     const singledatanew = (filter) => {
@@ -167,7 +165,6 @@ const PumpList = () => {
             setShapeType(res.results.shapetype);
         });
     };
-
     const [map, setMap] = React.useState(null);
     const [mapcircle, setMapCircle] = React.useState(false);
     const onLoad = React.useCallback(function callback(map) {
@@ -462,13 +459,15 @@ if (areanumber !== 0)
                     return (
                         <>
                             <button style={{ backgroundColor: "transparent", border: "none" }} value={"Add"} >
-                                <NavLink to={`/edit-device/${cell.row.original.deviceid}`}
+                                {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
+                                <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
                                 className="text-primary">
                                     {<EditIcon />}
                                 </NavLink>
                             </button>
                             <button style={{ backgroundColor: "transparent", border: "none" }} value={"Add"} >
-                                <NavLink to={`/device-information/${cell.row.original.deviceid}`} className="text-primary" >
+                                {/* <NavLink to={`/device-information/${cell.row.original.deviceid}`} className="text-primary" > */}
+                                <NavLink to={`/pump-information/${cell.row.original.deviceid}`} className="text-primary" >
                                     {<RemoveRedEyeOutlinedIcon />}
                                 </NavLink>
                             </button>

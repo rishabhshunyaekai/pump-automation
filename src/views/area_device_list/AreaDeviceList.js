@@ -83,7 +83,7 @@ const RecentHistory = (props) => {
         headerClassName: 'text-muted text-small text-uppercase w-8 p-4', Cell: (cell) => {
           return (
             <>
-              <NavLink to={`/device-information/${cell.row.original.deviceid}`}>
+              <NavLink to={`/pump-information/${cell.row.original.deviceid}`}>
                 {cell.row.original.deviceid}
               </NavLink>
             </>
@@ -144,13 +144,14 @@ const RecentHistory = (props) => {
 
           return (<>
             <button style={{ backgroundColor: 'transparent', border: 'none' }} value={"Add"}>
-              <NavLink to={`/edit-device/${cell.row.original.deviceid}`}
+              {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
+              <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
                 className="text-primary"> {<EditIcon />} </NavLink>
 
             </button>
 
             <button style={{ backgroundColor: 'transparent', border: 'none' }} value={"Add"}> <NavLink
-              to={`/device-information/${cell.row.original.deviceid}`}
+              to={`/pump-information/${cell.row.original.deviceid}`}
 
               className="text-primary"> {<RemoveRedEyeOutlinedIcon />}  </NavLink></button>
 

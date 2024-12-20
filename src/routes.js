@@ -72,12 +72,12 @@ const routesAndMenuItems = {
         ],
     },
     {
-        path      : `${appRoot}/device-information/:id`,
+        path      : `${appRoot}/pump-information/:id`,
         //label   : "menu.device-information",
         component : shipping,
     },
     {
-        path      : `${appRoot}/edit-device/:id`,
+        path      : `${appRoot}/edit-pump/:id`,
         component : edit_device,
         icon      : "bell",
     },

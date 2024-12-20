@@ -194,7 +194,7 @@ const AddPump = () => {
     if (values.areaid != "0" || values.areaid != 0) {
       AddDeviceService(values, (result) => {
         toast(result.message)
-        if (result.success == true) {
+        if (result.success === true) {
           formik.resetForm()
         } else {
         }
@@ -323,7 +323,7 @@ const AddPump = () => {
                     </Form.Label>
                     <div>
                       <Form.Control
-                        type="text"
+                        type="number"
                         placeholder="Enter the Pump Capacity"
                         name="devicecapacity"
                         value={values.devicecapacity}

@@ -178,15 +178,15 @@
                         </div>
 
                         <div className="mb-5">
-                        <p className="text-small text-muted mb-2">Device Details</p>
+                        <p className="text-small text-muted mb-2">Pump Details</p>
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
-                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
+                            {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                                 <HowToRegIcon
                                 icon="credit-card"
                                 className="text-primary"
                                 />
-                            </div>
+                            </div> */}
                             </Col>
 
                             <Col className="ps-3">
@@ -207,12 +207,12 @@
 
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
-                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
+                            {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                                 <LaptopIcon
                                 icon="credit-card"
                                 className="text-primary"
                                 />
-                            </div>
+                            </div> */}
                             </Col>
 
                             <Col className="ps-3">
@@ -233,13 +233,13 @@
 
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
-                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
+                            {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                                 <CompareArrowsIcon
                                 from
                                 icon="credit-card"
                                 className="text-primary"
                                 />
-                            </div>
+                            </div> */}
                             </Col>
 
                             <Col className="ps-3">
@@ -259,12 +259,12 @@
                         </Row>
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
-                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
+                            {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                                 <MyLocationIcon
                                 icon="credit-card"
                                 className="text-primary"
                                 />
-                            </div>
+                            </div> */}
                             </Col>
 
                             <Col className="ps-3">
@@ -285,13 +285,13 @@
                         </Row>
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
-                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
+                            {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                                 <LocationSearchingIcon
                                 from
                                 icon="credit-card"
                                 className="text-primary"
                                 />
-                            </div>
+                            </div> */}
                             </Col>
 
                             <Col className="ps-3">
@@ -480,7 +480,7 @@
                     <>
                         <Row className="g-0  align-content-center d-none d-lg-flex ps-5 pe-5 mb-2 custom-sort">
                         <Col
-                            lg="2"
+                            lg="3"
                             className="d-flex flex-column pe-1 justify-content-center"
                         >
                             <div className="text-muted text-medium cursor-pointer ">
@@ -520,7 +520,7 @@
                             </div>
                         </Col> */}
                         <Col
-                            lg="2"
+                            lg="3"
                             className="d-flex flex-column mb-lg-0 pe-3 d-flex"
                         >
                             <div className="text-muted text-medium cursor-pointer ">
@@ -528,7 +528,7 @@
                             </div>
                         </Col>
                         <Col
-                            lg="2"
+                            lg="3"
                             className="d-flex flex-column mb-lg-0 pe-3 d-flex"
                         >
                             <div className="text-muted text-medium cursor-pointer ">
@@ -550,7 +550,7 @@
                                     >
                                         <Col
                                         xs="6"
-                                        md="2"
+                                        md="3"
                                         className="d-flex flex-column justify-content-center mb-2 mb-md-0"
                                         >
                                         <div className="text-alternate">

@@ -73,7 +73,7 @@
         const [reset, setreset] = useState("");
 
         function backToPumpList () {
-            historys.push('/pump/pump_list');
+            historys.goBack();
         }
 
         React.useEffect(() => {
@@ -277,7 +277,7 @@
                                         }}
                                     > Pump Capacity </Form.Label>
                                     <div>
-                                        <Form.Control type="text" name="devicecapacity" value={deviceData.devicecapacity} placeholder="Enter the Pump Capacity" onChange={changeHandler} />
+                                        <Form.Control type="number" name="devicecapacity" value={deviceData.devicecapacity} placeholder="Enter the Pump Capacity" onChange={changeHandler} />
                                     </div>
                                     {error && deviceCapacity.length <= 0 ? (
                                         <label style={{ color: "red" }}>
