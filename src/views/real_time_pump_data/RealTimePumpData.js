@@ -134,7 +134,7 @@ let myuuid = uuidv4();
           <CsLineIcons icon="chevron-left" size="13" />
           <span className="align-middle text-small ms-1">Dashboard</span>
         </NavLink>
-        <h1 className="mb-0 pb-0 display-4" id="title" style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}>
+        <h1 className="mb-0 pb-0 display-4" id="title" style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6', }}>
           {title}
         </h1>
       </div>
@@ -178,7 +178,7 @@ let myuuid = uuidv4();
                 }}
               >
                 <OverlayTrigger delay={{ show: 1000, hide: 0 }} placement="top" overlay={<Tooltip id="tooltip-top">   {devicestatus == 0 ? "Active" : devicestatus == 1 ? "Inactive" : "All Items"}</Tooltip>}>
-                  <Dropdown.Toggle variant="foreground-alternate" className="shadow">
+                  <Dropdown.Toggle  className="shadow" style={{backgroundColor: '#24A6F6'}}>
                     {devicestatus == 0 ? "Active" : devicestatus == 1 ? "Inactive" : "All Items"}
                   </Dropdown.Toggle>
                 </OverlayTrigger>
@@ -206,7 +206,7 @@ let myuuid = uuidv4();
                 }}
               >
                 <OverlayTrigger delay={{ show: 1000, hide: 0 }} placement="top" overlay={<Tooltip id="tooltip-top"> {itemPerPage} Items</Tooltip>}>
-                  <Dropdown.Toggle variant="foreground-alternate" className="shadow">
+                  <Dropdown.Toggle className="shadow" style={{backgroundColor: '#24A6F6'}}>
                     {itemPerPage} Items
                   </Dropdown.Toggle>
                 </OverlayTrigger>
@@ -235,7 +235,7 @@ let myuuid = uuidv4();
                           <Row className="g-0">
                             <Col>
                               {/* <NavLink to={`device-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25"> */}
-                              <NavLink to={`pump-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25">
+                              <NavLink to={`pump-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25" style={{color: '#24A6F6'}}>
                                 {item.devicename}
                                 {/* Device Name </div> */}
                               </NavLink>

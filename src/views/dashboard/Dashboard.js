@@ -8,6 +8,7 @@ import PhonelinkEraseOutlinedIcon from "@mui/icons-material/PhonelinkEraseOutlin
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import { GoogleMap, Data, DrawingManager, useJsApiLoader, Circle, Polygon, Marker,MarkerClusterer } from "@react-google-maps/api";
 // const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
+import style from './dashboard.module.css';
 
 import { SocketIo, DEFAULT_USER } from "config";
 import RealTimeNotification from "../../@mock-api/data/notifications";
@@ -94,7 +95,7 @@ const Dashboard = () => {
         >
           <span className="align-middle text-small ms-1">&nbsp;</span>
         </NavLink>
-        <h1 className="mb-0 pb-0  display-4" id="title" style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}>Dashboard</h1></div>
+        <h1 className="mb-0 pb-0  display-4" id="title" style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6', }}>Dashboard</h1></div>
       {/* Title End */}
 
       {/* Stats Here */}
@@ -102,7 +103,7 @@ const Dashboard = () => {
         {/* Card One */}
         <Col xs="6" md="4" lg="4">
           {/* <NavLink to="device-list"> */}
-          <NavLink to="pump/pump_list">
+          {/* <NavLink to="pump/pump_list">
             <Card className="h-100 hover-scale-up cursor-pointer">
               <Card.Body className="d-flex flex-column align-items-center">
                 <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
@@ -122,12 +123,27 @@ const Dashboard = () => {
                 </div>
               </Card.Body>
             </Card>
-          </NavLink>
+          </NavLink> */}
+          <Card className="h-100 hover-scale-up cursor-pointer">
+            <NavLink to="pump/pump_list">
+              <div className={`${style.card}`}>
+                <div className={style.cardWrapper}>
+                  <div className={style.cardIcon}>
+                    <DesktopWindowsOutlinedIcon style={{color : "#24A6F6"}} />
+                  </div>
+                  <div className={style.cardContent}>
+                    <div className={style.cardCount}>{deviceCount.totalDevice}</div>
+                    <div className={style.cardTitle}>TOTAL DEVICES</div>
+                  </div>
+                </div>
+              </div>
+            </NavLink>
+          </Card>
         </Col>
 
         {/* Card Two */}
         <Col xs="6" md="4" lg="4">
-          <Card className="h-100 hover-scale-up">
+          {/* <Card className="h-100 hover-scale-up">
             <Card.Body className="d-flex flex-column align-items-center">
               <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                 <VibrationOutlinedIcon className="text-primary" />
@@ -145,12 +161,25 @@ const Dashboard = () => {
                 {deviceCount.totalActive}
               </div>
             </Card.Body>
+          </Card> */}
+          <Card className="h-100 hover-scale-up">
+            <div className={`${style.card}`}>
+              <div className={style.cardWrapper}>
+                <div className={style.cardIcon}>
+                  <VibrationOutlinedIcon style={{color : "#24A6F6"}} />
+                </div>
+                <div className={style.cardContent}>
+                  <div className={style.cardCount}>{deviceCount.totalActive}</div>
+                  <div className={style.cardTitle}>ACTIVE DEVICES</div>
+                </div>
+              </div>
+            </div>
           </Card>
         </Col>
 
         {/* Card Three */}
         <Col xs="6" md="4" lg="4">
-          <Card className="h-100 hover-scale-up">
+          {/* <Card className="h-100 hover-scale-up">
             <Card.Body className="d-flex flex-column align-items-center">
               <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                 <PhonelinkEraseOutlinedIcon className="text-primary" />
@@ -168,12 +197,25 @@ const Dashboard = () => {
                 {deviceCount.totalDeactive}
               </div>
             </Card.Body>
+          </Card> */}
+          <Card className="h-100 hover-scale-up">
+            <div className={`${style.card}`}>
+              <div className={style.cardWrapper}>
+                <div className={style.cardIcon}>
+                  <PhonelinkEraseOutlinedIcon style={{color : "#24A6F6"}} />
+                </div>
+                <div className={style.cardContent}>
+                  <div className={style.cardCount}>{deviceCount.totalDeactive}</div>
+                  <div className={style.cardTitle}>INACTIVE DEVICES</div>
+                </div>
+              </div>
+            </div>
           </Card>
         </Col>
 
         {/* Card Four */}
         <Col xs="6" md="4" lg="4">
-          {/* <NavLink to="alert-history"> */}
+          {/* <NavLink to="alert-history">
           <Card className="h-100 hover-scale-up">
             <Card.Body className="d-flex flex-column align-items-center">
               <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
@@ -193,12 +235,25 @@ const Dashboard = () => {
               </div>
             </Card.Body>
           </Card>
-          {/* </NavLink> */}
+          </NavLink> */}
+          <Card className="h-100 hover-scale-up">
+            <div className={`${style.card}`}>
+              <div className={style.cardWrapper}>
+                <div className={style.cardIcon}>
+                  <NotificationsActiveOutlinedIcon style={{color : "#24A6F6"}} />
+                </div>
+                <div className={style.cardContent}>
+                  <div className={style.cardCount}>{deviceCount.todayAlert}</div>
+                  <div className={style.cardTitle}>TODAY'S ALERTS</div>
+                </div>
+              </div>
+            </div>
+          </Card>
         </Col>
 
         {/* Card Five */}
         <Col xs="6" md="4" lg="4">
-          {/* <NavLink to="alert-history"> */}
+          {/* <NavLink to="alert-history">
           <Card className="h-100 hover-scale-up">
             <Card.Body className="d-flex flex-column align-items-center">
               <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
@@ -220,7 +275,20 @@ const Dashboard = () => {
               </div>
             </Card.Body>
           </Card>
-          {/* </NavLink> */}
+          </NavLink> */}
+          <Card className="h-100 hover-scale-up">
+            <div className={`${style.card}`}>
+              <div className={style.cardWrapper}>
+                <div className={style.cardIcon}>
+                  <NotificationsActiveOutlinedIcon style={{color : "#24A6F6"}} />
+                </div>
+                <div className={style.cardContent}>
+                  <div className={style.cardCount}>{deviceCount.acticeAlert}</div>
+                  <div className={style.cardTitle}>ACTIVE ALERTS</div>
+                </div>
+              </div>
+            </div>
+          </Card>
         </Col>
       </Row>
       {/* End Here */}

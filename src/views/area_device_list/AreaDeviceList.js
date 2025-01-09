@@ -80,10 +80,10 @@ const RecentHistory = (props) => {
     return [
       {
         Header: 'Pump ID', accessor: 'deviceid', sortable: true,
-        headerClassName: 'text-muted text-small text-uppercase w-8 p-4', Cell: (cell) => {
+        headerClassName: 'text-dark text-small text-uppercase w-8 p-4', Cell: (cell) => {
           return (
             <>
-              <NavLink to={`/pump-information/${cell.row.original.deviceid}`}>
+              <NavLink to={`/pump-information/${cell.row.original.deviceid}`} style={{color: '#24A6F6 '}}>
                 {cell.row.original.deviceid}
               </NavLink>
             </>
@@ -91,8 +91,8 @@ const RecentHistory = (props) => {
         },
       },
 
-      { Header: 'Pump Name', accessor: 'devicename', sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-2 ', cellClassName: 'text-alternate' },
-      { Header: 'Pump Capacity', accessor: 'devicecapacity', sortable: false, headerClassName: 'text-muted text-small text-uppercase w-8 px-2 ', cellClassName: 'text-alternate' },
+      { Header: 'Pump Name', accessor: 'devicename', sortable: false, headerClassName: 'text-dark text-small text-uppercase w-8 px-2 ', cellClassName: 'text-alternate' },
+      { Header: 'Pump Capacity', accessor: 'devicecapacity', sortable: false, headerClassName: 'text-dark text-small text-uppercase w-8 px-2 ', cellClassName: 'text-alternate' },
 
       // { Header: 'Temperature Alert', accessor: 'temperature', 
       // Cell: (row) => {
@@ -143,22 +143,22 @@ const RecentHistory = (props) => {
         Header: 'Action', accessor: 'action', sortable: false, Cell: (cell) => {
 
           return (<>
-            <button style={{ backgroundColor: 'transparent', border: 'none' }} value={"Add"}>
+            <button style={{ backgroundColor: 'transparent', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px', marginRight: '2px' }} value={"Add"}>
               {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
               <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
                 className="text-primary"> {<EditIcon />} </NavLink>
 
             </button>
 
-            <button style={{ backgroundColor: 'transparent', border: 'none' }} value={"Add"}> <NavLink
+            <button style={{ backgroundColor: 'transparent', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px',marginRight: '2px' }} value={"Add"}> <NavLink
               to={`/pump-information/${cell.row.original.deviceid}`}
 
               className="text-primary"> {<RemoveRedEyeOutlinedIcon />}  </NavLink></button>
 
-            <button className="text-primary" onClick={handleShow} style={{ backgroundColor: 'transparent', border: 'none' }} value={"Add"}>{<DeleteOutlineOutlinedIcon />}</button>
+            <button className="text-primary" onClick={handleShow} style={{ backgroundColor: 'transparent', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px' }} value={"Add"}>{<DeleteOutlineOutlinedIcon />}</button>
           </>)
         },
-        headerClassName: 'text-muted text-small text-uppercase w-10 px-5', cellClassName: 'text-alternate ',
+        headerClassName: 'text-dark text-small text-uppercase w-10 px-5', cellClassName: 'text-alternate ',
       },
       ,];
   }, [])

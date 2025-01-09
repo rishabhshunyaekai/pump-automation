@@ -83,7 +83,7 @@ const Table = ({ tableInstance, className }) => {
                     {page.map((row, i) => {
                         prepareRow(row);
                         return (
-                            <tr key={`tr.${i}`} {...row.getRowProps()} >
+                            <tr key={`tr.${i}`} {...row.getRowProps()}>
                                 {row.cells.map((cell, cellIndex) => (
                                     <td key={`td.${cellIndex}`}
                                         {...cell.getCellProps()}
@@ -318,11 +318,11 @@ if (areanumber !== 0)
                 Header          : "Pump ID",
                 accessor        : "deviceid",
                 sortable        : true,
-                headerClassName : "text-muted text-small text-uppercase w-10 px-3",
+                headerClassName : "text-dark text-medium text-uppercase w-10 px-3",
                 Cell : ({ cell }) => {
                     return (
                         // <NavLink to={`/device-information/${cell.row.original.deviceid}`}>
-                        <NavLink to={`/pump-information/${cell.row.original.deviceid}`}>
+                        <NavLink to={`/pump-information/${cell.row.original.deviceid}`} style={{color: '#24A6F6'}}>
                             {cell.row.original.deviceid}
                         </NavLink>
                     );
@@ -332,15 +332,15 @@ if (areanumber !== 0)
                 Header          : "Pump Name",
                 accessor        : "devicename",
                 sortable        : true,
-                headerClassName : "text-muted text-small text-uppercase w-10 px-3",
-                cellClassName   : "text-alternate",
+                headerClassName : "text-dark text-medium text-uppercase w-10 px-3",
+                cellClassName   : "text-dark",
             },
             {
                 Header          : "Pump Capacity",
                 accessor        : "devicecapacity",
                 sortable        : true,
-                headerClassName : "text-muted text-small text-uppercase w-10 px-3",
-                cellClassName   : "text-alternate",
+                headerClassName : "text-dark text-medium text-uppercase w-10 px-3",
+                cellClassName   : "text-dark",
             },
             // {
             //     Header   : "Pump Capacity",
@@ -459,14 +459,14 @@ if (areanumber !== 0)
                 Cell     : (cell) => {
                     return (
                         <>
-                            <button style={{ backgroundColor: "transparent", border: "none" }} value={"Add"} >
+                            <button style={{ backgroundColor: "transparent", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px',marginRight: '2px' }} value={"Add"} >
                                 {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
                                 <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
                                 className="text-primary">
                                     {<EditIcon />}
                                 </NavLink>
                             </button>
-                            <button style={{ backgroundColor: "transparent", border: "none" }} value={"Add"} >
+                            <button style={{ backgroundColor: "transparent", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px' }} value={"Add"} >
                                 {/* <NavLink to={`/device-information/${cell.row.original.deviceid}`} className="text-primary" > */}
                                 <NavLink to={`/pump-information/${cell.row.original.deviceid}`} className="text-primary" >
                                     {<RemoveRedEyeOutlinedIcon />}
@@ -478,8 +478,8 @@ if (areanumber !== 0)
                         </>
                     );
                 },
-                headerClassName : "text-muted text-small text-uppercase w-10 px-7",
-                cellClassName   : "text-alternate",
+                headerClassName : "text-dark text-medium text-uppercase w-10 px-7",
+                cellClassName   : "text-dark",
             },
         ];
     }, []);
@@ -531,7 +531,7 @@ return isLoaded ? (
             <CsLineIcons icon="chevron-left" size="13" />
             <span className="align-middle text-small ms-1">Dashboard</span>
             </NavLink>
-            <h1 className="mb-0 pb-0 display-4" id="title"  style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}>
+            <h1 className="mb-0 pb-0 display-4" id="title"  style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6', }}>
             {title}
             </h1>
         </Col>
@@ -540,11 +540,12 @@ return isLoaded ? (
     </div>
 
     <Row className="mb-3">
-        <Col md="5" lg="3" xxl="2" className="mb-1">
+        <Col md="6" lg="8" xxl="9" className="mb-1"></Col>
+        <Col md="4" lg="2" xxl="2" className="mb-1">
         {/* Search Start */}
         <div className="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
             <ControlsSearch tableInstance={tableInstance} />
-            <span className="search-magnifier-icon">
+            <span className="search-magnifier-icon" style={{backgroundColor: '#24A6F6', color: '#fff',borderRadius: '10px'}}>
             <CsLineIcons icon="search" />
             </span>
             {/* <span className="search-delete-icon d-none">
@@ -553,7 +554,7 @@ return isLoaded ? (
         </div>
         {/* Search End */}
         </Col>
-        <Col md="7" lg="9" xxl="10" className="mb-1 text-end">
+        <Col md="2" lg="2" xxl="1" className="mb-1 text-end">
         {/* Length Start */}
         <Dropdown
             align={{ xs: "end" }}
@@ -574,8 +575,9 @@ return isLoaded ? (
             overlay={<Tooltip id="tooltip-top">Item Count</Tooltip>}
             >
             <Dropdown.Toggle
-                variant="foreground-alternate"
+                // variant="foreground-alternate"
                 className="shadow sw-13"
+                style={{backgroundColor: '#24A6F6 ', color: 'white'}}
             >
                 {itemPerPage} Items
             </Dropdown.Toggle>

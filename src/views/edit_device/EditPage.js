@@ -371,7 +371,7 @@
                                     ) : ( "" )}
                                 </Col>
                                 <Col lg="10" className="mx-auto">
-                                    <Button variant="primary" style={{ position: "relative", top: "0px" }} onClick={handleShow} >
+                                    <Button style={{ position: "relative", top: "0px", backgroundColor: '#24A6F6' }} onClick={handleShow} >
                                         <span>Map Point</span>{" "}
                                         <CsLineIcons icon="chevron-right" />
                                     </Button>
@@ -385,12 +385,12 @@
                                         marginTop      : "3rem",
                                     }}
                                 >
-                                    <Button className="btn-icon btn-icon-end" variant="primary" type="reset" onClick={backToPumpList}>
+                                    <Button className="btn-icon btn-icon-end" type="reset" onClick={backToPumpList}  style={{ backgroundColor: '#24A6F6' }}>
                                         Cancel <CsLineIcons icon="chevron-right" />
                                     </Button>
                                     {/* <a href="/device-list" className="btn-icon btn-icon-end" style={{backgroundColor: '#1b98d0'}}> Cancel </a> */}
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <Button className="btn-icon btn-icon-end" variant="primary" type="submit"
+                                    <Button className="btn-icon btn-icon-end" type="submit" style={{ backgroundColor: '#24A6F6' }}
                                         onClick={() => {
                                             setreset();
                                         }}

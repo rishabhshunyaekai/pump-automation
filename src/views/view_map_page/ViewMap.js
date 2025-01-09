@@ -10,6 +10,7 @@
     import DeviceList from "views/device_list/DeviceList";
     import DeviceAreaList from "views/area_device_list/AreaDeviceList";
     import { DeviceAreaListService, SingleAreaService, } from "@mock-api/data/datatable";
+    import style from './viewmap.module.css';
 
     import { SocketIo, DEFAULT_USER } from "config.js";
     const containerStyle = { width: "100wv", height: "600px", };
@@ -186,7 +187,7 @@
                             }
                             }
                         }>
-                            <Card.Body className="d-flex flex-column align-items-center">
+                            {/* <Card.Body className="d-flex flex-column align-items-center">
                             <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                                 <DesktopWindowsOutlinedIcon className="text-primary" />
                             </div>
@@ -202,7 +203,18 @@
                             >
                                 {totalDevice}
                             </div>
-                            </Card.Body>
+                            </Card.Body> */}
+                            <div className={`${style.card}`}>
+                                <div className={style.cardWrapper}>
+                                    <div className={style.cardIcon}>
+                                    <DesktopWindowsOutlinedIcon style={{color : "#24A6F6"}} />
+                                </div>
+                                <div className={style.cardContent}>
+                                    <div className={style.cardCount}>{totalDevice}</div>
+                                    <div className={style.cardTitle}>TOTAL DEVICES</div>
+                                </div>
+                            </div>
+                        </div>
                         </Card>
                         </Col>
 
@@ -221,7 +233,7 @@
                                 }
                             }
                             }>
-                            <Card.Body className="d-flex flex-column align-items-center">
+                            {/* <Card.Body className="d-flex flex-column align-items-center">
                             <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                                 <VibrationOutlinedIcon className="text-primary" />
                             </div>
@@ -238,7 +250,18 @@
                             >
                                 {totalActive}
                             </div>
-                            </Card.Body>
+                            </Card.Body> */}
+                            <div className={`${style.card}`}>
+                                <div className={style.cardWrapper}>
+                                    <div className={style.cardIcon}>
+                                    <VibrationOutlinedIcon style={{color : "#24A6F6"}} />
+                                    </div>
+                                    <div className={style.cardContent}>
+                                        <div className={style.cardCount}>{totalActive}</div>
+                                        <div className={style.cardTitle}>ACTIVE DEVICES</div>
+                                    </div>
+                                </div>
+                            </div>
                         </Card>
                         </Col>
 
@@ -256,7 +279,7 @@
                             }
                             }
                         }>
-                            <Card.Body className="d-flex flex-column align-items-center">
+                            {/* <Card.Body className="d-flex flex-column align-items-center">
                             <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                                 <PhonelinkEraseOutlinedIcon className="text-primary" />
                             </div>
@@ -272,7 +295,18 @@
                             >
                                 {totalDevice - totalActive}
                             </div>
-                            </Card.Body>
+                            </Card.Body> */}
+                            <div className={`${style.card}`}>
+                                <div className={style.cardWrapper}>
+                                    <div className={style.cardIcon}>
+                                    <PhonelinkEraseOutlinedIcon style={{color : "#24A6F6"}} />
+                                    </div>
+                                    <div className={style.cardContent}>
+                                        <div className={style.cardCount}>{totalDevice - totalActive}</div>
+                                        <div className={style.cardTitle}>INACTIVE DEVICES</div>
+                                    </div>
+                                </div>
+                            </div>
                         </Card>
                         </Col>
                     </Row>

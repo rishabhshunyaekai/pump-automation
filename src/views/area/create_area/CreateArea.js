@@ -170,7 +170,7 @@ const CreateArea = () => {
               <CsLineIcons icon="chevron-left" size="13" />
               <span className="align-middle text-small ms-1">Dashboard</span>
             </NavLink>
-            <h1 className="mb-0 pb-0 display-4" id="title" style={{ marginLeft: '0.5rem', fontWeight: '400', marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}>
+            <h1 className="mb-0 pb-0 display-4" id="title" style={{ marginLeft: '0.5rem', fontWeight: '400', marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6', }}>
               {title}
             </h1>
           </Col>

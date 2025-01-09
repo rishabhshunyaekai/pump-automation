@@ -94,11 +94,11 @@ const Login = () => {
           </NavLink>
         </div>
         <div className="mb-3">
-          <h2 className="cta-1 mb-0 text-primary">Welcome,</h2>
-          <h2 className="cta-1 text-primary">let's get started!</h2>
+          <h2 className="cta-1 mb-0" style={{color: '#24A6F6'}}>Welcome,</h2>
+          <h2 className="cta-1" style={{color: '#24A6F6'}}>let's get started!</h2>
         </div>
         <div className="mb-4">
-          <p className="h6">Please use your credentials to login.</p>
+          <p className="h6" style={{color: '#24A6F6'}}>Please use your credentials to login.</p>
           {/* <p className="h6">
             If you are not a member, please <NavLink to="/register">register</NavLink>.
           </p> */}
@@ -118,7 +118,7 @@ const Login = () => {
               </NavLink> */}
               {errors.password && touched.password && <div className="d-block invalid-tooltip">{errors.password}</div>}
             </div>
-            <Button size="lg" type="submit" >
+            <Button size="lg" type="submit" style={{backgroundColor: '#24A6F6'}}>
               Login
             </Button>
           </form>

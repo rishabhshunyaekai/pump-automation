@@ -13,6 +13,7 @@ const Pagination = (props) => {
                         <a
                             className={`page-link ${props.current === 1 ? "link-disable" : props.current > 1 ? "" : ""
                                 }`}
+                                style={{color: '#24A6F6'}}
                             // href="#"
                             onClick={() => handlePagination(props.current - 1)}
                         >
@@ -29,6 +30,7 @@ const Pagination = (props) => {
                                 >
                                     <a
                                         className="page-link"
+                                        style={{backgroundColor: '#24A6F6'}}
                                         // href="#"
                                         onClick={() => handlePagination(i + 1)}
                                     >
@@ -206,6 +208,7 @@ const Pagination = (props) => {
                                     : ""
                                 }`}
                             // href="#"
+                            style={{color: '#24A6F6'}}
                             onClick={() => handlePagination(props.current + 1)}
                         >
                             <KeyboardDoubleArrowRightIcon />

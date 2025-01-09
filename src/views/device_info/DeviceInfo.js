@@ -77,7 +77,7 @@
                 <CsLineIcons icon="chevron-left" size="13" />
                 <span className="align-middle text-small ms-1">Dashboard</span>
                 </NavLink>
-                <h1 className="mb-0 pb-0 display-4" id="title" style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}>
+                <h1 className="mb-0 pb-0 display-4" id="title" style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6 ', }}>
                 {title}
                 </h1>
             </div>
@@ -100,10 +100,10 @@
                             }}
                         >
                             <div className="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100">
-                            <div style={{ width: "95%" }}>
+                            <div style={{ width: "98%" }}>
                                 {/* <NavLink to={`/edit-device/${details.deviceid}`}> */}
                                 <NavLink to={`/edit-pump/${details.deviceid}`}>
-                                <Button variant="primary" className="w-100 me-2">
+                                <Button style={{backgroundColor: "#24A6F6"}} className="w-100">
                                     Edit
                                 </Button>
                                 </NavLink>
@@ -111,14 +111,14 @@
                             </div>
 
                             <div className="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100">
-                            <div style={{ width: "95%" }}>
+                            <div style={{ width: "100%" }}>
                                 <Button
                                 variant={
                                     details.devicestatus
                                     ? "outline-danger"
                                     : "outline-primary"
                                 }
-                                className="w-100 me-2"
+                                className="w-100"
                                 // onClick={handleDeviceStatus}
                                 >
                                 {details.devicestatus ? "Inactive" : "Active"}
@@ -130,11 +130,13 @@
                         <div className="mb-5">
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
-                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
+                            <div className=" sw-5 sh-5 d-flex justify-content-center align-items-center"
+                                 style={{border: '1px solid #24A6F6', borderRadius: '10px', padding: '10px'}}
+                            >
                                 <AppRegistrationIcon
                                 from
                                 icon="credit-card"
-                                className="text-primary"
+                                style={{color: '#24A6F6'}}
                                 />
                             </div>
                             </Col>
@@ -155,8 +157,10 @@
                         </Row>
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
-                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
-                                <AddCardIcon icon="cart" className="text-primary" />
+                            <div className="sw-5 sh-5 d-flex justify-content-center align-items-center"
+                                 style={{border: '1px solid #24A6F6', borderRadius: '10px', padding: '10px'}}
+                            >
+                                <AddCardIcon icon="cart" style={{color: '#24A6F6'}}/>
                             </div>
                             </Col>
                             <Col className="ps-3">
@@ -179,18 +183,18 @@
                         </div>
 
                         <div className="mb-5">
-                        <p className="text-small text-muted mb-2">Pump Details</p>
+                        <p className="text-small text-dark mb-2">Pump Details</p>
                         <Row className="g-0 align-items-center mb-2">
-                            <Col xs="auto">
-                            {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
+                            {/* <Col xs="auto">
+                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                                 <HowToRegIcon
                                 icon="credit-card"
                                 className="text-primary"
                                 />
-                            </div> */}
-                            </Col>
+                            </div>
+                            </Col> */}
 
-                            <Col className="ps-3">
+                            {/* <Col className="ps-3"> */}
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
@@ -203,20 +207,20 @@
                                 </div>
                                 </Col>
                             </Row>
-                            </Col>
+                            {/* </Col> */}
                         </Row>
 
                         <Row className="g-0 align-items-center mb-2">
-                            <Col xs="auto">
-                            {/* <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
+                            {/* <Col xs="auto">
+                            <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
                                 <LaptopIcon
                                 icon="credit-card"
                                 className="text-primary"
                                 />
-                            </div> */}
-                            </Col>
+                            </div>
+                            </Col> */}
 
-                            <Col className="ps-3">
+                            {/* <Col className="ps-3"> */}
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
@@ -229,7 +233,7 @@
                                 </div>
                                 </Col>
                             </Row>
-                            </Col>
+                            {/* </Col> */}
                         </Row>
 
                         <Row className="g-0 align-items-center mb-2">
@@ -243,7 +247,7 @@
                             </div> */}
                             </Col>
 
-                            <Col className="ps-3">
+                            {/* <Col className="ps-3"> */}
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
@@ -256,7 +260,7 @@
                                 </div>
                                 </Col>
                             </Row>
-                            </Col>
+                            {/* </Col> */}
                         </Row>
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
@@ -268,7 +272,7 @@
                             </div> */}
                             </Col>
 
-                            <Col className="ps-3">
+                            {/* <Col className="ps-3"> */}
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
@@ -282,7 +286,7 @@
                                 </div>
                                 </Col>
                             </Row>
-                            </Col>
+                            {/* </Col> */}
                         </Row>
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
@@ -295,7 +299,7 @@
                             </div> */}
                             </Col>
 
-                            <Col className="ps-3">
+                            {/* <Col className="ps-3"> */}
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
@@ -309,7 +313,7 @@
                                 </div>
                                 </Col>
                             </Row>
-                            </Col>
+                            {/* </Col> */}
                         </Row>
                         </div>
                     </Card.Body>
@@ -472,7 +476,7 @@
                     {/* Recent Orders Start */}
 
                     <div className="d-flex justify-content-between">
-                    <h2 className="small-title">Recent History</h2>
+                    <h2 className="small-title" style={{color: '#24A6F6'}}>Recent History</h2>
                     {/* <NavLink to={`/alert/alert-history/${details.deviceid}`}>
                         <Button variant="primary">View More</Button>
                     </NavLink> */}
@@ -484,7 +488,7 @@
                             lg="3"
                             className="d-flex flex-column pe-1 justify-content-center"
                         >
-                            <div className="text-muted text-medium cursor-pointer ">
+                            <div className="text-dark text-medium cursor-pointer ">
                             Pump Name
                             </div>
                         </Col>
@@ -524,7 +528,7 @@
                             lg="3"
                             className="d-flex flex-column mb-lg-0 pe-3 d-flex"
                         >
-                            <div className="text-muted text-medium cursor-pointer ">
+                            <div className="text-dark text-medium cursor-pointer ">
                             Updated Date
                             </div>
                         </Col>
@@ -532,7 +536,7 @@
                             lg="3"
                             className="d-flex flex-column mb-lg-0 pe-3 d-flex"
                         >
-                            <div className="text-muted text-medium cursor-pointer ">
+                            <div className="text-dark text-medium cursor-pointer ">
                             Pump Capacity
                             </div>
                         </Col>

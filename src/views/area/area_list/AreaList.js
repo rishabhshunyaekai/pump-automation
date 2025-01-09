@@ -130,6 +130,7 @@ const Table = ({ tableInstance, className }) => {
                       paddingRight: "var(--card-spacing-sm)",
                       paddingTop: "0.25rem",
                       paddingBottom: "0.25rem",
+                      fontSize : "15x",
                     }}
                   >
                     {cell.render("Cell")}
@@ -205,13 +206,14 @@ const AreaList = () => {
         accessor: "AreaNumber",
         sortable: false,
         headerClassName:
-          "text-muted text-small text-uppercase w-10 px-4 overflow-x",
+          "text-dark text-medium text-uppercase w-10 px-4 overflow-x",
         Cell: ({ cell }) => {
           return (
             <>
               <a
                 className="list-item-heading body"
                 href="#!"
+                style={{color: '#24A6F6 '}}
                 onClick={(e) => {
                   e.preventDefault();
                 }}
@@ -227,32 +229,32 @@ const AreaList = () => {
         Header: "Area Name",
         accessor: "AreaName",
         sortable: true,
-        headerClassName: "text-muted text-small text-uppercase w-10 px-3",
-        cellClassName: "text-alternate",
+        headerClassName: "text-dark text-medium text-uppercase w-10 px-3",
+        cellClassName: "text-dark",
       },
 
       {
         Header: "No. of Devices",
         accessor: "totalDevice",
         sortable: true,
-        headerClassName: "text-muted text-small text-uppercase w-10",
-        cellClassName: "text-alternate",
+        headerClassName: "text-dark text-medium text-uppercase w-10",
+        cellClassName: "text-dark",
       },
 
       {
         Header: "Active Devices",
         accessor: "totalActive",
         sortable: true,
-        headerClassName: "text-muted text-small text-uppercase w-10",
-        cellClassName: "text-alternate",
+        headerClassName: "text-dark text-medium text-uppercase w-10",
+        cellClassName: "text-dark",
       },
 
       {
         Header: "InActive Devices",
         accessor: "totalDeactive",
         sortable: true,
-        headerClassName: "text-muted text-small text-uppercase w-10 ",
-        cellClassName: "text-alternate",
+        headerClassName: "text-dark text-medium text-uppercase w-10 ",
+        cellClassName: "text-dark",
       },
 
       {
@@ -263,16 +265,17 @@ const AreaList = () => {
           return (
             <>
               <NavLink
-                className="muted-link pb-1 d-inline-block hidden breadcrumb-back text-primary"
+                className="muted-link  d-inline-block hidden breadcrumb-back text-primary border border-primary rounded p-3"
                 to={"/view_map_page/" + cell.row.values.AreaNumber}
+                style={{color: '#24A6F6 '}}
               >
                 {<RemoveRedEyeOutlinedIcon />}
               </NavLink>
             </>
           );
         },
-        headerClassName: "text-muted text-small text-uppercase w-10 px-3",
-        cellClassName: "text-alternate",
+        headerClassName: "text-dark text-medium text-uppercase w-10 px-3",
+        cellClassName: "text-dark",
       },
       ,
     ];
@@ -303,7 +306,7 @@ const AreaList = () => {
               <CsLineIcons icon="chevron-left" size="13" />
               <span className="align-middle text-small ms-1">Dashboard</span>
             </NavLink>
-            <h1 className="mb-0 pb-0 display-4" id="title"  style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}>
+            <h1 className="mb-0 pb-0 display-4" id="title"  style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6', }}>
               {title}
             </h1>
           </Col>
@@ -316,20 +319,21 @@ const AreaList = () => {
       </div>
 
       <Row className="mb-3">
-        <Col md="5" lg="3" xxl="2" className="mb-1">
+      <Col md="9" lg="9" xxl="9" className="mb-1"></Col>
+        <Col md="2" lg="2" xxl="2" className="mb-1">
           {/* Search Start */}
           <div className="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
             <ControlsSearch tableInstance={tableInstance} />
-            <span className="search-magnifier-icon">
+            <span className="search-magnifier-icon" style={{backgroundColor: '#24A6F6 ', color: '#fff', borderRadius: '10px'}}>
               <CsLineIcons icon="search" />
             </span>
-            <span className="search-delete-icon d-none">
+            <span className="search-delete-icon d-none" style={{backgroundColor: '#24A6F6 ', color: '#fff', borderRadius: '10px'}}>
               <CsLineIcons icon="close" />
             </span>
           </div>
           {/* Search End */}
         </Col>
-        <Col md="7" lg="9" xxl="10" className="mb-1 text-end">
+        <Col md="1" lg="1" xxl="1" className="mb-1 text-end">
           {/* Export Dropdown End */}
 
           {/* Length Start */}
@@ -352,8 +356,9 @@ const AreaList = () => {
               overlay={<Tooltip id="tooltip-top">Item Count</Tooltip>}
             >
               <Dropdown.Toggle
-                variant="foreground-alternate"
+                // variant="foreground-alternate"
                 className="shadow sw-13"
+                style={{backgroundColor: '#24A6F6 ', color: '#fff'}}
               >
                 {itemPerPage} Items
               </Dropdown.Toggle>

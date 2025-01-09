@@ -240,7 +240,7 @@ const AddPump = () => {
             <h1
               className="mb-0 pb-0 display-4"
               id="title"
-              style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}
+              style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6', }}
             >
               {title}
             </h1>
@@ -465,7 +465,7 @@ const AddPump = () => {
                   <Col lg="8" className="mx-auto">
                     <Button
                       variant="primary"
-                      style={{ position: "relative", top: "0px" }}
+                      style={{ position: "relative", top: "0px",backgroundColor: '#24A6F6'}}
                       onClick={handleShow}
                     >
                       <span>Map Point</span>
@@ -482,7 +482,7 @@ const AddPump = () => {
                       marginTop: "3rem",
                     }}
                   >
-                    <Button className="btn-icon btn-icon-end" variant="primary" type="reset" href='/dashboard'>
+                    <Button className="btn-icon btn-icon-end" variant="primary" type="reset" href='/dashboard' style={{backgroundColor: '#24A6F6'}}>
                       Cancel <CsLineIcons icon="chevron-right" />
                     </Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -490,6 +490,7 @@ const AddPump = () => {
                       className="btn-icon btn-icon-end"
                       variant="primary"
                       type="submit"
+                      style={{backgroundColor: '#24A6F6'}}
                     >
                       Submit
                       <CsLineIcons icon="chevron-right" />

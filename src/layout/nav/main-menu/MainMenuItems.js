@@ -39,14 +39,14 @@ const MainMenuItem = memo(({ item, id, isSubItem = false, menuPlacement = DEFAUL
   const [verticalMenuCollapseExpanded, setVerticalMenuCollapseExpanded] = useState(isActive);
   const [horizontalDropdownIsOpen, setHorizontalDropdownIsOpen] = useState(false);
 
-  const getLabel = (icon, label) => (
+  const getLabel = (icon, label, active) => (
     <>
       {icon && (
         <>
-          <CsLineIcons icon={icon} size={18} className="cs-icon icon" />{' '}
+          <CsLineIcons icon={icon} size={18} className="cs-icon icon" active={active}/>{' '}
         </>
       )}
-      <span className="label">{USE_MULTI_LANGUAGE ? f({ id: label }) : label}</span>
+      <span className="label" style={{ color: active ? '#fff' : '#000' }}>{USE_MULTI_LANGUAGE ? f({ id: label }) : label}</span>
     </>
   );
 
@@ -76,7 +76,7 @@ const MainMenuItem = memo(({ item, id, isSubItem = false, menuPlacement = DEFAUL
     return (
       <Dropdown as="li" key={id} onToggle={onToggleItem} className={classNames({ mega: item.mega })} show={horizontalDropdownIsOpen}>
         <Dropdown.Toggle as={HorizontalMenuDropdownToggle} onClick={onHorizontalMenuDropdownToggleClick} href={item.path} active={isActive}>
-          {getLabel(item.icon, item.label)}
+          {getLabel(item.icon, item.label,isActive)}
         </Dropdown.Toggle>
         <Dropdown.Menu
           ref={dropdownMenuRef}
@@ -124,8 +124,8 @@ const MainMenuItem = memo(({ item, id, isSubItem = false, menuPlacement = DEFAUL
   if (item.subs && menuPlacement === MENU_PLACEMENT.Horizontal) {
     return (
       <li className="dropdown col d-flex flex-column">
-        <NavLink to={item.path} className={classNames('dropdown-toggle', { active: isActive })}>
-          {getLabel(item.icon, item.label)}
+        <NavLink to={item.path} className={classNames('dropdown-toggle', { active: isActive })} style={{backgroundColor: isActive ? "#24A6F6 " : '', borderRadius: '15px'}}>
+          {getLabel(item.icon, item.label,isActive)}
         </NavLink>
         <ul>
           <MainMenuItems menuItems={item.subs} menuPlacement={menuPlacement} isSubItem />
@@ -140,11 +140,12 @@ const MainMenuItem = memo(({ item, id, isSubItem = false, menuPlacement = DEFAUL
           href={item.path}
           data-bs-toggle="collapse"
           role="button"
-          className={classNames({ active: isActive })}
+          // className={classNames({ active: isActive })}
           aria-expanded={verticalMenuCollapseExpanded && !collapseAll}
           onClick={onVerticalMenuCollapseClick}
+          style={{backgroundColor: isActive ? "#24A6F6 " : '', borderRadius: '15px'}}
         >
-          {getLabel(item.icon, item.label)}
+          {getLabel(item.icon, item.label,isActive)}
         </a>
         <Collapse in={verticalMenuCollapseExpanded && !collapseAll}>
           <ul>
@@ -158,16 +159,16 @@ const MainMenuItem = memo(({ item, id, isSubItem = false, menuPlacement = DEFAUL
     return (
       <li key={id}>
         <a href={item.path} target="_blank" rel="noopener noreferrer">
-          {getLabel(item.icon, item.label)}
+          {getLabel(item.icon, item.label,isActive)}
         </a>
       </li>
     );
   }
   if (!isSubItem || menuPlacement === MENU_PLACEMENT.Vertical) {
     return (
-      <li>
+      <li style={{backgroundColor: isActive ? "#24A6F6 " : '', borderRadius: '15px'}}>
         <NavLink to={item.path} className={classNames({ active: isActive })} activeClassName="">
-          {getLabel(item.icon, item.label)}
+          {getLabel(item.icon, item.label,isActive)}
         </NavLink>
       </li>
     );
@@ -175,16 +176,16 @@ const MainMenuItem = memo(({ item, id, isSubItem = false, menuPlacement = DEFAUL
   if (menuPlacement === MENU_PLACEMENT.Horizontal && item.megaParent) {
     return (
       <li className="col d-flex flex-column">
-        <NavLink to={item.path} className={classNames({ active: isActive })} activeClassName="">
-          {getLabel(item.icon, item.label)}
+        <NavLink to={item.path} className={classNames({ active: isActive })} activeClassName="" style={{backgroundColor: isActive ? "#24A6F6 " : '', borderRadius: '15px'}}>
+          {getLabel(item.icon, item.label,isActive)}
         </NavLink>
       </li>
     );
   }
   return (
     <Dropdown.Item as="li">
-      <NavLink to={item.path} className={classNames({ active: isActive })} activeClassName="">
-        {getLabel(item.icon, item.label)}
+      <NavLink to={item.path} className={classNames({ active: isActive })} activeClassName="" style={{backgroundColor: isActive ? "#24A6F6 " : '', borderRadius: '15px'}}>
+        {getLabel(item.icon, item.label,isActive)}
       </NavLink>
     </Dropdown.Item>
   );

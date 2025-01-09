@@ -14,8 +14,8 @@
         reconnectionAttempts : 99999
     });
     export const REACT_HELMET_PROPS = {
-        defaultTitle  : "ENV Plus",
-        titleTemplate : "ENV Plus",
+        defaultTitle  : "Pump Automation",
+        titleTemplate : "Pump Automation",
     };
     export const DEFAULT_PATHS = {
         APP             : "/",

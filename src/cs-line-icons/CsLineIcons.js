@@ -15,6 +15,7 @@ const CsLineIcons = ({
   strokeLinejoin = 'round',
   viewBox = '0 0 20 20',
   xmlns = 'http://www.w3.org/2000/svg',
+  active
 }) => {
   if (svgs[icon]) {
     if (size) {
@@ -29,7 +30,8 @@ const CsLineIcons = ({
         height={height}
         viewBox={viewBox}
         fill={fill}
-        stroke={stroke}
+        // stroke={stroke}
+        stroke={active ? '#fff' : stroke}
         strokeWidth={strokeWidth}
         strokeLinecap={strokeLinecap}
         strokeLinejoin={strokeLinejoin}

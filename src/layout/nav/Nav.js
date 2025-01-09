@@ -58,10 +58,10 @@ const Nav = () => {
         className="nav-content d-flex"
         style={placementStatus.placementHtmlData === MENU_PLACEMENT.Horizontal && menuPadding ? { paddingRight: menuPadding } : {}}
       >
-        <NavLogo />
-        <NavLanguageSwitcher />
-        <NavUserMenu />
-        <NavIconMenu />
+        {/* <NavLogo /> */}
+        {/* <NavLanguageSwitcher /> */}
+        {/* <NavUserMenu /> */}
+        {/* <NavIconMenu /> */}
         <MainMenu />
         <NavMobileButtons />
  
