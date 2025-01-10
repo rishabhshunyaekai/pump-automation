@@ -13,7 +13,7 @@
     import style from './viewmap.module.css';
 
     import { SocketIo, DEFAULT_USER } from "config.js";
-    const containerStyle = { width: "100wv", height: "600px", };
+    const containerStyle = { width: "100wv", height: "600px", borderRadius: "20px"};
     const center         = { lat: 28.805918377354473, lng: 76.93546814405957, };
     let user_id          = sessionStorage.getItem("user_id")
     let lib              = ["places", "geometry", "visualization", "drawing"];
@@ -89,7 +89,7 @@
                                 <CsLineIcons icon="chevron-left" size="13" />
                                 <span className="align-middle text-small ms-1">Aear List</span>
                             </NavLink>
-                            <h1 className="mb-0 pb-0 display-4" id="title" style={{ marginLeft: "0.5rem", fontWeight: "700", fontSize: "1.5rem", color: "#5ebce3", }} > {title} </h1>
+                            <h1 className="mb-0 pb-0 display-4" id="title" style={{ marginLeft: "0.5rem", fontWeight: "700", fontSize: "1.5rem", color: "#24A6F6", }} > {title} </h1>
                         </Col>
                         {/* Title End */}
                     </Row>
@@ -207,11 +207,11 @@
                             <div className={`${style.card}`}>
                                 <div className={style.cardWrapper}>
                                     <div className={style.cardIcon}>
-                                    <DesktopWindowsOutlinedIcon style={{color : "#24A6F6"}} />
+                                    <DesktopWindowsOutlinedIcon style={{color : "#fff"}} />
                                 </div>
                                 <div className={style.cardContent}>
                                     <div className={style.cardCount}>{totalDevice}</div>
-                                    <div className={style.cardTitle}>TOTAL DEVICES</div>
+                                    <div className={style.cardTitle}>Total Device</div>
                                 </div>
                             </div>
                         </div>
@@ -254,11 +254,11 @@
                             <div className={`${style.card}`}>
                                 <div className={style.cardWrapper}>
                                     <div className={style.cardIcon}>
-                                    <VibrationOutlinedIcon style={{color : "#24A6F6"}} />
+                                    <VibrationOutlinedIcon style={{color : "#fff"}} />
                                     </div>
                                     <div className={style.cardContent}>
                                         <div className={style.cardCount}>{totalActive}</div>
-                                        <div className={style.cardTitle}>ACTIVE DEVICES</div>
+                                        <div className={style.cardTitle}>Active Device</div>
                                     </div>
                                 </div>
                             </div>
@@ -299,11 +299,11 @@
                             <div className={`${style.card}`}>
                                 <div className={style.cardWrapper}>
                                     <div className={style.cardIcon}>
-                                    <PhonelinkEraseOutlinedIcon style={{color : "#24A6F6"}} />
+                                    <PhonelinkEraseOutlinedIcon style={{color : "#fff"}} />
                                     </div>
                                     <div className={style.cardContent}>
                                         <div className={style.cardCount}>{totalDevice - totalActive}</div>
-                                        <div className={style.cardTitle}>INACTIVE DEVICES</div>
+                                        <div className={style.cardTitle}>In-Active Device</div>
                                     </div>
                                 </div>
                             </div>

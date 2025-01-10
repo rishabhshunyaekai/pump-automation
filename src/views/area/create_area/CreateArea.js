@@ -12,6 +12,7 @@ import { DEFAULT_USER } from "config";
 const containerStyle = {
   width: "100wv",
   height: "600px",
+  borderRadius: '20px'
 };
 const center = {
   lat: 28.6139,

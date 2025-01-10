@@ -4,9 +4,9 @@
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  padding: 40px;
+  padding: 40px 20px;
 }
 
 .cardWrapper {
@@ -17,6 +17,7 @@
 
 .cardIcon {
   border: 1px solid #24a6f6;
+  background-color: #24a6f6;
   padding: 20px;
   border-radius: 10px;
   display: flex;

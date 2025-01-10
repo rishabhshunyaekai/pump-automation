@@ -80,7 +80,7 @@ const Table = ({ tableInstance, className }) => {
     <>
       <table
         style={{
-          borderSpacing: "0 calc(var(--card-spacing-xs)/10*7)",
+          borderSpacing: "0 calc(var(--card-spacing-xs)/10*17)",
           borderCollapse: "separate",
           width: "100%",
         }}
@@ -237,7 +237,7 @@ const AreaList = () => {
         Header: "No. of Devices",
         accessor: "totalDevice",
         sortable: true,
-        headerClassName: "text-dark text-medium text-uppercase w-10",
+        headerClassName: "text-dark text-medium text-uppercase w-10 px-3",
         cellClassName: "text-dark",
       },
 
@@ -245,7 +245,7 @@ const AreaList = () => {
         Header: "Active Devices",
         accessor: "totalActive",
         sortable: true,
-        headerClassName: "text-dark text-medium text-uppercase w-10",
+        headerClassName: "text-dark text-medium text-uppercase w-10 px-3",
         cellClassName: "text-dark",
       },
 
@@ -253,7 +253,7 @@ const AreaList = () => {
         Header: "InActive Devices",
         accessor: "totalDeactive",
         sortable: true,
-        headerClassName: "text-dark text-medium text-uppercase w-10 ",
+        headerClassName: "text-dark text-medium text-uppercase w-10 px-3",
         cellClassName: "text-dark",
       },
 
@@ -267,7 +267,6 @@ const AreaList = () => {
               <NavLink
                 className="muted-link  d-inline-block hidden breadcrumb-back text-primary border border-primary rounded p-3"
                 to={"/view_map_page/" + cell.row.values.AreaNumber}
-                style={{color: '#24A6F6 '}}
               >
                 {<RemoveRedEyeOutlinedIcon />}
               </NavLink>
@@ -310,19 +309,9 @@ const AreaList = () => {
               {title}
             </h1>
           </Col>
-          {/* Title End */}
-
-          {/* Top Buttons Start */}
-
-          {/* Top Buttons End */}
-        </Row>
-      </div>
-
-      <Row className="mb-3">
-      <Col md="9" lg="9" xxl="9" className="mb-1"></Col>
-        <Col md="2" lg="2" xxl="2" className="mb-1">
+          <Col md="3" lg="2" xxl="2" className="mb-1">
           {/* Search Start */}
-          <div className="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
+          <div className="d-inline-block float-md-start me-1 mt-2 search-input-container w-100 shadow bg-foreground">
             <ControlsSearch tableInstance={tableInstance} />
             <span className="search-magnifier-icon" style={{backgroundColor: '#24A6F6 ', color: '#fff', borderRadius: '10px'}}>
               <CsLineIcons icon="search" />
@@ -333,13 +322,14 @@ const AreaList = () => {
           </div>
           {/* Search End */}
         </Col>
-        <Col md="1" lg="1" xxl="1" className="mb-1 text-end">
+        <Col md="2" lg="1" xxl="1" className="mb-1 text-end">
           {/* Export Dropdown End */}
 
           {/* Length Start */}
           <Dropdown
+            style={{marginLeft: '10px'}}
             align={{ xs: "end" }}
-            className="d-inline-block ms-1"
+            className="d-inline-block mt-2"
             onSelect={(e) => {
               setItemPerpage(Number(e));
               setstate({ ...state, currentPage: 1 });
@@ -377,7 +367,13 @@ const AreaList = () => {
           </Dropdown>
           {/* Length End */}
         </Col>
-      </Row>
+        </Row>
+      </div>
+
+      {/* <Row className="mb-3">
+      <Col md="9" lg="9" xxl="9" className="mb-1"></Col>
+        
+      </Row> */}
 
       <Row>
         <Col xs="12" className="overflow-scroll">

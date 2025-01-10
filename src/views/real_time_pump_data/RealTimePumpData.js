@@ -129,7 +129,7 @@ let myuuid = uuidv4();
     <>
       <HtmlHead title={title} description={description} />
       {/* Title Start */}
-      <div className="page-title-c  ontainer">
+      <div className="page-title-container">
         <NavLink className="muted-link pb-1 d-inline-block hidden breadcrumb-back" to="/">
           <CsLineIcons icon="chevron-left" size="13" />
           <span className="align-middle text-small ms-1">Dashboard</span>
@@ -144,14 +144,13 @@ let myuuid = uuidv4();
         <Col md="12" lg="12" xxl="12" sm="12">
           <Row>
        
-            <Col md="6" lg="6" xxl="6" sm="12" className="mb-1 text-end ">
+            <Col md="9" lg="8" xxl="7" sm="12" className="mb-1 text-end ">
               {/* Length Start */}
               <Select 
-               
-                className="react-select-container w-50 mb-1 text-end "
+                className="react-select-container w-25 mb-1 "
                 classNamePrefix="react-select"
                 options={listData}
-                //className="btn btn-foreground-alternate"
+                // className="btn btn-foreground-alternate"
                 onChange={(key) => {
                   setstate({ ...state, currentPage: 1, limit: itemPerPage, areanumber: key.AreaNumber, devicestatus: devicestatus });
                  if (isConnected) {
@@ -163,7 +162,7 @@ let myuuid = uuidv4();
                 }
               />
             </Col>
-            <Col md="3" lg="3" xxl="3" sm="12" className="mb-1 text-end">
+            <Col md="3" lg="3" xxl="4" sm="12" className="mb-1 text-end">
               {/* Length Start */}
               <Dropdown align={{ xs: 'end' }} className="d-inline-block ms-1"
                 onSelect={(key) => {
@@ -191,7 +190,7 @@ let myuuid = uuidv4();
               </Dropdown>
               {/* Length End */}
             </Col>
-            <Col md="3" lg="3" xxl="3" sm="12" className="mb-1 text-end">
+            <Col md="1" lg="1" xxl="1" sm="12" className="mb-1 text-end">
 
               {/* Length Start */}
               <Dropdown align={{ xs: 'end' }} className="d-inline-block ms-1"
@@ -235,8 +234,8 @@ let myuuid = uuidv4();
                           <Row className="g-0">
                             <Col>
                               {/* <NavLink to={`device-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25"> */}
-                              <NavLink to={`pump-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25" style={{color: '#24A6F6'}}>
-                                {item.devicename}
+                              <NavLink to={`pump-information/${item.deviceid}`} className="sh-5 d-flex align-items-center lh-1-25" style={{color: '#24A6F6', fontWeight:'900', fontSize: '18px'}}>
+                                <b>{item.devicename}</b>
                                 {/* Device Name </div> */}
                               </NavLink>
                             </Col>

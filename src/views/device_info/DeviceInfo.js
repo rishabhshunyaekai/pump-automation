@@ -89,7 +89,7 @@
                     <Card.Body className="mb-n5">
                         <div className="d-flex align-items-center flex-column mb-5">
                         <div className="mb-5 d-flex align-items-center flex-column">
-                            <div className="h5 mb-1">{details.devicename}</div>
+                            <div className="h5 mb-1 text-uppercase" style={{color: '#24A6F6'}}><strong>{details.devicename}</strong></div>
                         </div>
                         <div
                             style={{
@@ -131,12 +131,12 @@
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
                             <div className=" sw-5 sh-5 d-flex justify-content-center align-items-center"
-                                 style={{border: '1px solid #24A6F6', borderRadius: '10px', padding: '10px'}}
+                                 style={{border: '1px solid #24A6F6', borderRadius: '10px', padding: '10px',backgroundColor: '#24A6F6'}}
                             >
                                 <AppRegistrationIcon
                                 from
                                 icon="credit-card"
-                                style={{color: '#24A6F6'}}
+                                style={{color: '#fff'}}
                                 />
                             </div>
                             </Col>
@@ -144,7 +144,7 @@
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
-                                    Registration Date
+                                    <strong style={{fontWeight: '900', fontSize: '16px'}}>Registration Date</strong>
                                 </div>
                                 </Col>
                                 <Col xs="auto">
@@ -158,16 +158,16 @@
                         <Row className="g-0 align-items-center mb-2">
                             <Col xs="auto">
                             <div className="sw-5 sh-5 d-flex justify-content-center align-items-center"
-                                 style={{border: '1px solid #24A6F6', borderRadius: '10px', padding: '10px'}}
+                                 style={{border: '1px solid #24A6F6', borderRadius: '10px', padding: '10px',backgroundColor: '#24A6F6'}}
                             >
-                                <AddCardIcon icon="cart" style={{color: '#24A6F6'}}/>
+                                <AddCardIcon icon="cart" style={{color: '#fff'}}/>
                             </div>
                             </Col>
                             <Col className="ps-3">
                             <Row className="g-0">
                                 <Col>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">
-                                    Warranty Date
+                                    <strong style={{fontWeight: '900', fontSize: '16px'}}>Warranty Date</strong>
                                 </div>
                                 </Col>
                                 <Col xs="auto">
@@ -183,7 +183,7 @@
                         </div>
 
                         <div className="mb-5">
-                        <p className="text-small text-dark mb-2">Pump Details</p>
+                        <p className="text-dark mb-2"><strong style={{fontWeight: '900',fontSize: '16px'}}>Pump Details</strong></p>
                         <Row className="g-0 align-items-center mb-2">
                             {/* <Col xs="auto">
                             <div className="border border-primary sw-5 sh-5 rounded-xl d-flex justify-content-center align-items-center">
@@ -476,7 +476,7 @@
                     {/* Recent Orders Start */}
 
                     <div className="d-flex justify-content-between">
-                    <h2 className="small-title" style={{color: '#24A6F6'}}>Recent History</h2>
+                    <h2 className="small-title" style={{color: '#24A6F6'}}><b>Recent History</b></h2>
                     {/* <NavLink to={`/alert/alert-history/${details.deviceid}`}>
                         <Button variant="primary">View More</Button>
                     </NavLink> */}
@@ -526,7 +526,7 @@
                         </Col> */}
                         <Col
                             lg="3"
-                            className="d-flex flex-column mb-lg-0 pe-3 d-flex"
+                            className="d-flex flex-column mb-lg-0 px-1 d-flex"
                         >
                             <div className="text-dark text-medium cursor-pointer ">
                             Updated Date

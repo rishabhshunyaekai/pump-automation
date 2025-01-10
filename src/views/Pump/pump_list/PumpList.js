@@ -459,14 +459,14 @@ if (areanumber !== 0)
                 Cell     : (cell) => {
                     return (
                         <>
-                            <button style={{ backgroundColor: "transparent", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px',marginRight: '2px' }} value={"Add"} >
+                            <button style={{ color: "#24A6F6", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px',marginRight: '6px' }} value={"Add"} >
                                 {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
                                 <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
                                 className="text-primary">
                                     {<EditIcon />}
                                 </NavLink>
                             </button>
-                            <button style={{ backgroundColor: "transparent", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px' }} value={"Add"} >
+                            <button style={{ color: "#24A6F6", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px' }} value={"Add"} >
                                 {/* <NavLink to={`/device-information/${cell.row.original.deviceid}`} className="text-primary" > */}
                                 <NavLink to={`/pump-information/${cell.row.original.deviceid}`} className="text-primary" >
                                     {<RemoveRedEyeOutlinedIcon />}
@@ -478,7 +478,7 @@ if (areanumber !== 0)
                         </>
                     );
                 },
-                headerClassName : "text-dark text-medium text-uppercase w-10 px-7",
+                headerClassName : "text-dark text-medium text-uppercase w-10 px-3",
                 cellClassName   : "text-dark",
             },
         ];
@@ -535,15 +535,9 @@ return isLoaded ? (
             {title}
             </h1>
         </Col>
-        {/* Title End */}
-        </Row>
-    </div>
-
-    <Row className="mb-3">
-        <Col md="6" lg="8" xxl="9" className="mb-1"></Col>
-        <Col md="4" lg="2" xxl="2" className="mb-1">
+        <Col md="3" lg="2" xxl="2" className="mb-1">
         {/* Search Start */}
-        <div className="d-inline-block float-md-start me-1 mb-1 search-input-container w-100 shadow bg-foreground">
+        <div className="d-inline-block float-md-start me-1 mt-2 search-input-container w-100 shadow bg-foreground">
             <ControlsSearch tableInstance={tableInstance} />
             <span className="search-magnifier-icon" style={{backgroundColor: '#24A6F6', color: '#fff',borderRadius: '10px'}}>
             <CsLineIcons icon="search" />
@@ -554,11 +548,12 @@ return isLoaded ? (
         </div>
         {/* Search End */}
         </Col>
-        <Col md="2" lg="2" xxl="1" className="mb-1 text-end">
+        <Col md="2" lg="1" xxl="1" className="mb-1 text-end">
         {/* Length Start */}
         <Dropdown
+            style={{marginLeft: '10px'}}
             align={{ xs: "end" }}
-            className="d-inline-block ms-1"
+            className="d-inline-block mt-2"
             onSelect={(e) => {
             setItemPerpage(Number(e));
             setstate({ ...state, currentPage: 1 });
@@ -596,7 +591,14 @@ return isLoaded ? (
         </Dropdown>
         {/* Length End */}
         </Col>
-    </Row>
+        {/* Title End */}
+        </Row>
+    </div>
+
+    {/* <Row className="mb-3">
+        <Col md="6" lg="8" xxl="9" className="mb-1"></Col>
+        
+    </Row> */}
 
     <Row className="mb-3">
         <Col className="w-100 overflow-scroll">

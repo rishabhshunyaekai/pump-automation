@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
     <>
       <Nav />
       <main>
-        <Container>
+        <Container style={{padding: "0px 70px"}}>
           <Row className="h-100">
             <SidebarMenu />
             <RealTimeNotification></RealTimeNotification>
