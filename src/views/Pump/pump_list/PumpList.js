@@ -459,14 +459,14 @@ if (areanumber !== 0)
                 Cell     : (cell) => {
                     return (
                         <>
-                            <button style={{ color: "#24A6F6", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px',marginRight: '6px' }} value={"Add"} >
+                            <button style={{ backgroundColor: '#fff', color: "#24A6F6", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px',marginRight: '6px' }} value={"Add"}>
                                 {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
                                 <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
                                 className="text-primary">
                                     {<EditIcon />}
                                 </NavLink>
                             </button>
-                            <button style={{ color: "#24A6F6", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px' }} value={"Add"} >
+                            <button style={{ backgroundColor: '#fff', color: "#24A6F6", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px' }} value={"Add"}>
                                 {/* <NavLink to={`/device-information/${cell.row.original.deviceid}`} className="text-primary" > */}
                                 <NavLink to={`/pump-information/${cell.row.original.deviceid}`} className="text-primary" >
                                     {<RemoveRedEyeOutlinedIcon />}

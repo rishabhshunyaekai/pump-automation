@@ -617,10 +617,10 @@ const AddPump = () => {
           </GoogleMap>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cencel
+          <Button style={{backgroundColor: '#24A6F6'}} onClick={handleClose}>
+            Cancel
           </Button>
-          <Button variant="primary" disabled={movementPoint} onClick={onSave}>
+          <Button style={{backgroundColor: '#24A6F6'}} disabled={movementPoint} onClick={onSave}>
             Save
           </Button>
         </Modal.Footer>

@@ -143,19 +143,19 @@ const RecentHistory = (props) => {
         Header: 'Action', accessor: 'action', sortable: false, Cell: (cell) => {
 
           return (<>
-            <button style={{ color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px', marginRight: '5px' }} value={"Add"}>
+            <button style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px', marginRight: '5px' }} value={"Add"}>
               {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
               <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
                 className="text-primary"> {<EditIcon  />} </NavLink>
 
             </button>
 
-            <button style={{ color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px',marginRight: '5px' }} value={"Add"}> <NavLink
+            <button style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px',marginRight: '5px' }} value={"Add"}> <NavLink
               to={`/pump-information/${cell.row.original.deviceid}`}
 
               className="text-primary"> {<RemoveRedEyeOutlinedIcon  />}  </NavLink></button>
 
-            <button className="text-primary" onClick={handleShow} style={{ color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px' }} value={"Add"}>{<DeleteOutlineOutlinedIcon />}</button>
+            <button className="text-primary" onClick={handleShow} style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px' }} value={"Add"}>{<DeleteOutlineOutlinedIcon />}</button>
           </>)
         },
         headerClassName: 'text-dark text-medium text-uppercase w-10 p-4', cellClassName: 'text-alternate ',

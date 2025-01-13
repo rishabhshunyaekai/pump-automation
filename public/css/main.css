@@ -37,3 +37,7 @@
 html[data-navcolor=light] .nav-container {
   background: var(--foreground);
 }
+.form-check-input:checked {
+  background-color: #24A6F6;
+  border-color: #24A6F6 !important;
+}
