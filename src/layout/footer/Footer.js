@@ -15,7 +15,7 @@ const Footer = () => {
         <Container>
           <Row>
             <Col xs="12" sm="6">
-              <p className="mb-0 text-muted text-medium">@Copyright Shunya Ekai Technologies 2022</p>
+              <p className="mb-0 text-muted text-medium">@Copyright Shunya Ekai Technologies 2025</p>
             </Col>
           </Row>
         </Container>

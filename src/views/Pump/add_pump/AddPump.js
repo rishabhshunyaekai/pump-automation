@@ -326,8 +326,10 @@ const AddPump = () => {
                         type="number"
                         placeholder="Enter the Pump Capacity"
                         name="devicecapacity"
-                        value={values.devicecapacity}
+                        value={0}
+                        // value={values.devicecapacity}
                         onChange={handleChange}
+                        disabled
                       />
                       {errors.devicecapacity && touched.devicecapacity && (
                         <div className="d-block invalid-tooltip">

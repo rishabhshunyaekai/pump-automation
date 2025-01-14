@@ -36,6 +36,18 @@
     font-size: 14px;
     line-height: 20px;
   }
+
+  @media (max-width: 850px) {
+    .card {
+      padding: 35px 15px;
+    }
+    .cardWrapper {
+      column-gap: 22px;
+    }
+    .cardIcon {
+      padding: 18px;
+    }
+  }
   
   /* .card:hover {
       background-color: #00ffc3;

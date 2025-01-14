@@ -36,6 +36,42 @@
   line-height: 20px;
 }
 
+@media (max-width: 570px) {
+  .card {
+    padding: 20px 10px;
+  }
+  .cardWrapper {
+    column-gap: 20px;
+  }
+  .cardIcon {
+    padding: 10px;
+  }
+  .cardCount {
+    font-size: 20px;
+    font-weight: 900;
+  }
+  
+  .cardTitle {
+    font-size: 14px;
+  }
+}
+@media (max-width: 464px) {
+  .cardWrapper {
+    column-gap: 15px;
+  }
+  .cardIcon {
+    padding: 8px;
+  }
+  .cardCount {
+    font-size: px;
+    font-weight: 900;
+  }
+  
+  .cardTitle {
+    font-size: 12px;
+  }
+}
+
 /* .card:hover {
     background-color: #00ffc3;
     color: #000000 !important;

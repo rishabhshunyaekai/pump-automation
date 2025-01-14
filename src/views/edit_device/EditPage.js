@@ -277,7 +277,10 @@
                                         }}
                                     > Pump Capacity </Form.Label>
                                     <div>
-                                        <Form.Control type="number" name="devicecapacity" value={deviceData.devicecapacity} placeholder="Enter the Pump Capacity" onChange={changeHandler} />
+                                        <Form.Control type="number" name="devicecapacity" 
+                                        // value={deviceData.devicecapacity} 
+                                        value={0} disabled
+                                        placeholder="Enter the Pump Capacity" onChange={changeHandler} />
                                     </div>
                                     {error && deviceCapacity.length <= 0 ? (
                                         <label style={{ color: "red" }}>

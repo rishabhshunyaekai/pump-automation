@@ -341,6 +341,13 @@ if (areanumber !== 0)
                 sortable        : true,
                 headerClassName : "text-dark text-medium text-uppercase w-10 px-3",
                 cellClassName   : "text-dark",
+                Cell     : (cell) => { 
+                            return (
+                                <> 
+                                    { cell.row.original.alerttypetemp }
+                                </>
+                            );
+                        },
             },
             // {
             //     Header   : "Pump Capacity",

@@ -40,21 +40,23 @@ const RealTimePumpData = () => {
   const [currentToggleId, setCurrentToggleId] = useState(null);
   const [passwordError, setPasswordError] = useState("");
   const [pass, setPass] = useState("");
-
-  const [messages, setMessages] = useState([]);
+  const [toggleEnable, setToggleEnable] = useState([]);
+  const [client, setClient] = useState(null);
 
   // For Mqtt
   useEffect(() => {
     const client = new Client(  hostname,
                                 Number(port),
-                                `clientId-${Math.random().toString(16).slice(2)}`
+                                 `clientId-${Math.random().toString(16).slice(2)}`
                               );
-                             
+    setClient(client);
+                              
     client.connect({
       userName: username,
       password: password,
       onSuccess: () => {
-                          const topic = 'topic'
+                          // const topic = '/supro/pump/+/GEN'
+                          const topic = '/supro/pump/#'
                           client.subscribe(topic, {
                             onSuccess: ()=> console.log('Subscription Succesfull', topic),
                             onFailure: (error) => console.error('Subscription failed:', error),
@@ -70,12 +72,26 @@ const RealTimePumpData = () => {
     };
 
     client.onMessageArrived = (message) => {
-      console.log(message)
-      console.log(`Message received on topic ${message.destinationName}: ${message.payloadString}`);
-      setMessages((prev) => [
-        ...prev,
-        { topic: message.destinationName, message: message.payloadString },
-      ]);
+      console.log(`Message received on topic ${message.destinationName} : ${message.payloadString}`);
+
+      setToggleEnable((prev) => {
+        const existingIndex = prev.findIndex((item) => item.topic === message.destinationName);
+      
+        if (existingIndex !== -1) {
+          // Update the existing object if the topic matches
+          return prev.map((item, index) =>
+            index === existingIndex
+              ? { ...item, message: message.payloadString }
+              : item
+          );
+        } else {
+          // Add a new object if the topic is not found
+          return [
+            ...prev,
+            { topic: message.destinationName, message: message.payloadString },
+          ];
+        }
+      });
     };
 
     return () => {
@@ -119,7 +135,6 @@ const RealTimePumpData = () => {
     if (isConnected) {
        SocketIo.emit('onrealtimedata',({ userId: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id, currentPage: currentPage, limit: limit, areanumber: areanumber, devicestatus: devicestatus,groupid:uuidgen  }));
         SocketIo.on('deviceData', (result) => {
-        // console.log("wanha par")
           if (result.length !== 0) {
             SeLists(result.deviceList);
             setTotalrecoard(result.totalrecoard);
@@ -171,6 +186,13 @@ const RealTimePumpData = () => {
     setPasswordError("");
     setPass('')
   };
+
+  const handleInputChange = (e) => {
+    setPass(e.target.value);
+    if (passwordError) {
+      setPasswordError("");
+    }
+  }
   
   const handlePasswordBlur = () => {
     if (!pass) {
@@ -184,7 +206,17 @@ const RealTimePumpData = () => {
     if (!pass) {
       setPasswordError("Password is required.");
     } else {
-      console.log(pass);
+      const toggleId = Object.entries(toggleStates)
+        .filter(([id, isChecked]) => isChecked)
+        .map(([id]) => id);
+
+        const topic = `/supro/pump/${toggleId}/GEN`;
+        const existingToggle = toggleEnable.find((toggle) => toggle.topic === topic);
+        const payload = existingToggle?.message === "1" ? " " : "1";
+  
+      client.publish(topic, payload, 0, true);
+      console.log(`Message published to topic ${topic}:`,payload);
+
       setPasswordError("");
       setPass('')
       handleClose();
@@ -238,7 +270,7 @@ const RealTimePumpData = () => {
               >
                 <OverlayTrigger delay={{ show: 1000, hide: 0 }} placement="top" overlay={<Tooltip id="tooltip-top">   {devicestatus == 0 ? "Active" : devicestatus == 1 ? "Inactive" : "All Items"}</Tooltip>}>
                   <Dropdown.Toggle  className="shadow" style={{backgroundColor: '#24A6F6'}}>
-                    {devicestatus == 0 ? "Active" : devicestatus == 1 ? "Inactive" : "All Items"}
+                    {devicestatus === 0 ? "Active" : devicestatus === 1 ? "Inactive" : "All Items"}
                   </Dropdown.Toggle>
                 </OverlayTrigger>
                 <Dropdown.Menu className="shadow dropdown-menu-end">
@@ -287,7 +319,7 @@ const RealTimePumpData = () => {
             list.map((item) => {
               return (
                 <Col xl="3" key={item.id}>
-                  <Card className="mb-5" style={item.count_temp == 1 || item.count_moist == 1 || item.count_humi == 1 || item.fire == 1 ? { border: "2px solid red" } : { border: "none" }}>
+                  <Card className="mb-5" style={item.humidity === '1' ? { border: "2px solid red" } : { border: "none" }}>
                     <Card.Header  >
                       <Row className="g-0 align-items-center mb-0">
                         <Col className="ps-2">
@@ -299,7 +331,7 @@ const RealTimePumpData = () => {
                             </Col>
                             <Col xs="auto">
                               <div className="sh-5 d-flex align-items-center">
-                                {item.devicestatus === 0 ? <Badge pill={true} bg="success">Active</Badge> : <Badge pill={true} bg="danger">Inactive</Badge>}
+                                {item.devicestatus === 1 ? <Badge pill={true} bg="success">Active</Badge> : <Badge pill={true} bg="danger">Inactive</Badge>}
                               </div>
                             </Col>
                           </Row>
@@ -315,7 +347,7 @@ const RealTimePumpData = () => {
                                 <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div>
                             </Col>
                             <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25"></div> 
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.deviceid}</div> 
                             </Col>
                           </Row>
                         </Col>
@@ -330,7 +362,7 @@ const RealTimePumpData = () => {
                               <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div>
                             </Col>
                             <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25"></div> 
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.devicename}</div> 
                             </Col>
                           </Row>
                         </Col>
@@ -345,7 +377,7 @@ const RealTimePumpData = () => {
                               <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div>
                             </Col>
                             <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25"></div> 
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.humidity === '1' ? 'Overflow': 'Normal'}</div>
                             </Col>
                           </Row>
                         </Col>
@@ -360,7 +392,7 @@ const RealTimePumpData = () => {
                               <div className="sh-5 d-flex align-items-center lh-1-25">Pump Capacity</div>
                             </Col>
                             <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25"></div> 
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.temperature} Ltr</div> 
                             </Col>
                           </Row>
                         </Col>
@@ -389,9 +421,12 @@ const RealTimePumpData = () => {
                               <div className="sh-5 d-flex align-items-center lh-1-25">Pump Status</div>
                             </Col>
                             <Col xs="auto">
-                              <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id={`flexSwitchCheckDefault-${item.id}`}
-                                  style={{width: "2rem", height: "1rem", transform: "scale(1.5)"}} checked={toggleStates[item.id] || false} onChange={() => handleToggle(item.id)}
+                              <div className="form-check form-switch">
+                                <input className="form-check-input" type="checkbox" role="switch" id={`flexSwitchCheckDefault-${item.deviceid}`}
+                                  style={{width: "2rem", height: "1rem", transform: "scale(1.5)"}} 
+                                  // checked={toggleStates[item.deviceid] || false} 
+                                  checked={toggleStates[item.deviceid] || toggleEnable.some(toggle => toggle.topic === `/supro/pump/${item.deviceid}/GEN` && toggle.message === "1")}
+                                  onChange={() => handleToggle(item.deviceid)}
                                   // checked={isChecked} onChange={handleShow}
                                 />
                               </div>
@@ -430,7 +465,7 @@ const RealTimePumpData = () => {
                   placeholder='Enter Password'
                   value={pass}
                   onBlur={handlePasswordBlur}
-                  onChange={(e) => setPass(e.target.value)}
+                  onChange={handleInputChange}
                 />
                 {passwordError && (
                   <div style={{ color: 'red', fontSize: '0.775rem', marginTop: '0.3rem',marginLeft: '0.6rem' }}>
@@ -457,9 +492,123 @@ const RealTimePumpData = () => {
 export default RealTimePumpData;
 
 
+// function connectionWithPumpDevice(id) {
+  //   console.log("con",id);
+  //   const client = new Client(  
+  //                               hostname,
+  //                               Number(port),
+  //                               id
+  //                               // `clientId-${Math.random().toString(16).slice(2)}`
+  //                             );
+
+  //                             console.log('client', client)
+  //   client.connect({
+  //     userName: username,
+  //     password: password,
+  //     onSuccess: () => {
+  //                         const topic = '/supro/pump/#'
+  //                         // const topic = `/supro/pump/${id}/GEN`
+  //                         client.subscribe(topic, {
+  //                           onSuccess: ()=> console.log('Subscription Succesfull', topic),
+  //                           onFailure: (error) => console.error('Subscription failed:', error),
+  //                         });
+  //                       },
+  //     onFailure: (error) => { console.error('Connection failed:', error); },
+  //                         });
+
+  //   client.onConnectionLost = (responseObject) => {
+  //     if (responseObject.errorCode !== 0) {
+  //       console.error('Connection lost:', responseObject.errorMessage);
+  //     }
+  //   };
+
+  //   client.onMessageArrived = (message) => {
+  //     console.log(message)
+  //     console.log(`Message received on topic ${message.destinationName}: ${message.payloadString}`);
+  //     setMessages((prev) => [
+  //       ...prev,
+  //       { topic: message.destinationName, message: message.payloadString },
+  //     ]);
+  //   };                         
+  // }
+
+
+  // if (isConnected) {
+      //   const topic = `/supro/pump/${toggleId}/GEN`;
+      //   const payload = JSON.stringify({
+      //     toggleId,
+      //     status: toggleStates[toggleId] ? "ON" : "OFF",
+      //     // timestamp: new Date().toISOString(),
+      //   });
+    
+      //   client.publish(topic, payload, 0, true); // QoS 0, retained = true
+      //   console.log(`Message published to topic ${topic}:`, payload);
+      // }
+
+      // if (isConnected && currentToggleId) {
+      //   const topic = `device/${currentToggleId}/data`; // Adjust topic format as needed
+      //   client.subscribe(topic, {
+      //     onSuccess: () => {
+      //       console.log(`Subscribed to topic: ${topic}`);
+      //     },
+      //     onFailure: (error) => {
+      //       console.error("Subscription failed:", error);
+      //     },
+      //   });
+  
+      //   // Listen for incoming messages
+      //   client.onMessageArrived = (message) => {
+      //     console.log(`Message received on topic ${message.destinationName}: ${message.payloadString}`);
+      //     setMessages((prev) => [
+      //       ...prev,
+      //       { topic: message.destinationName, message: message.payloadString },
+      //     ]);
+      //   };
+      // }
 
 
 
+      // For Mqtt
+  // useEffect(() => {
+  //   const client = new Client(  hostname,
+  //                               Number(port),
+  //                               `id`
+  //                             );
+                              
+  //   client.connect({
+  //     userName: username,
+  //     password: password,
+  //     onSuccess: () => {
+  //                         const topic = '/supro/pump/+/GEN'
+  //                         client.subscribe(topic, {
+  //                           onSuccess: ()=> console.log('Subscription Succesfull', topic),
+  //                           onFailure: (error) => console.error('Subscription failed:', error),
+  //                         });
+  //                       },
+  //     onFailure: (error) => { console.error('Connection failed:', error); },
+  //                         });
+
+  //   client.onConnectionLost = (responseObject) => {
+  //     if (responseObject.errorCode !== 0) {
+  //       console.error('Connection lost:', responseObject.errorMessage);
+  //     }
+  //   };
+
+  //   client.onMessageArrived = (message) => {
+  //     console.log(message)
+  //     console.log(`Message received on topic ${message.destinationName}: ${message.payloadString}`);
+  //     setMessages((prev) => [
+  //       ...prev,
+  //       { topic: message.destinationName, message: message.payloadString },
+  //     ]);
+  //   };
+
+  //   return () => {
+  //     if (client.isConnected()) {
+  //         client.disconnect();
+  //     }
+  //   };
+  // }, []);
 
 
 
@@ -998,32 +1147,32 @@ export default RealTimePumpData;
 //       </Row>
 
 //        <Modal show={show} size="lg" onHide={handleClose}>
-    //     <Modal.Header>
-    //     <h2>Password</h2>
-    //   </Modal.Header>
-    //   <Modal.Body>
-    //     <Row className="g-3 pt-5 pb-5">
-    //         <Col lg="8" className="mx-auto">
-    //           <Form.Label>Enter Password</Form.Label>
-    //           <div className="">
-    //             <Form.Control
-    //               type="password"
-    //               name="password"
-    //               autocomplete="off"
-    //             />
-    //           </div>
-    //         </Col>
-    //       </Row>
-    //   </Modal.Body>
-    //   <Modal.Footer>
-    //     <Button style={{backgroundColor: '#24A6F6'}} onClick={handleClose}>
-    //       Cancel
-    //     </Button>
-    //     <Button style={{backgroundColor: '#24A6F6'}}>
-    //       Submit
-    //     </Button>
-    //   </Modal.Footer>
-    // </Modal> 
+//         <Modal.Header>
+//         <h2>Password</h2>
+//       </Modal.Header>
+//       <Modal.Body>
+//         <Row className="g-3 pt-5 pb-5">
+//             <Col lg="8" className="mx-auto">
+//               <Form.Label>Enter Password</Form.Label>
+//               <div className="">
+//                 <Form.Control
+//                   type="password"
+//                   name="password"
+//                   autocomplete="off"
+//                 />
+//               </div>
+//             </Col>
+//           </Row>
+//       </Modal.Body>
+//       <Modal.Footer>
+//         <Button style={{backgroundColor: '#24A6F6'}} onClick={handleClose}>
+//           Cancel
+//         </Button>
+//         <Button style={{backgroundColor: '#24A6F6'}}>
+//           Submit
+//         </Button>
+//       </Modal.Footer>
+//     </Modal> 
 //     </>
 //   ) : <></>;
 // };

@@ -173,7 +173,7 @@
 
                     <Col xl="6 mt-5">
                     {/* Status Start */}
-                    <Row className="g-2 mb-5">
+                    <Row className="g-2 mb-5 pb-2">
                         <Col sm="4">
                         <Card className="h-100 hover-scale-up cursor-pointer" onClick={
                             () => {
