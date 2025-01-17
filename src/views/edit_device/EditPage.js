@@ -53,7 +53,7 @@
         // Popup Code End from here
         const [deviceId, setDeviceID]     = useState();
         const [deviceName, setDeviceName] = useState();
-        const [deviceCapacity, setDeviceCapacity] = useState();
+        // const [deviceCapacity, setDeviceCapacity] = useState();
         const [areaName, setareaName]     = useState();
         const [areanumber, setAreaNumber] = React.useState();
         const [regisdate, setRegisDate]   = useState();
@@ -63,7 +63,7 @@
             deviceid   : "",
             userid     : DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id,
             devicename : "",
-            devicecapacity: "",
+            // devicecapacity: "",
             areaid     : "",
             latitude,
             longitude
@@ -268,7 +268,7 @@
                                         </label>
                                     ) : ( "" )}
                                 </Col>
-                                <Col lg="10" className="mx-auto">
+                                {/* <Col lg="10" className="mx-auto">
                                     <Form.Label
                                         style={{
                                             marginLeft : "5px",
@@ -287,7 +287,7 @@
                                             area device can't be empty
                                         </label>
                                     ) : ( "" )}
-                                </Col>
+                                </Col> */}
                                 <Col lg="10" className="mx-auto">
                                     <Form.Label
                                         style={{

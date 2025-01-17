@@ -110,7 +110,7 @@
                             </div>
                             </div>
 
-                            <div className="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100">
+                            {/* <div className="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100">
                             <div style={{ width: "100%" }}>
                                 <Button
                                 variant={
@@ -124,7 +124,7 @@
                                 {details.devicestatus ? "Inactive" : "Active"}
                                 </Button>
                             </div>
-                            </div>
+                            </div> */}
                         </div>
                         </div>
                         <div className="mb-5">
@@ -314,6 +314,20 @@
                                 </Col>
                             </Row>
                             {/* </Col> */}
+
+                            <Row className="g-0">
+                                <Col>
+                                <div className="sh-5 d-flex align-items-center lh-1-25">
+                                    Updated At
+                                </div>
+                                </Col>
+                                <Col xs="auto">
+                                <div className="sh-5 d-flex align-items-center">
+                                    {" "}
+                                    {moment(details.update_at).format("YYYY-MM-DD HH:mm:ss")}
+                                </div>
+                                </Col>
+                            </Row>
                         </Row>
                         </div>
                     </Card.Body>
@@ -483,13 +497,10 @@
                     </div>
                     {details.historyList.length > 0 ? (
                     <>
-                        <Row className="g-0  align-content-center d-none d-lg-flex ps-5 pe-5 mb-2 custom-sort">
-                        <Col
-                            lg="3"
-                            className="d-flex flex-column pe-1 justify-content-center"
-                        >
+                        <Row className="g-0  align-content-center d-flex ps-5 pe-5 mb-2 custom-sort">
+                        <Col xs="3" md="3" className="pe-1 justify-content-center" >
                             <div className="text-dark text-medium cursor-pointer ">
-                            Pump Name
+                                <b>Pump Name</b>
                             </div>
                         </Col>
                         {/* <Col
@@ -524,20 +535,19 @@
                             Fire
                             </div>
                         </Col> */}
-                        <Col
-                            lg="3"
-                            className="d-flex flex-column mb-lg-0 px-1 d-flex"
-                        >
+                        <Col xs="3" md="3" className="mb-lg-0 px-1">
                             <div className="text-dark text-medium cursor-pointer ">
-                            Updated Date
+                                <b>Updated Date</b>
                             </div>
                         </Col>
-                        <Col
-                            lg="3"
-                            className="d-flex flex-column mb-lg-0 pe-3 d-flex"
-                        >
+                        <Col xs="3" md="3" className="mb-lg-0 pe-3">
                             <div className="text-dark text-medium cursor-pointer ">
-                            Pump Capacity
+                                <b>Pump Status</b>
+                            </div>
+                        </Col>
+                        <Col xs="3" md="3" className="mb-lg-0 pe-3">
+                            <div className="text-dark text-medium cursor-pointer ">
+                                {/* Pump Status */}
                             </div>
                         </Col>
                         </Row>
@@ -554,13 +564,13 @@
                                         style={{ marginLeft: "1rem" }}
                                     >
                                         <Col
-                                        xs="6"
-                                        md="3"
-                                        className="d-flex flex-column justify-content-center mb-2 mb-md-0"
+                                            xs="3"
+                                            md="3"
+                                            className="d-flex flex-column justify-content-center mb-2 mb-md-0"
                                         >
                                         <div className="text-alternate">
                                             <span className="text-medium">
-                                            {item.devicename}
+                                                {item.devicename}
                                             </span>
                                         </div>
                                         </Col>
@@ -643,11 +653,25 @@
                                         </div>
                                         </Col> */}
                                         <Col
-                                        xs="6"
-                                        md="2"
-                                        className="d-flex flex-column justify-content-center mb-2 mb-md-0 h-md-100"
+                                            xs="3"
+                                            md="3"
+                                            className="d-flex flex-column justify-content-center mb-2 mb-md-0 h-md-100"
                                         >
-                                        {moment(item.update_at).format("llll")}
+                                            {moment(item.update_at).format("llll")}
+                                        </Col>
+                                        <Col
+                                            xs="3"
+                                            md="3"
+                                            className="d-flex flex-column justify-content-center mb-2 mb-md-0 h-md-100"
+                                        >
+                                            0
+                                        </Col>
+                                        <Col
+                                            xs="3"
+                                            md="3"
+                                            className="d-flex flex-column justify-content-center mb-2 mb-md-0 h-md-100"
+                                        >
+                                            {/* {item.devicename} */}
                                         </Col>
                                     </Row>
                                     </Card.Body>

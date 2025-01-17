@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import Select from 'react-select'
+import moment from "moment";
 import { Row, Col, Button, Modal, Form, Dropdown, Tooltip, OverlayTrigger, } from "react-bootstrap";
 
 import { useTable, useGlobalFilter, useSortBy, useAsyncDebounce, usePagination, } from "react-table";
@@ -336,19 +337,30 @@ if (areanumber !== 0)
                 cellClassName   : "text-dark",
             },
             {
-                Header          : "Pump Capacity",
-                accessor        : "devicecapacity",
+                Header   : "Register Date",
+                accessor : "createdat",
+                Cell     : (cell) => {
+                    return <span>{moment(listData.createdat).format("ll")}</span>;
+                },
                 sortable        : true,
                 headerClassName : "text-dark text-medium text-uppercase w-10 px-3",
                 cellClassName   : "text-dark",
-                Cell     : (cell) => { 
-                            return (
-                                <> 
-                                    { cell.row.original.alerttypetemp }
-                                </>
-                            );
-                        },
+
             },
+            // {
+            //     Header          : "Pump Status",
+            //     accessor        : "devicestatus",
+            //     sortable        : true,
+            //     headerClassName : "text-dark text-medium text-uppercase w-10 px-3",
+            //     cellClassName   : "text-dark",
+            //     Cell     : (cell) => { 
+            //                 return (
+            //                     <> 
+            //                         { cell.row.original.alerttypetemp }
+            //                     </>
+            //                 );
+            //             },
+            // },
             // {
             //     Header   : "Pump Capacity",
             //     accessor : "temperature",
@@ -466,16 +478,15 @@ if (areanumber !== 0)
                 Cell     : (cell) => {
                     return (
                         <>
-                            <button style={{ backgroundColor: '#fff', color: "#24A6F6", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px',marginRight: '6px' }} value={"Add"}>
+                            <button className="btn btn-outline-primary p-2" value={"Add"}>
                                 {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
-                                <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
-                                className="text-primary">
+                                <NavLink to={`/edit-pump/${cell.row.original.deviceid}`} className="icon-color">
                                     {<EditIcon />}
                                 </NavLink>
                             </button>
-                            <button style={{ backgroundColor: '#fff', color: "#24A6F6", border: "1px solid #24A6F6",borderRadius: '10px', padding: '5px' }} value={"Add"}>
+                            <button className="btn btn-outline-primary p-2 mx-2" value={"Add"}>
                                 {/* <NavLink to={`/device-information/${cell.row.original.deviceid}`} className="text-primary" > */}
-                                <NavLink to={`/pump-information/${cell.row.original.deviceid}`} className="text-primary" >
+                                <NavLink to={`/pump-information/${cell.row.original.deviceid}`} className="icon-color">
                                     {<RemoveRedEyeOutlinedIcon />}
                                 </NavLink>
                             </button>
@@ -493,7 +504,7 @@ if (areanumber !== 0)
 
 const handleSave = () => {
     devicepoint.areaid = areanumber;
-    if(mapcircle==false){
+    if(mapcircle===false){
         postRequest(`/reassigndevice`, devicepoint, (res) => {
             if (res.success == true) {
                 toast("Area update successfully", { toastId: 1 })

@@ -78,7 +78,7 @@ const AddPump = () => {
     deviceid: "",
     userid: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id,
     devicename: "",
-    devicecapacity: "",
+    // devicecapacity: "",
     areaid: areanumber,
     regisdate: newdate,
     latitude: "",
@@ -181,7 +181,7 @@ const AddPump = () => {
   const validationSchema = Yup.object().shape({
     deviceid: Yup.string().required("pumpId is required"),
     devicename: Yup.string().required("pumpName is required"),
-    devicecapacity: Yup.string().required("pumpCapacity is required"),
+    // devicecapacity: Yup.string().required("pumpCapacity is required"),
     latitude: Yup.string().required("latitude is required"),
     longitude: Yup.string().required("longitude is required"),
   });
@@ -311,7 +311,7 @@ const AddPump = () => {
                     </div>
                   </Col>
 
-                  <Col lg="8" className="mx-auto">
+                  {/* <Col lg="8" className="mx-auto">
                     <Form.Label
                       style={{
                         marginLeft: "5px",
@@ -337,7 +337,7 @@ const AddPump = () => {
                         </div>
                       )}
                     </div>
-                  </Col>
+                  </Col> */}
 
                   {listData.length !== 0 ? (
                     <Col lg="8" className="mx-auto">

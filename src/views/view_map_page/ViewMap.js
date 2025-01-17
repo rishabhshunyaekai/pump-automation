@@ -223,7 +223,7 @@
                             onClick={
                             () => {
 
-                                if (isConnected == true) {
+                                if (isConnected === true) {
                                 SocketIo.emit("ondataareadevice", {  userId: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id,areaid: areanumber, devicestatus: 0 });
                                 SocketIo.on("deviceAreaDataInfo", (result) => {
                                     //   alert(isConnected);

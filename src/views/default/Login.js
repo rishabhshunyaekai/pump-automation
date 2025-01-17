@@ -83,34 +83,34 @@ const Login = () => {
       </div>
     </div>
   );
-
+// d-flex justify-content-center align-items-center shadow-deep full-page-content-right-border
   const rightSide = (
-    <div className="sw-lg-70 min-h-100 bg-foreground d-flex justify-content-center align-items-center shadow-deep py-5 full-page-content-right-border">
-      <div className="sw-lg-50 px-5">
-        <div className="">
+    <div className="bg-foreground d-flex justify-content-center align-items-center py-5" style={{borderRadius: '50px', width: '50rem'}}>
+      <div className="px-5 d-flex flex-column justify-content-center align-items-center w-100">
+        <div className="m-5">
           <NavLink to="/">
             <img src='../img/logo4.svg' />
             {/* <div className="logo-default" /> */}
           </NavLink>
         </div>
         <div className="mb-3">
-          <h2 className="cta-1 mb-0" style={{color: '#24A6F6'}}>Welcome,</h2>
-          <h2 className="cta-1" style={{color: '#24A6F6'}}>let's get started!</h2>
+          <h2 className="cta-1 mb-0" style={{color: '#24A6F6', fontSize: '2em', fontWeight: '700'}}>Welcome, Let's get started!</h2>
+          {/* <h2 className="cta-1" style={{color: '#24A6F6'}}>let's get started!</h2> */}
         </div>
         <div className="mb-4">
-          <p className="h6" style={{color: '#24A6F6'}}>Please use your credentials to login.</p>
+          <p className="h6" style={{color: "#000", fontSize: "1.3em", fontWeight: '500'}}>Please use your credentials to login.</p>
           {/* <p className="h6">
             If you are not a member, please <NavLink to="/register">register</NavLink>.
           </p> */}
         </div>
-        <div>
-          <form id="loginForm" className="tooltip-end-bottom" onSubmit={handleSubmit} >
-            <div className="mb-3 filled form-group tooltip-end-top">
+        <div className='w-50'>
+          <form id="loginForm" className="w-100 tooltip-end-bottom d-flex flex-column justify-content-center align-items-center" onSubmit={handleSubmit} >
+            <div className="mb-4 filled form-group tooltip-end-top w-100">
               <CsLineIcons icon="email" />
               <Form.Control type="text" name="email" placeholder="Email" value={values.email} onChange={handleChange} />
               {errors.email && touched.email && <div className="d-block invalid-tooltip">{errors.email}</div>}
             </div>
-            <div className="mb-3 filled form-group tooltip-end-top">
+            <div className="mb-4 filled form-group tooltip-end-top w-100">
               <CsLineIcons icon="lock-off" />
               <Form.Control type="password" name="userpassword" onChange={handleChange} value={values.userpassword} placeholder="Password" />
               {/* <NavLink className="text-small position-absolute t-3 e-3" to="/forgot-password">
@@ -118,7 +118,7 @@ const Login = () => {
               </NavLink> */}
               {errors.password && touched.password && <div className="d-block invalid-tooltip">{errors.password}</div>}
             </div>
-            <Button size="lg" type="submit" style={{backgroundColor: '#24A6F6'}}>
+            <Button size="lg" type="submit" style={{backgroundColor: '#24A6F6', borderRadius: '50px'}}>
               Login
             </Button>
           </form>

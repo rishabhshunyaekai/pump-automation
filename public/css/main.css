@@ -41,3 +41,9 @@ html[data-navcolor=light] .nav-container {
   background-color: #24A6F6;
   border-color: #24A6F6 !important;
 }
+.btn-outline-primary:hover {
+  background-color: #24A6F6;
+  .icon-color{
+    color: #fff;
+  }
+}

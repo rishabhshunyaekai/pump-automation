@@ -11,6 +11,9 @@ import {SocketIo,DEFAULT_USER } from 'config.js';
 import Pagination from "../../Pagination";
 import "react-circular-progressbar/dist/styles.css";
 import { Client, Message } from 'paho-mqtt';
+import moment from "moment";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const username = process.env.REACT_APP_MQTT_USERNAME;
 const password = process.env.REACT_APP_MQTT_PASSWORD;
@@ -42,6 +45,7 @@ const RealTimePumpData = () => {
   const [pass, setPass] = useState("");
   const [toggleEnable, setToggleEnable] = useState([]);
   const [client, setClient] = useState(null);
+  const [notifiedDevices, setNotifiedDevices] = useState([]);
 
   // For Mqtt
   useEffect(() => {
@@ -212,7 +216,7 @@ const RealTimePumpData = () => {
 
         const topic = `/supro/pump/${toggleId}/GEN`;
         const existingToggle = toggleEnable.find((toggle) => toggle.topic === topic);
-        const payload = existingToggle?.message === "1" ? " " : "1";
+        const payload = existingToggle?.message === "1" ? "" : "1";
   
       client.publish(topic, payload, 0, true);
       console.log(`Message published to topic ${topic}:`,payload);
@@ -268,15 +272,15 @@ const RealTimePumpData = () => {
                   setSelectedItemValue(key)
                 }}
               >
-                <OverlayTrigger delay={{ show: 1000, hide: 0 }} placement="top" overlay={<Tooltip id="tooltip-top">   {devicestatus == 0 ? "Active" : devicestatus == 1 ? "Inactive" : "All Items"}</Tooltip>}>
+                <OverlayTrigger delay={{ show: 1000, hide: 0 }} placement="top" overlay={<Tooltip id="tooltip-top">   {devicestatus === 0 ? "Active" : devicestatus === 1 ? "Inactive" : "All Items"}</Tooltip>}>
                   <Dropdown.Toggle  className="shadow" style={{backgroundColor: '#24A6F6'}}>
                     {devicestatus === 0 ? "Active" : devicestatus === 1 ? "Inactive" : "All Items"}
                   </Dropdown.Toggle>
                 </OverlayTrigger>
                 <Dropdown.Menu className="shadow dropdown-menu-end">
                   <Dropdown.Item key={0} eventKey={2} value={2}>All Items</Dropdown.Item>
-                  <Dropdown.Item key={1} eventKey={0} value={0}>Active</Dropdown.Item>
-                  <Dropdown.Item key={2} eventKey={1} value={1}>Inactive</Dropdown.Item>
+                  <Dropdown.Item key={2} eventKey={1} value={1}>Active</Dropdown.Item>
+                  <Dropdown.Item key={1} eventKey={0} value={0}>Inactive</Dropdown.Item>
 
                 </Dropdown.Menu>
               </Dropdown>
@@ -341,48 +345,97 @@ const RealTimePumpData = () => {
 
                     <Card.Body className="mb-0">
                       <Row className="g-0 align-items-center mb-2">
-                        <Col className="ps-3">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div>
+                          <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.deviceid}</div> 
+                        </div>
+                        {/* <Col className="">
                           <Row className="g-0">
-                            <Col>
+                            <Col lg='5'>
                                 <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div>
                             </Col>
-                            <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.deviceid}</div> 
+                            <Col lg='7'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.deviceid}</div> 
                             </Col>
                           </Row>
-                        </Col>
+                        </Col> */}
                       </Row>
                       <Row className="g-0 align-items-center mb-2">
-                        <Col xs="auto">
-                        </Col>
-
-                        <Col className="ps-3">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div>
+                          <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.devicename}</div> 
+                        </div>
+                        {/* <Col className="">
                           <Row className="g-0">
-                            <Col>
+                            <Col lg='5'>
                               <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div>
                             </Col>
-                            <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.devicename}</div> 
+                            <Col lg='7'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.devicename}</div> 
                             </Col>
                           </Row>
-                        </Col>
+                        </Col> */}
                       </Row>
-                      <Row className="g-0 align-items-center mb-2">
-                        <Col xs="auto">
-                        </Col>
 
-                        <Col className="ps-3">
+                      <Row className="g-0 align-items-center mb-2">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div>
+                          <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1' ? (() => {
+                                                                                            if (!notifiedDevices.includes(item.deviceid)) {
+                                                                                              toast(`Overflow has detected for ${item.devicename}`);
+                                                                                              setNotifiedDevices((prev) => [...prev, item.deviceid]);
+                                                                                            }
+                                                                                            return "Overflow"; })() : "Normal"}</div> 
+                        </div>
+                        {/* <Col className="">
                           <Row className="g-0">
-                            <Col>
+                            <Col lg='5'>
                               <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div>
                             </Col>
                             <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.humidity === '1' ? 'Overflow': 'Normal'}</div>
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.humidity === '1' ? (() => {
+                                                                                                                  toast(`Overflow has detected for ${item.devicename}`);
+                                                                                                                  return "Overflow";
+                                                                                                                })() : "Normal"}</div>
+                            </Col>
+                            <Col lg='7'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1'
+                                                                                        ? (() => {
+                                                                                            if (!notifiedDevices.includes(item.deviceid)) {
+                                                                                              toast(`Overflow has detected for ${item.devicename}`);
+                                                                                              setNotifiedDevices((prev) => [...prev, item.deviceid]);
+                                                                                            }
+                                                                                            return "Overflow";
+                                                                                          })()
+                                                                                        : "Normal"}
+                              </div>
+                            </Col>
+                            <Col xs="auto">
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.humidity === '1'
+                                                                                        ? showToast(`Overflow has been detected for ${item.devicename}`)
+                                                                                        : "Normal"}
+                              </div>
                             </Col>
                           </Row>
-                        </Col>
+                        </Col> */}
                       </Row>
-                      <Row className="g-0 align-items-center mb-0">
+                      <Row className="g-0 align-items-center mb-2">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="sh-5 d-flex align-items-center lh-1-25">Updated at</div>
+                          <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{moment(item.update_at).format("YYYY-MM-DD HH:mm:ss")}</div> 
+                        </div>
+                        {/* <Col className="">
+                          <Row className="g-0">
+                            <Col lg='5'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Updated at</div>
+                            </Col>
+                            <Col lg='7'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{moment(item.update_at).format("YYYY-MM-DD HH:mm:ss")}</div>
+                            </Col>
+                          </Row>
+                        </Col> */}
+                      </Row>
+                      {/* <Row className="g-0 align-items-center mb-0">
                         <Col xs="auto">
                         </Col>
 
@@ -396,34 +449,52 @@ const RealTimePumpData = () => {
                             </Col>
                           </Row>
                         </Col>
-                      </Row>
+                      </Row> */}
                     </Card.Body>
 
                     <Card.Footer>
                       <Row className="g-0 align-items-center mb-0">
-                        <Col className="ps-2">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="sh-5 d-flex align-items-center lh-1-25">Area</div>
+                          <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.AreaName}</div> 
+                        </div>
+                        {/* <Col className="">
                           <Row className="g-0">
-                            <Col>
+                            <Col lg='5'>
                               <div className="sh-5 d-flex align-items-center lh-1-25">Area</div>
                             </Col>
-                            <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center">
+                            <Col lg="7">
+                              <div className="sh-5 d-flex align-items-center justify-content-end">
                                 {item.AreaName}
                               </div>
                             </Col>
                           </Row>
-                        </Col>
+                        </Col> */}
                       </Row>
                       <Row className="g-0 align-items-center mb-0">
-                        <Col className="ps-2">
+                        <div className="d-flex align-items-center justify-content-between">
+                          <div className="sh-5 d-flex align-items-center lh-1-25">Pump Status</div>
+                          <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">
+                            <div className="d-flex align-items-center form-check form-switch justify-content-end h-100">
+                              <input className="form-check-input" type="checkbox" role="switch" id={`flexSwitchCheckDefault-${item.deviceid}`}
+                                style={{width: "2rem", height: "1rem", transform: "scale(1.5)", marginRight: '10px'}} 
+                                // checked={toggleStates[item.deviceid] || false} 
+                                checked={toggleStates[item.deviceid] || toggleEnable.some(toggle => toggle.topic === `/supro/pump/${item.deviceid}/GEN` && toggle.message === "1")}
+                                onChange={() => handleToggle(item.deviceid)}
+                                // checked={isChecked} onChange={handleShow}
+                              />
+                            </div>
+                          </div> 
+                        </div>
+                        {/* <Col className="">
                           <Row className="g-0">
-                            <Col>
+                            <Col lg='5'>
                               <div className="sh-5 d-flex align-items-center lh-1-25">Pump Status</div>
                             </Col>
-                            <Col xs="auto">
-                              <div className="form-check form-switch">
+                            <Col lg='7'>
+                              <div className="d-flex align-items-center form-check form-switch justify-content-end h-100">
                                 <input className="form-check-input" type="checkbox" role="switch" id={`flexSwitchCheckDefault-${item.deviceid}`}
-                                  style={{width: "2rem", height: "1rem", transform: "scale(1.5)"}} 
+                                  style={{width: "2rem", height: "1rem", transform: "scale(1.5)", marginRight: '10px'}} 
                                   // checked={toggleStates[item.deviceid] || false} 
                                   checked={toggleStates[item.deviceid] || toggleEnable.some(toggle => toggle.topic === `/supro/pump/${item.deviceid}/GEN` && toggle.message === "1")}
                                   onChange={() => handleToggle(item.deviceid)}
@@ -432,7 +503,7 @@ const RealTimePumpData = () => {
                               </div>
                             </Col>
                           </Row>
-                        </Col>
+                        </Col> */}
                       </Row>
                     </Card.Footer>
                   </Card>

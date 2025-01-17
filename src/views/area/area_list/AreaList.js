@@ -265,10 +265,12 @@ const AreaList = () => {
           return (
             <>
               <NavLink
-                className="muted-link  d-inline-block hidden breadcrumb-back text-primary border border-primary rounded p-3"
                 to={"/view_map_page/" + cell.row.values.AreaNumber}
               >
-                {<RemoveRedEyeOutlinedIcon />}
+                {/* <div className="muted-link d-inline-block hidden breadcrumb-back text-primary border border-primary rounded btn btn-outline-primary p-3">                 */}
+                <div className="btn btn-outline-primary p-3">                
+                  {<RemoveRedEyeOutlinedIcon />}
+                </div>
               </NavLink>
             </>
           );
@@ -276,7 +278,6 @@ const AreaList = () => {
         headerClassName: "text-dark text-medium text-uppercase w-10 px-3",
         cellClassName: "text-dark",
       },
-      ,
     ];
   }, []);
 

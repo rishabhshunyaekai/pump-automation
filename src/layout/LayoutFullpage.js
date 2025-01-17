@@ -24,14 +24,14 @@ const LayoutFullpage = ({ left, right }) => {
       <div className="fixed-background" />
       {/* Background End */}
 
-      <div className="container-fluid p-0 h-100 position-relative">
-        <div className="row g-0 h-100">
+      <div className="container-fluid p-0 h-100 w-100 position-relative">
+        <div className="row g-0 h-100 w-100">
           {/* Left Side Start */}
-          <div className="offset-0 col-12 d-none d-lg-flex offset-md-1 col-lg h-lg-100">{left}</div>
+          {/* <div className="offset-0 col-12 d-none d-lg-flex offset-md-1 col-lg h-lg-100">{left}</div> */}
           {/* Left Side End */}
 
           {/* Right Side Start */}
-          <div className="col-12 col-lg-auto h-100 pb-4 px-4 pt-0 p-lg-0">{right}</div>
+          <div className="col-12 col-sm-auto mx-auto my-auto">{right}</div>
           {/* Right Side End */}
         </div>
       </div>

@@ -92,7 +92,7 @@ const RecentHistory = (props) => {
       },
 
       { Header: 'Pump Name', accessor: 'devicename', sortable: false, headerClassName: 'text-dark text-medium text-uppercase w-8 p-4 ', cellClassName: 'text-alternate' },
-      { Header: 'Pump Capacity', accessor: 'devicecapacity', sortable: false, headerClassName: 'text-dark text-medium text-uppercase w-8 p-4 ', cellClassName: 'text-alternate' },
+      { Header: 'Pump Status', accessor: 'devicestatus', sortable: false, headerClassName: 'text-dark text-medium text-uppercase w-8 p-4 ', cellClassName: 'text-alternate' },
 
       // { Header: 'Temperature Alert', accessor: 'temperature', 
       // Cell: (row) => {
@@ -143,24 +143,24 @@ const RecentHistory = (props) => {
         Header: 'Action', accessor: 'action', sortable: false, Cell: (cell) => {
 
           return (<>
-            <button style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px', marginRight: '5px' }} value={"Add"}>
+            {/* <button style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px', marginRight: '5px' }} value={"Add"}> */}
+            <button className="btn btn-outline-primary p-1" value={"Add"}>
               {/* <NavLink to={`/edit-device/${cell.row.original.deviceid}`} */}
-              <NavLink to={`/edit-pump/${cell.row.original.deviceid}`}
-                className="text-primary"> {<EditIcon  />} </NavLink>
-
+              <NavLink to={`/edit-pump/${cell.row.original.deviceid}`} className="icon-color"> {<EditIcon  />} </NavLink>
             </button>
 
-            <button style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px',marginRight: '5px' }} value={"Add"}> <NavLink
-              to={`/pump-information/${cell.row.original.deviceid}`}
+            {/* <button style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px',marginRight: '5px' }} value={"Add"}> <NavLink */}
+            <button className="btn btn-outline-primary p-1 mx-2" value={"Add"}> <NavLink
+              to={`/pump-information/${cell.row.original.deviceid}`} className="icon-color"> {<RemoveRedEyeOutlinedIcon  />}</NavLink>
+            </button>
 
-              className="text-primary"> {<RemoveRedEyeOutlinedIcon  />}  </NavLink></button>
-
-            <button className="text-primary" onClick={handleShow} style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px' }} value={"Add"}>{<DeleteOutlineOutlinedIcon />}</button>
+            {/* <button className="text-primary" onClick={handleShow} style={{ backgroundColor: '#fff', color: '#24A6F6', border: '1px solid #24A6F6', padding: '2px', borderRadius: '10px' }} value={"Add"}>{<DeleteOutlineOutlinedIcon />}</button> */}
+            <button className="btn btn-outline-primary p-1" onClick={handleShow} value={"Add"}>{<DeleteOutlineOutlinedIcon />}</button>
           </>)
         },
         headerClassName: 'text-dark text-medium text-uppercase w-10 p-4', cellClassName: 'text-alternate ',
       },
-      ,];
+      ];
   }, [])
 
   const tableInstance = useTable({ columns, data, initialState: { sortBy: [{ id: 'name', desc: true }] }, }, useGlobalFilter, useSortBy, usePagination);
