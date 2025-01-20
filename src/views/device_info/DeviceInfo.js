@@ -176,6 +176,8 @@
           const handleSubmit = () => {
             if (!pass) {
               setPasswordError("Password is required.");
+            } else if (pass !== "345890") {
+               setPasswordError("Incorrect password. Please try again.");
             } else {
               const toggleId = Object.entries(toggleStates)
                 .filter(([id, isChecked]) => isChecked)
