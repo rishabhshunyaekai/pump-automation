@@ -573,6 +573,7 @@ const AddPump = () => {
             onLoad={onLoad}
             onUnmount={onUnmount}
             mapTypeId="terrain"
+            options={{fullscreenControl: false}}
           >
             <Marker
               position={coords[0]}

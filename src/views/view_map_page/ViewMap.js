@@ -97,7 +97,7 @@
                 <Row>
                     <Col xl="6 mt-5">
                         <div>
-                            <GoogleMap mapContainerStyle={containerStyle} center={coords[0]} zoom={7} onLoad={onLoad} onUnmount={onUnmount} mapTypeId="terrain" >
+                            <GoogleMap mapContainerStyle={containerStyle} center={coords[0]} zoom={7} onLoad={onLoad} onUnmount={onUnmount} mapTypeId="terrain" options={{fullscreenControl: false}} >
                                 {deviceData.map((data, index) => (
                                     <Marker
                                         key={index}

@@ -25,7 +25,6 @@ let lib = ["places", "geometry", "visualization", "drawing"];
 const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const Dashboard = () => {
-
   const title = "Dashboard";
   const description = "Ecommerce Dashboard Page";
   const { isLoaded } = useJsApiLoader({
@@ -133,7 +132,8 @@ const Dashboard = () => {
                     <DesktopWindowsOutlinedIcon style={{color : "#fff"}} />
                   </div>
                   <div className={style.cardContent}>
-                    <div className={style.cardCount}>{deviceCount.totalDevice}</div>
+                    {/* <div className={style.cardCount}>{deviceCount.totalDevice}</div> */}
+                    <div className={style.cardCount}>0</div>
                     <div className={style.cardTitle}>Total Device</div>
                   </div>
                 </div>
@@ -170,7 +170,8 @@ const Dashboard = () => {
                   <VibrationOutlinedIcon style={{color : "#fff"}} />
                 </div>
                 <div className={style.cardContent}>
-                  <div className={style.cardCount}>{deviceCount.totalActive}</div>
+                  {/* <div className={style.cardCount}>{deviceCount.totalActive}</div> */}
+                  <div className={style.cardCount}>0</div>
                   <div className={style.cardTitle}>Active Device</div>
                 </div>
               </div>
@@ -206,7 +207,8 @@ const Dashboard = () => {
                   <PhonelinkEraseOutlinedIcon style={{color : "#fff"}} />
                 </div>
                 <div className={style.cardContent}>
-                  <div className={style.cardCount}>{deviceCount.totalDeactive}</div>
+                  {/* <div className={style.cardCount}>{deviceCount.totalDeactive}</div> */}
+                  <div className={style.cardCount}>0</div>
                   <div className={style.cardTitle}>In-Active Device</div>
                 </div>
               </div>
@@ -244,7 +246,8 @@ const Dashboard = () => {
                   <NotificationsActiveOutlinedIcon style={{color : "#fff"}} />
                 </div>
                 <div className={style.cardContent}>
-                  <div className={style.cardCount}>{deviceCount.todayAlert}</div>
+                  {/* <div className={style.cardCount}>{deviceCount.todayAlert}</div> */}
+                  <div className={style.cardCount}>0</div>
                   <div className={style.cardTitle}>Today's Alert</div>
                 </div>
               </div>
@@ -284,7 +287,8 @@ const Dashboard = () => {
                   <NotificationsActiveOutlinedIcon style={{color : "#fff"}} />
                 </div>
                 <div className={style.cardContent}>
-                  <div className={style.cardCount}>{deviceCount.acticeAlert}</div>
+                  {/* <div className={style.cardCount}>{deviceCount.acticeAlert}</div> */}
+                  <div className={style.cardCount}>0</div>
                   <div className={style.cardTitle}>Active Alert</div>
                 </div>
               </div>
@@ -300,10 +304,11 @@ const Dashboard = () => {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={11}
+          zoom={10}
           onLoad={onLoad}
           onUnmount={onUnmount}
           mapTypeId="terrain"
+          options={{fullscreenControl: false}}
         >
 
 

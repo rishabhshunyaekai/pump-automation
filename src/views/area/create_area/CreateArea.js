@@ -189,7 +189,8 @@ const CreateArea = () => {
               zoom={7}
               onLoad={onLoad}
               onUnmount={onUnmount}
-              mapTypeId="terrain">
+              mapTypeId="terrain"
+              options={{fullscreenControl: false}}>
 
               <DrawingManager
                 options={{

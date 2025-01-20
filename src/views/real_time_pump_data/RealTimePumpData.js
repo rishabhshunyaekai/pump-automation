@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {v4 as uuidv4} from 'uuid';
 import Select from 'react-select'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { Row,Col, Dropdown,Card,Tooltip,OverlayTrigger,Badge,Modal,Form,Button } from "react-bootstrap";
 import { useParams } from "react-router";
 import HtmlHead from 'components/html-head/HtmlHead';
@@ -22,6 +22,7 @@ const port     = process.env.REACT_APP_MQTT_PORT;
 
 const RealTimePumpData = () => {
   let { id } = useParams();
+  const navigate = useHistory();
   const [isConnected, setIsConnected] = useState(SocketIo.connected);
   const[uuidgen]=useState(uuidv4())
   const title = 'Real Time Pump Monitoring';
@@ -226,6 +227,19 @@ const RealTimePumpData = () => {
       handleClose();
     }
   };
+ 
+  useEffect(() => {
+    list.forEach((item) => {
+      if (item.humidity === '1' && !notifiedDevices.includes(item.deviceid)) {
+        toast(<div>Overflow detected for <span style={{ color: 'blue', textTransform: 'uppercase' }} onClick={() => handleToastClick(item.deviceid)}>{item.devicename}</span></div>);
+        setNotifiedDevices((prev) => [...prev, item.deviceid]);
+      }
+    });
+  }, [list, notifiedDevices]);
+  
+  const handleToastClick = (deviceid) => {
+    navigate.push(`/pump-information/${deviceid}`);
+  };
 
   return loading ? (
     <>
@@ -349,107 +363,34 @@ const RealTimePumpData = () => {
                           <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div>
                           <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.deviceid}</div> 
                         </div>
-                        {/* <Col className="">
-                          <Row className="g-0">
-                            <Col lg='5'>
-                                <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div>
-                            </Col>
-                            <Col lg='7'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.deviceid}</div> 
-                            </Col>
-                          </Row>
-                        </Col> */}
                       </Row>
                       <Row className="g-0 align-items-center mb-2">
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div>
                           <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.devicename}</div> 
                         </div>
-                        {/* <Col className="">
-                          <Row className="g-0">
-                            <Col lg='5'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div>
-                            </Col>
-                            <Col lg='7'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.devicename}</div> 
-                            </Col>
-                          </Row>
-                        </Col> */}
                       </Row>
 
                       <Row className="g-0 align-items-center mb-2">
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div>
-                          <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1' ? (() => {
+                            <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1' ? "Overflow" : "Normal"}</div>
+                          {/* <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1' ? (() => {
                                                                                             if (!notifiedDevices.includes(item.deviceid)) {
-                                                                                              toast(`Overflow has detected for ${item.devicename}`);
+                                                                                              toast(<div>
+                                                                                                Overflow detected for <span style={{ cursor: "pointer",color: 'blue' }}
+                                                                                                onClick={() => handleToastClick(item.deviceid)}>{item.devicename}</span></div>);
                                                                                               setNotifiedDevices((prev) => [...prev, item.deviceid]);
-                                                                                            }
-                                                                                            return "Overflow"; })() : "Normal"}</div> 
+                                                                                              }
+                                                                                            return "Overflow"; })() : "Normal"}</div>  */}
                         </div>
-                        {/* <Col className="">
-                          <Row className="g-0">
-                            <Col lg='5'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div>
-                            </Col>
-                            <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.humidity === '1' ? (() => {
-                                                                                                                  toast(`Overflow has detected for ${item.devicename}`);
-                                                                                                                  return "Overflow";
-                                                                                                                })() : "Normal"}</div>
-                            </Col>
-                            <Col lg='7'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1'
-                                                                                        ? (() => {
-                                                                                            if (!notifiedDevices.includes(item.deviceid)) {
-                                                                                              toast(`Overflow has detected for ${item.devicename}`);
-                                                                                              setNotifiedDevices((prev) => [...prev, item.deviceid]);
-                                                                                            }
-                                                                                            return "Overflow";
-                                                                                          })()
-                                                                                        : "Normal"}
-                              </div>
-                            </Col>
-                            <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.humidity === '1'
-                                                                                        ? showToast(`Overflow has been detected for ${item.devicename}`)
-                                                                                        : "Normal"}
-                              </div>
-                            </Col>
-                          </Row>
-                        </Col> */}
                       </Row>
                       <Row className="g-0 align-items-center mb-2">
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="sh-5 d-flex align-items-center lh-1-25">Updated at</div>
                           <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{moment(item.update_at).format("YYYY-MM-DD HH:mm:ss")}</div> 
                         </div>
-                        {/* <Col className="">
-                          <Row className="g-0">
-                            <Col lg='5'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25">Updated at</div>
-                            </Col>
-                            <Col lg='7'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{moment(item.update_at).format("YYYY-MM-DD HH:mm:ss")}</div>
-                            </Col>
-                          </Row>
-                        </Col> */}
                       </Row>
-                      {/* <Row className="g-0 align-items-center mb-0">
-                        <Col xs="auto">
-                        </Col>
-
-                        <Col className="ps-3">
-                          <Row className="g-0">
-                            <Col>
-                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Capacity</div>
-                            </Col>
-                            <Col xs="auto">
-                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.temperature} Ltr</div> 
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row> */}
                     </Card.Body>
 
                     <Card.Footer>
@@ -458,18 +399,6 @@ const RealTimePumpData = () => {
                           <div className="sh-5 d-flex align-items-center lh-1-25">Area</div>
                           <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.AreaName}</div> 
                         </div>
-                        {/* <Col className="">
-                          <Row className="g-0">
-                            <Col lg='5'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25">Area</div>
-                            </Col>
-                            <Col lg="7">
-                              <div className="sh-5 d-flex align-items-center justify-content-end">
-                                {item.AreaName}
-                              </div>
-                            </Col>
-                          </Row>
-                        </Col> */}
                       </Row>
                       <Row className="g-0 align-items-center mb-0">
                         <div className="d-flex align-items-center justify-content-between">
@@ -486,24 +415,6 @@ const RealTimePumpData = () => {
                             </div>
                           </div> 
                         </div>
-                        {/* <Col className="">
-                          <Row className="g-0">
-                            <Col lg='5'>
-                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Status</div>
-                            </Col>
-                            <Col lg='7'>
-                              <div className="d-flex align-items-center form-check form-switch justify-content-end h-100">
-                                <input className="form-check-input" type="checkbox" role="switch" id={`flexSwitchCheckDefault-${item.deviceid}`}
-                                  style={{width: "2rem", height: "1rem", transform: "scale(1.5)", marginRight: '10px'}} 
-                                  // checked={toggleStates[item.deviceid] || false} 
-                                  checked={toggleStates[item.deviceid] || toggleEnable.some(toggle => toggle.topic === `/supro/pump/${item.deviceid}/GEN` && toggle.message === "1")}
-                                  onChange={() => handleToggle(item.deviceid)}
-                                  // checked={isChecked} onChange={handleShow}
-                                />
-                              </div>
-                            </Col>
-                          </Row>
-                        </Col> */}
                       </Row>
                     </Card.Footer>
                   </Card>
@@ -1249,3 +1160,109 @@ export default RealTimePumpData;
 // };
 
 // export default RealTimePumpData;
+{/* <Col className="">
+                          <Row className="g-0">
+                            <Col lg='5'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Status</div>
+                            </Col>
+                            <Col lg='7'>
+                              <div className="d-flex align-items-center form-check form-switch justify-content-end h-100">
+                                <input className="form-check-input" type="checkbox" role="switch" id={`flexSwitchCheckDefault-${item.deviceid}`}
+                                  style={{width: "2rem", height: "1rem", transform: "scale(1.5)", marginRight: '10px'}} 
+                                  // checked={toggleStates[item.deviceid] || false} 
+                                  checked={toggleStates[item.deviceid] || toggleEnable.some(toggle => toggle.topic === `/supro/pump/${item.deviceid}/GEN` && toggle.message === "1")}
+                                  onChange={() => handleToggle(item.deviceid)}
+                                  // checked={isChecked} onChange={handleShow}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                        </Col> */}
+                        {/* <Col className="">
+                          <Row className="g-0">
+                            <Col lg='5'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Area</div>
+                            </Col>
+                            <Col lg="7">
+                              <div className="sh-5 d-flex align-items-center justify-content-end">
+                                {item.AreaName}
+                              </div>
+                            </Col>
+                          </Row>
+                        </Col> */}
+                        {/* <Col className="">
+                          <Row className="g-0">
+                            <Col lg='5'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Updated at</div>
+                            </Col>
+                            <Col lg='7'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{moment(item.update_at).format("YYYY-MM-DD HH:mm:ss")}</div>
+                            </Col>
+                          </Row>
+                        </Col> */}
+                        {/* <Col className="">
+                          <Row className="g-0">
+                            <Col lg='5'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Name</div>
+                            </Col>
+                            <Col lg='7'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.devicename}</div> 
+                            </Col>
+                          </Row>
+                        </Col> */}
+                        {/* <Col className="">
+                          <Row className="g-0">
+                            <Col lg='5'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div>
+                            </Col>
+                            <Col xs="auto">
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.humidity === '1' ? (() => {
+                                                                                                                  toast(`Overflow has detected for ${item.devicename}`);
+                                                                                                                  return "Overflow";
+                                                                                                                })() : "Normal"}</div>
+                            </Col>
+                            <Col lg='7'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1'
+                                                                                        ? (() => {
+                                                                                            if (!notifiedDevices.includes(item.deviceid)) {
+                                                                                              toast(`Overflow has detected for ${item.devicename}`);
+                                                                                              setNotifiedDevices((prev) => [...prev, item.deviceid]);
+                                                                                            }
+                                                                                            return "Overflow";
+                                                                                          })()
+                                                                                        : "Normal"}
+                              </div>
+                            </Col>
+                            <Col xs="auto">
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.humidity === '1'
+                                                                                        ? showToast(`Overflow has been detected for ${item.devicename}`)
+                                                                                        : "Normal"}
+                              </div>
+                            </Col>
+                          </Row>
+                        </Col> */}
+                         {/* <Col className="">
+                          <Row className="g-0">
+                            <Col lg='5'>
+                                <div className="sh-5 d-flex align-items-center lh-1-25">Pump Id</div>
+                            </Col>
+                            <Col lg='7'>
+                              <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.deviceid}</div> 
+                            </Col>
+                          </Row>
+                        </Col> */}
+                        {/* <Row className="g-0 align-items-center mb-0">
+                        <Col xs="auto">
+                        </Col>
+
+                        <Col className="ps-3">
+                          <Row className="g-0">
+                            <Col>
+                              <div className="sh-5 d-flex align-items-center lh-1-25">Pump Capacity</div>
+                            </Col>
+                            <Col xs="auto">
+                              <div className="sh-5 d-flex align-items-center lh-1-25">{item.temperature} Ltr</div> 
+                            </Col>
+                          </Row>
+                        </Col>
+                      </Row> */}

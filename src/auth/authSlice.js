@@ -11,8 +11,7 @@
         initialState,
         reducers : {
             setCurrentUser(state, action) {
-                console.log('Isey', action.payload.currentUser) 
-                if( action.payload.currentUser.id !=null || action.payload.currentUser.id != undefined ){
+                if( action.payload.currentUser !=null || action.payload.currentUser != undefined ){
                     sessionStorage.setItem('user_id', action.payload.currentUser.id)
                     sessionStorage.setItem("isLogin", action.payload.isLogin);
                     state.currentUser = action.payload.currentUser;

@@ -1,6 +1,5 @@
     import React, { useState } from "react";
     import { NavLink } from "react-router-dom";
-
     // import material ui
     import HowToRegIcon from "@mui/icons-material/HowToReg";
     import LaptopIcon from "@mui/icons-material/Laptop";
@@ -10,7 +9,7 @@
     import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
     import AddCardIcon from "@mui/icons-material/AddCard";
     import BorderColorIcon from "@mui/icons-material/BorderColor";
-    import { Row, Col, Button, Card } from "react-bootstrap";
+    import { Row, Col, Button, Card,Modal,Form } from "react-bootstrap";
     import { useParams } from "react-router";
     import HtmlHead from "components/html-head/HtmlHead";
     import CsLineIcons from "cs-line-icons/CsLineIcons";
@@ -20,6 +19,12 @@
     import moment from "moment";
     import { SocketIo, DEFAULT_USER } from "config.js";
     import { toast } from "react-toastify";
+    import { Client, Message } from 'paho-mqtt';
+
+    const username = process.env.REACT_APP_MQTT_USERNAME;
+    const password = process.env.REACT_APP_MQTT_PASSWORD;
+    const hostname = process.env.REACT_APP_MQTT_HOSTNAME;
+    const port     = process.env.REACT_APP_MQTT_PORT;
 
     const DeviceInfo = () => {
         let { id } = useParams();
@@ -28,6 +33,72 @@
         const description = "Ecommerce Customer Detail Page";
         const [details, SetDetails] = useState(0);
         const [loading, SetLoading] = useState(false);
+
+        const [toggleStates, setToggleStates] = useState({});
+        const [show, setShow] = useState(false);
+        const [currentToggleId, setCurrentToggleId] = useState(null);
+        const [passwordError, setPasswordError] = useState("");
+        const [pass, setPass] = useState("");
+        const [toggleEnable, setToggleEnable] = useState([]);
+        const [client, setClient] = useState(null);
+
+        // For Mqtt
+        React.useEffect(() => {
+        const client = new Client(  hostname,
+                                    Number(port),
+                                        `clientId-${Math.random().toString(16).slice(2)}`
+                                    );
+        setClient(client);
+                                    
+        client.connect({
+            userName: username,
+            password: password,
+            onSuccess: () => {
+                                // const topic = '/supro/pump/+/GEN'
+                                const topic = '/supro/pump/#'
+                                client.subscribe(topic, {
+                                onSuccess: ()=> console.log('Subscription Succesfull', topic),
+                                onFailure: (error) => console.error('Subscription failed:', error),
+                                });
+                            },
+            onFailure: (error) => { console.error('Connection failed:', error); },
+                                });
+    
+        client.onConnectionLost = (responseObject) => {
+            if (responseObject.errorCode !== 0) {
+            console.error('Connection lost:', responseObject.errorMessage);
+            }
+        };
+    
+        client.onMessageArrived = (message) => {
+            console.log(`Message received on topic ${message.destinationName} : ${message.payloadString}`);
+    
+            setToggleEnable((prev) => {
+            const existingIndex = prev.findIndex((item) => item.topic === message.destinationName);
+            
+            if (existingIndex !== -1) {
+                // Update the existing object if the topic matches
+                return prev.map((item, index) =>
+                index === existingIndex
+                    ? { ...item, message: message.payloadString }
+                    : item
+                );
+            } else {
+                // Add a new object if the topic is not found
+                return [
+                ...prev,
+                { topic: message.destinationName, message: message.payloadString },
+                ];
+            }
+            });
+        };
+    
+        return () => {
+            if (client.isConnected()) {
+                client.disconnect();
+            }
+        };
+        }, []);
 
         React.useEffect(() => {
             SetDetails(0);
@@ -64,6 +135,64 @@
             }
             });
         };
+
+        const handleToggle = (id) => {
+            setToggleStates((prevStates) => {
+              const isEnabled = !prevStates[id];
+              if (isEnabled) {
+                setCurrentToggleId(id);
+                setShow(true);
+              }
+              return { ...prevStates, [id]: isEnabled };
+            });
+          };
+          
+          const handleClose = () => {
+            setShow(false);
+            setToggleStates((prevStates) => ({
+              ...prevStates,
+              [currentToggleId]: false,
+            }));
+            setCurrentToggleId(null);
+            setPasswordError("");
+            setPass('')
+          };
+        
+          const handleInputChange = (e) => {
+            setPass(e.target.value);
+            if (passwordError) {
+              setPasswordError("");
+            }
+          }
+          
+          const handlePasswordBlur = () => {
+            if (!pass) {
+              setPasswordError("Password is required.");
+            } else {
+              setPasswordError("");
+            }
+          };
+          
+          const handleSubmit = () => {
+            if (!pass) {
+              setPasswordError("Password is required.");
+            } else {
+              const toggleId = Object.entries(toggleStates)
+                .filter(([id, isChecked]) => isChecked)
+                .map(([id]) => id);
+        
+                const topic = `/supro/pump/${toggleId}/GEN`;
+                const existingToggle = toggleEnable.find((toggle) => toggle.topic === topic);
+                const payload = existingToggle?.message === "1" ? "" : "1";
+          
+              client.publish(topic, payload, 0, true);
+              console.log(`Message published to topic ${topic}:`,payload);
+        
+              setPasswordError("");
+              setPass('')
+              handleClose();
+            }
+          };
 
         return loading ? (
             <>
@@ -110,6 +239,30 @@
                             </div>
                             </div>
 
+                            <div className="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100">
+                            <div style={{ width: "100%" }}>
+                                {/* <Button
+                                variant={
+                                    details.devicestatus
+                                    ? "outline-danger"
+                                    : "outline-primary"
+                                }
+                                className="w-100"
+                                // onClick={handleDeviceStatus}
+                                >
+                                {details.devicestatus ? "Inactive" : "Active"}
+                                </Button> */}
+                                <div className="d-flex align-items-center form-check form-switch justify-content-end h-100">
+                                    <input className="form-check-input" type="checkbox" role="switch" id={`flexSwitchCheckDefault-${details.deviceid}`}
+                                        style={{width: "2rem", height: "1rem", transform: "scale(1.5)", marginRight: '10px'}} 
+                                        // checked={toggleStates[item.deviceid] || false} 
+                                        checked={toggleStates[details.deviceid] || toggleEnable.some(toggle => toggle.topic === `/supro/pump/${details.deviceid}/GEN` && toggle.message === "1")}
+                                        onChange={() => handleToggle(details.deviceid)}
+                                        // checked={isChecked} onChange={handleShow}
+                                    />
+                                    </div>
+                            </div>
+                            </div>
                             {/* <div className="d-flex flex-row justify-content-between w-100 w-sm-50 w-xl-100">
                             <div style={{ width: "100%" }}>
                                 <Button
@@ -690,6 +843,38 @@
                 </Col>
                 </Row>
             )}
+
+            <Modal show={show} backdrop="static" keyboard={false} onHide={handleClose}>
+                <Modal.Title> <h4 style={{ fontSize: '1.2rem', fontWeight: '600', position: 'relative', top: '1rem', left: '2rem' }}>Password</h4></Modal.Title>
+                <Modal.Body>
+                <Row className="g-3">
+                    <div className="">
+                        <Form.Control
+                        type="password"
+                        name="password"
+                        placeholder='Enter Password'
+                        value={pass}
+                        onBlur={handlePasswordBlur}
+                        onChange={handleInputChange}
+                        />
+                        {passwordError && (
+                        <div style={{ color: 'red', fontSize: '0.775rem', marginTop: '0.3rem',marginLeft: '0.6rem' }}>
+                            {passwordError}
+                        </div>
+                        )}
+                    </div>
+                </Row>
+                </Modal.Body>
+                <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', padding: '0px 1rem', marginBottom: '1rem' }}>
+                    <Button style={{backgroundColor: '#24A6F6'}} onClick={handleClose} >
+                    Cancel
+                    </Button>
+                    &nbsp;&nbsp;
+                    <Button style={{backgroundColor: '#24A6F6'}} onClick={handleSubmit}>
+                    Submit
+                    </Button>
+                </div>
+            </Modal>
             </>
         ) : (
             <></>
