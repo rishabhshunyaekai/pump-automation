@@ -5,9 +5,9 @@
     export const IS_DEMO              = sessionStorage.getItem("isLogin") === "true" ? true : false;
     export const IS_AUTH_GUARD_ACTIVE = true;
     //export const SERVICE_URL          = "http://localhost:8080/api/v1"; 
-    export const SERVICE_URL = "https://env.shunyaekai.com/api/v1";
+    export const SERVICE_URL = "https://pump.shunyaekai.com/api/v1"; //https://env.shunyaekai.com/api/v1
     export const USE_MULTI_LANGUAGE = false;
-    export const SocketIo = io('https://env.shunyaekai.com', {
+    export const SocketIo = io('https://pump.shunyaekai.com', {
         reconnection         : true,
         reconnectionDelay    : 1000,
         reconnectionDelayMax : 5000,

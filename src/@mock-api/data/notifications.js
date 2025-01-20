@@ -4,7 +4,7 @@
     import { ToastContainer, toast } from 'react-toastify';
     import 'react-toastify/dist/ReactToastify.css';
     import { DeviceNotificationCloseServices } from '@mock-api/data/datatable';
-    const SocketIo = io('https://env.shunyaekai.com/');
+    const SocketIo = io('https://pump.shunyaekai.com/');
     //const SocketIo = io('http://localhost:8080');  // set PORT=3030 && 
     const RealTimeNotification = ()=> {
         

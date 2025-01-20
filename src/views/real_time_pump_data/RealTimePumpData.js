@@ -50,9 +50,12 @@ const RealTimePumpData = () => {
 
   // For Mqtt
   useEffect(() => {
-    const client = new Client(  hostname,
-                                Number(port),
-                                 `clientId-${Math.random().toString(16).slice(2)}`
+    // const client = new Client(  hostname,
+    //                             Number(port),
+    //                              `clientId-${Math.random().toString(16).slice(2)}`
+    //                           );
+    const client = new Client(  `wss://mqttportal.shunyaekai.tech:443/mqtt`,
+                                `clientId-${Math.random().toString(16).slice(2)}`
                               );
     setClient(client);
                               
