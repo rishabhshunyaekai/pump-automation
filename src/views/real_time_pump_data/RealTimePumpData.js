@@ -47,6 +47,7 @@ const RealTimePumpData = () => {
   const [toggleEnable, setToggleEnable] = useState([]);
   const [client, setClient] = useState(null);
   const [notifiedDevices, setNotifiedDevices] = useState([]);
+  const [loadList, setLoadList] = useState(false);
 
   // For Mqtt
   useEffect(() => {
@@ -139,6 +140,7 @@ const RealTimePumpData = () => {
   }, []);
 
   useEffect(() => {
+    setLoadList(true);
     SeLists([]);
     if (isConnected) {
        SocketIo.emit('onrealtimedata',({ userId: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id, currentPage: currentPage, limit: limit, areanumber: areanumber, devicestatus: devicestatus,groupid:uuidgen  }));
@@ -147,10 +149,12 @@ const RealTimePumpData = () => {
             SeLists(result.deviceList);
             setTotalrecoard(result.totalrecoard);
             setTotalpage(result.totalpage);
+            setLoadList(false);
           } else {
             SeLists([]);
             setTotalrecoard(0);
             setTotalpage(0);
+            setLoadList(false);
           }
         });
     }
@@ -337,11 +341,11 @@ const RealTimePumpData = () => {
       </Row>
 
       <Row>
-        {
+        { loadList ? <span>Loading...</span> :
           list.length !== 0 ?
             list.map((item) => {
               return (
-                <Col xl="3" key={item.id}>
+                <Col lg="4" md="6" sm="12" key={item.id}>
                   <Card className="mb-5" style={item.humidity === '1' ? { border: "2px solid red" } : { border: "none" }}>
                     <Card.Header  >
                       <Row className="g-0 align-items-center mb-0">

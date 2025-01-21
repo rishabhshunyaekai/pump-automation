@@ -133,7 +133,7 @@ const Dashboard = () => {
                   </div>
                   <div className={style.cardContent}>
                     {/* <div className={style.cardCount}>{deviceCount.totalDevice}</div> */}
-                    <div className={style.cardCount}>0</div>
+                    <div className={style.cardCount}>14</div>
                     <div className={style.cardTitle}>Total Device</div>
                   </div>
                 </div>
@@ -171,7 +171,7 @@ const Dashboard = () => {
                 </div>
                 <div className={style.cardContent}>
                   {/* <div className={style.cardCount}>{deviceCount.totalActive}</div> */}
-                  <div className={style.cardCount}>0</div>
+                  <div className={style.cardCount}>14</div>
                   <div className={style.cardTitle}>Active Device</div>
                 </div>
               </div>
@@ -180,8 +180,26 @@ const Dashboard = () => {
         </Col>
 
         {/* Card Three */}
+        {/* <Col xs="6" md="4" lg="4" className="p-3">
+          <Card className="h-100 hover-scale-up">
+            <div className={`${style.card}`}>
+              <div className={style.cardWrapper}>
+                <div className={style.cardIcon}>
+                  <PhonelinkEraseOutlinedIcon style={{color : "#fff"}} />
+                </div>
+                <div className={style.cardContent}>
+                  <div className={style.cardCount}>{deviceCount.totalDeactive}</div>
+                  <div className={style.cardCount}>0</div>
+                  <div className={style.cardTitle}>In-Active Device</div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </Col> */}
+
+        {/* 
         <Col xs="6" md="4" lg="4" className="p-3">
-          {/* <Card className="h-100 hover-scale-up">
+        <Card className="h-100 hover-scale-up">
             <Card.Body className="d-flex flex-column align-items-center">
               <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
                 <PhonelinkEraseOutlinedIcon className="text-primary" />
@@ -199,26 +217,29 @@ const Dashboard = () => {
                 {deviceCount.totalDeactive}
               </div>
             </Card.Body>
-          </Card> */}
+          </Card> </Col>*/}
+
+        {/* Card Four */}
+        {/* <Col xs="6" md="4" lg="4" className="p-3">
           <Card className="h-100 hover-scale-up">
             <div className={`${style.card}`}>
               <div className={style.cardWrapper}>
                 <div className={style.cardIcon}>
-                  <PhonelinkEraseOutlinedIcon style={{color : "#fff"}} />
+                  <NotificationsActiveOutlinedIcon style={{color : "#fff"}} />
                 </div>
                 <div className={style.cardContent}>
-                  {/* <div className={style.cardCount}>{deviceCount.totalDeactive}</div> */}
+                  <div className={style.cardCount}>{deviceCount.todayAlert}</div>
                   <div className={style.cardCount}>0</div>
-                  <div className={style.cardTitle}>In-Active Device</div>
+                  <div className={style.cardTitle}>Today's Alert</div>
                 </div>
               </div>
             </div>
           </Card>
-        </Col>
+        </Col> */}
 
-        {/* Card Four */}
+        {/* 
         <Col xs="6" md="4" lg="4" className="p-3">
-          {/* <NavLink to="alert-history">
+        <NavLink to="alert-history">
           <Card className="h-100 hover-scale-up">
             <Card.Body className="d-flex flex-column align-items-center">
               <div className="sw-6 sh-6 rounded-xl d-flex justify-content-center align-items-center border border-primary mb-4">
@@ -238,22 +259,7 @@ const Dashboard = () => {
               </div>
             </Card.Body>
           </Card>
-          </NavLink> */}
-          <Card className="h-100 hover-scale-up">
-            <div className={`${style.card}`}>
-              <div className={style.cardWrapper}>
-                <div className={style.cardIcon}>
-                  <NotificationsActiveOutlinedIcon style={{color : "#fff"}} />
-                </div>
-                <div className={style.cardContent}>
-                  {/* <div className={style.cardCount}>{deviceCount.todayAlert}</div> */}
-                  <div className={style.cardCount}>0</div>
-                  <div className={style.cardTitle}>Today's Alert</div>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </Col>
+          </NavLink> </Col>*/}
 
         {/* Card Five */}
         <Col xs="6" md="4" lg="4" className="p-3">
