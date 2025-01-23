@@ -21,33 +21,35 @@ const hostname = process.env.REACT_APP_MQTT_HOSTNAME;
 const port     = process.env.REACT_APP_MQTT_PORT;
 
 const RealTimePumpData = () => {
-  let { id } = useParams();
-  const navigate = useHistory();
-  const [isConnected, setIsConnected] = useState(SocketIo.connected);
-  const[uuidgen]=useState(uuidv4())
-  const title = 'Real Time Pump Monitoring';
-  const description = 'Ecommerce Customer Detail Page';
-  const [details, SetDetails] = useState();
-  const [list, SeLists] = useState([]);
-  const [loading, SetLoading] = useState(false);
-  const [listData, setListData] = React.useState([]);
-  const [selectedItem, setSelectedItem] = React.useState("");
-  const [selectedItemValue, setSelectedItemValue] = React.useState(0);
-  const [itemPerPage, setItemPerpage] = useState(10);
-  const [totalrecord, setTotalrecoard] = useState(1);
-  const [totalpage, setTotalpage] = useState(0);
-  const [state, setstate] = React.useState({ currentPage: 1, limit: itemPerPage, areanumber: 0, devicestatus: 2 });
-  const { currentPage, limit, areanumber, devicestatus } = state;
+  let { id }                                      = useParams();
+  const navigate                                  = useHistory();
+  const[uuidgen]                                  = useState(uuidv4());
+  const title                                     = 'Real Time Pump Monitoring';
+  const description                               = 'Ecommerce Customer Detail Page';
 
-  const [toggleStates, setToggleStates] = useState({});
-  const [show, setShow] = useState(false);
-  const [currentToggleId, setCurrentToggleId] = useState(null);
-  const [passwordError, setPasswordError] = useState("");
-  const [pass, setPass] = useState("");
-  const [toggleEnable, setToggleEnable] = useState([]);
-  const [client, setClient] = useState(null);
-  const [notifiedDevices, setNotifiedDevices] = useState([]);
-  const [loadList, setLoadList] = useState(false);
+  const [isConnected, setIsConnected]             = useState(SocketIo.connected);
+  const [details, SetDetails]                     = useState();
+  const [list, SeLists]                           = useState([]);
+  const [loading, SetLoading]                     = useState(false);
+  const [listData, setListData]                   = React.useState([]);
+  const [selectedItem, setSelectedItem]           = React.useState("");
+  const [selectedItemValue, setSelectedItemValue] = React.useState(0);
+  const [itemPerPage, setItemPerpage]             = useState(10);
+  const [totalrecord, setTotalrecoard]            = useState(1);
+  const [totalpage, setTotalpage]                 = useState(0);
+  const [state, setstate]                         = React.useState({ currentPage: 1, limit: itemPerPage, areanumber: 0, devicestatus: 2 });
+  
+  const [toggleStates, setToggleStates]           = useState({});
+  const [show, setShow]                           = useState(false);
+  const [currentToggleId, setCurrentToggleId]     = useState(null);
+  const [passwordError, setPasswordError]         = useState("");
+  const [pass, setPass]                           = useState("");
+  const [toggleEnable, setToggleEnable]           = useState([]);
+  const [client, setClient]                       = useState(null);
+  const [notifiedDevices, setNotifiedDevices]     = useState([]);
+  const [loadList, setLoadList]                   = useState(false);
+  
+  const { currentPage, limit, areanumber, devicestatus } = state;
 
   // For Mqtt
   useEffect(() => {
@@ -239,7 +241,7 @@ const RealTimePumpData = () => {
  
   useEffect(() => {
     list.forEach((item) => {
-      if (item.humidity === '1' && !notifiedDevices.includes(item.deviceid)) {
+      if (item.fire === '1' && !notifiedDevices.includes(item.deviceid)) {
         toast(<div>Overflow detected for <span style={{ color: 'blue', textTransform: 'uppercase' }} onClick={() => handleToastClick(item.deviceid)}>{item.devicename}</span></div>);
         setNotifiedDevices((prev) => [...prev, item.deviceid]);
       }
@@ -346,7 +348,7 @@ const RealTimePumpData = () => {
             list.map((item) => {
               return (
                 <Col lg="4" md="6" sm="12" key={item.id}>
-                  <Card className="mb-5" style={item.humidity === '1' ? { border: "2px solid red" } : { border: "none" }}>
+                  <Card className="mb-5" style={item.fire === '1' ? { border: "2px solid red" } : { border: "none" }}>
                     <Card.Header  >
                       <Row className="g-0 align-items-center mb-0">
                         <Col className="ps-2">
@@ -383,8 +385,8 @@ const RealTimePumpData = () => {
                       <Row className="g-0 align-items-center mb-2">
                         <div className="d-flex align-items-center justify-content-between">
                           <div className="sh-5 d-flex align-items-center lh-1-25">Current Status</div>
-                            <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1' ? "Overflow" : "Normal"}</div>
-                          {/* <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.humidity === '1' ? (() => {
+                            <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.fire === '1' ? "Overflow" : "Normal"}</div>
+                          {/* <div className="sh-5 d-flex align-items-center lh-1-25 justify-content-end">{item.fire === '1' ? (() => {
                                                                                             if (!notifiedDevices.includes(item.deviceid)) {
                                                                                               toast(<div>
                                                                                                 Overflow detected for <span style={{ cursor: "pointer",color: 'blue' }}

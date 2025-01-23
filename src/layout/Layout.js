@@ -11,7 +11,7 @@ import { DEFAULT_USER, SocketIo } from 'config.js';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import RealTimeNotification from "@mock-api/data/notifications";
+// import RealTimeNotification from "@mock-api/data/notifications";
 const Layout = ({ children }) => {
   useLayout();
 
@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
         <Container style={{padding: "0px 70px"}}>
           <Row className="h-100">
             <SidebarMenu />
-            <RealTimeNotification></RealTimeNotification>
+            {/* <RealTimeNotification></RealTimeNotification> */}
             <Col className="h-100" id="contentArea">
               {children}
             </Col>

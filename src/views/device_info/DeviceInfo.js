@@ -18,13 +18,17 @@
     } from "../../@mock-api/data/datatable";
     import moment from "moment";
     import { SocketIo, DEFAULT_USER } from "config.js";
+    // import { DEFAULT_USER } from "config.js";
     import { toast } from "react-toastify";
     import { Client, Message } from 'paho-mqtt';
+    // import io from 'socket.io-client';
 
     const username = process.env.REACT_APP_MQTT_USERNAME;
     const password = process.env.REACT_APP_MQTT_PASSWORD;
     const hostname = process.env.REACT_APP_MQTT_HOSTNAME;
     const port     = process.env.REACT_APP_MQTT_PORT;
+    // const url     = process.env.REACT_APP_BASEURL;
+    // const SocketIo = io(url);
 
     const DeviceInfo = () => {
         let { id } = useParams();

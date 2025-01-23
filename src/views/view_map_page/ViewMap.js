@@ -11,14 +11,19 @@
     import DeviceAreaList from "views/area_device_list/AreaDeviceList";
     import { DeviceAreaListService, SingleAreaService, } from "@mock-api/data/datatable";
     import style from './viewmap.module.css';
-
+    // import io from 'socket.io-client';
     import { SocketIo, DEFAULT_USER } from "config.js";
+    // import { DEFAULT_USER } from "config.js";
+
+    // const url     = process.env.REACT_APP_BASEURL;
+    
     const containerStyle = { width: "100wv", height: "600px", borderRadius: "20px"};
     const center         = { lat: 28.805918377354473, lng: 76.93546814405957, };
     let user_id          = sessionStorage.getItem("user_id")
     let lib              = ["places", "geometry", "visualization", "drawing"];
     const google         = (window.google = window.google ? window.google : {});
     const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+    // const SocketIo = io(url);
     
     const ViewMap = () => {
         let { id }                          = useParams();

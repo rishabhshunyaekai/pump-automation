@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
@@ -10,20 +10,24 @@ import HtmlHead from 'components/html-head/HtmlHead';
 import { setCurrentUser } from '../../auth/authSlice';
 import { LoginService } from "../../@mock-api/data/datatable"
 import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const title = 'Login';
-  const description = 'Login Page';
+  const history                         = useHistory();
+  const dispatch                        = useDispatch();
+  const title                           = 'Login';
+  const description                     = 'Login Page';
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isLogin }                     = useSelector((state) => state.auth);
+  const initialValues                    = { email: '', userpassword: '' };
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required('Email is required'),
     userpassword: Yup.string().min(6, 'Must be at least 6 chars!').required('Password is required'),
   });
-  const initialValues = { email: '', userpassword: '' };
-
+  
   const onSubmit = (values) => {
+    setIsSubmitting(true)
     let payload = {
       isLogin: false,
       currentUser: null,
@@ -38,25 +42,24 @@ const Login = () => {
         }
         toast(result.message)
         dispatch(setCurrentUser(payload));
+        setIsSubmitting(false); 
       } else {
-        alert(result.message)
+        toast(result.message)
         payload = {
           isLogin: false,
           currentUser: null,
           message: result.message
         }
         dispatch(setCurrentUser(payload));
+        setIsSubmitting(false); 
       }
     });
   }
 
-  const { isLogin } = useSelector((state) => state.auth);
   useEffect(() => {
-
     if (isLogin === true) {
       history.push("/dashboard");
     }
-
   }, [isLogin]);
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
@@ -118,8 +121,8 @@ const Login = () => {
               </NavLink> */}
               {errors.password && touched.password && <div className="d-block invalid-tooltip">{errors.password}</div>}
             </div>
-            <Button size="lg" type="submit" style={{backgroundColor: '#24A6F6', borderRadius: '50px'}}>
-              Login
+            <Button disabled={isSubmitting} size="lg" type="submit" style={{backgroundColor: '#24A6F6', borderRadius: '50px'}}>
+              {isSubmitting ? 'Logging in...' : 'Login'}
             </Button>
           </form>
         </div>

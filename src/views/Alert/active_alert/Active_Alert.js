@@ -14,7 +14,6 @@
     import { SocketIo, DEFAULT_USER } from 'config.js';
     import { toast } from 'react-toastify';
     import 'react-toastify/dist/ReactToastify.css';
-
     // import RealTimeNotification from "RealTimeNotification";
 
     const ControlsSearch = ({ tableInstance }) => {
@@ -107,30 +106,29 @@
     const ActiveAlert = () => {
         const title                                       = "Active Alert List";
         const description                                 = "Ecommerce Discount Page";
+        const history                                     = useHistory();
+        
         const [isConnected, setIsConnected]               = useState(SocketIo.connected);
         const [audio_path, setAudioPath]                  = useState('/sound.mp3');
         const [commentDescription, setCommentDescription] = useState("");
-        const history                                     = useHistory();
-
-        const [show, setShow]           = useState(false);
-        const handleClose               = () => setShow(false);
-        const [show2, setShow2]         = useState(false);
-        const [teamModal, setTeamModal] = useState(false);
-        const handleClose2              = () => setShow2(false);
-        const handleClose3              = () => setTeamModal(false);
-        const handleShow2 = (id) => {
-            setShow2(true);
-            setDeviceId(id) //
-        }
-        const [data, SeLists] = useState([]);
-
-        const [itemPerPage, setItemPerpage]  = useState(10);
-        const [totalrecord, setTotalrecoard] = useState(1);
-        const [deviceId, setDeviceId]        = useState()
-        const [totalpage, setTotalpage]      = useState(0);
-        const [all_team_list, setAllTeamList] = useState([]);
-        const [teamID, setTeamID]  = useState('');
-
+        const [show, setShow]                             = useState(false);
+        const [show2, setShow2]                           = useState(false);
+        const [teamModal, setTeamModal]                   = useState(false);
+        const [data, SeLists]                             = useState([]);
+        const [itemPerPage, setItemPerpage]               = useState(10);
+        const [totalrecord, setTotalrecoard]              = useState(1);
+        const [deviceId, setDeviceId]                     = useState();
+        const [totalpage, setTotalpage]                   = useState(0);
+        const [all_team_list, setAllTeamList]             = useState([]);
+        const [teamID, setTeamID]                         = useState('');
+        
+        const handleClose3                                = () => setTeamModal(false);
+        const handleClose2                                = () => setShow2(false);
+        const handleClose                                 = () => setShow(false);
+        const handleShow2                                 = (id) => {
+                                                                setShow2(true);
+                                                                setDeviceId(id);
+                                                            }
         const [state, setstate] = React.useState({
             currentPage  : 1,
             limit        : itemPerPage,
@@ -237,10 +235,10 @@
                 Header          : 'Device Id',
                 accessor        : 'deviceid',
                 sortable        : true,
-                headerClassName : 'text-muted text-small text-uppercase w-10 px-3',
+                headerClassName : 'text-dark text-medium text-uppercase w-10 px-3',
                 Cell            : ({ cell }) => {
                 return (
-                    <NavLink to={`/device-information/${cell.row.original.deviceid}`}>
+                    <NavLink to={`/pump-information/${cell.row.original.deviceid}`} style={{color: '#24A6F6'}}>
                         {cell.row.original.deviceid}
                     </NavLink>
                 );
@@ -250,10 +248,45 @@
                 Header          : 'Device Name', 
                 accessor        : 'devicename', 
                 sortable        : true, 
-                headerClassName : 'text-muted text-small text-uppercase w-10 px-3', 
-                cellClassName   : 'text-alternate' 
+                headerClassName : 'text-dark text-medium text-uppercase w-10 px-3', 
+                cellClassName   : 'text-dark' 
             },
             {
+                Header : 'Fire Alert', accessor: 'fire',
+                Cell   : (row) => {
+                    return (
+                        <>
+                            {row.row.original.fire == 1 || row.row.original.fire == '1' ? <span style={{ color: "red" }}>Detected </span> : "Not Detected"}
+                        </>
+                    );
+                },
+                sortable        : true, 
+                headerClassName : 'text-dark text-medium text-uppercase w-10 px-5', 
+                cellClassName   : 'text-dark'
+            },
+            {
+                Header : 'Alert Date', accessor: 'update_at', sortable: true,
+                Cell   : (row) => (
+                    <>
+                        <span>{moment(row.row.original.update_at).format('lll')} </span>
+                    </>
+                ),
+                headerClassName : 'text-dark text-medium text-uppercase w-10 px-3',
+                cellClassName   : 'text-dark'
+            },
+            {
+                Header : 'Action', accessor: 'action', sortable: false, Cell: (cell) => {
+                    return (<>
+
+                        <button className="btn btn-outline-primary p-2" value={"Add"} onClick={() => handleShow2(cell.row.original.deviceid)}>  {<AddIcon />}</button>
+                        <button className="btn btn-outline-primary p-2 mx-2" value={"Add"} onClick={() => handleShow(cell.row.original.deviceid)}>  {<RemoveRedEyeOutlinedIcon />}</button>
+                        <button className="btn btn-outline-primary p-2" value={"Assign"} onClick={() => getTeamList(cell.row.original.deviceid)}>  {<AddIcon />}</button>
+                    </>)
+                },
+                headerClassName : 'text-dark text-medium text-uppercase w-10 px-5', 
+                cellClassName   : 'text-dark'
+            },
+            /*{
                 Header : 'Temperature Alert', accessor: 'temperature',
                 Cell   : (row) => {
                     return (
@@ -294,59 +327,19 @@
                 cellClassName   : 'text-alternate'
             },
             {
-                Header : 'Fire Alert', accessor: 'fire',
-                Cell   : (row) => {
-                    return (
-                        <>
-                            {row.row.original.fire == 1 || row.row.original.fire == '1' ? <span style={{ color: "red" }}>Detected </span> : "Not Detected"}
-                        </>
-                    );
-                },
-                sortable        : true, 
-                headerClassName : 'text-muted text-small text-uppercase w-10 px-5', 
-                cellClassName   : 'text-alternate'
-            },
-            {
-                Header : 'Alert Date', accessor: 'update_at', sortable: true,
-                Cell   : (row) => (
-                    <>
-                        <span>{moment(row.row.original.update_at).format('ll')} </span>
-                    </>
-                ),
-                headerClassName : 'text-muted text-small text-uppercase w-10 px-3',
-                cellClassName   : 'text-alternate'
-            },
-            {
-                Header : 'Action', accessor: 'action', sortable: false, Cell: (cell) => {
-                    return (<>
+              Header: 'Action',
+              accessor: '',
+              sortable: false,
+              Cell: cell => (
 
-                        <button className="text-primary" style={{ marginLeft: '-2rem', backgroundColor: 'transparent', border: 'none' }} value={"Add"} onClick={() => handleShow2(cell.row.original.deviceid)}>  {<AddIcon />}
-                        </button>
-                        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button className="text-primary" style={{ marginLeft: '-1rem', backgroundColor: 'transparent', border: 'none' }} value={"Add"} onClick={() => handleShow(cell.row.original.deviceid)}>  {<RemoveRedEyeOutlinedIcon />}
-                        </button>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button className="text-primary" style={{ marginLeft: '-2rem', backgroundColor: 'transparent', border: 'none' }} value={"Assign"} onClick={() => getTeamList(cell.row.original.deviceid)}>  {<AddIcon />}
-                        </button>
-                        
-                    </>)
-                },
-                headerClassName : 'text-muted text-small text-uppercase w-10 px-2', 
-                cellClassName   : 'text-alternate'
-            }
-            // {
-            //   Header: 'Action',
-            //   accessor: '',
-            //   sortable: false,
-            //   Cell: cell => (
-
-            //     <NavLink
-            //       className="muted-link pb-1 d-inline-block hidden breadcrumb-back"
-            //       to={"/view_map_page/" + cell.row.values.AreaNumber}
-            //     >Link</NavLink>
-            //   ),
-            //   headerClassName: 'text-muted text-small text-uppercase w-20',
-            //   cellClassName: 'text-alternate',
-            // },
+                <NavLink
+                  className="muted-link pb-1 d-inline-block hidden breadcrumb-back"
+                  to={"/view_map_page/" + cell.row.values.AreaNumber}
+                >Link</NavLink>
+              ),
+              headerClassName: 'text-muted text-small text-uppercase w-20',
+              cellClassName: 'text-alternate',
+            },*/
             ];
         }, []);
 
@@ -370,9 +363,18 @@
                         <CsLineIcons icon="chevron-left" size="13" />
                             <span className="align-middle text-small ms-1">Dashboard</span>
                         </NavLink>
-                        <h1 className="mb-0 pb-0 display-4" id="title"  style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}>
+                        <h1 className="mb-0 pb-0 display-4" id="title"  style={{ marginLeft: '0.5rem', fontWeight: '400', marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6', }}>
                         {title}
                         </h1>
+                    </Col>
+
+                    <Col md="3" lg="2" xxl="2" className="mb-1">
+                        <div className="d-inline-block float-md-start mt-2 search-input-container w-100 border border-separator bg-foreground">
+                            <ControlsSearch tableInstance={tableInstance} />
+                            <span className="search-magnifier-icon" style={{backgroundColor: '#24A6F6', color: '#fff',borderRadius: '10px'}}>
+                                <CsLineIcons icon="search" />
+                            </span>
+                        </div>
                     </Col>
                     {/* Title End */}
                 </Row>
@@ -380,12 +382,6 @@
             {/* <RealTimeNotification /> */}
 
             <Row className="mb-3">
-                <Col sm="12" md="5" lg="3" xxl="2" className="mb-1">
-                    <div className="d-inline-block float-md-start me-1 search-input-container w-100 border border-separator bg-foreground search-sm">
-                        <ControlsSearch tableInstance={tableInstance} />
-                    </div>
-                </Col>
-
                 <Col xs="12" className="overflow-scroll tab-scroll">
                     {data.length !== 0 ?
                         <Table className="react-table nowrap responsive" tableInstance={tableInstance} />
@@ -429,7 +425,7 @@
                         </div>
                     </Modal.Body>
                     <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', margin: '10px 2rem' }}>
-                        <Button variant="primary" onClick={handleClose} > Close </Button>
+                        <Button style={{backgroundColor: '#24A6F6', color: '#fff'}} onClick={handleClose} > Close </Button>
                     </div>
                 </Modal>
             </div>
@@ -449,9 +445,9 @@
                     </div>
                 </Modal.Body>
                 <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', margin: '10px 2rem' }}>
-                    <Button variant="primary" onClick={handleClose2} > Cancel </Button>
+                    <Button style={{backgroundColor: '#24A6F6', color: '#fff'}} onClick={handleClose2} > Cancel </Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="primary" onClick={saveComment} > Add </Button>
+                    <Button style={{backgroundColor: '#24A6F6', color: '#fff'}} onClick={saveComment} > Add </Button>
                 </div>
             </Modal>
 
@@ -468,9 +464,9 @@
                     </div>
                 </Modal.Body>
                 <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', margin: '10px 2rem' }}>
-                    <Button variant="primary" onClick={handleClose3} > Cancel </Button>
+                    <Button style={{backgroundColor: '#24A6F6', color: '#fff'}} onClick={handleClose3} > Cancel </Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="primary" onClick={alloteTeam} > Add </Button>
+                    <Button style={{backgroundColor: '#24A6F6', color: '#fff'}} onClick={alloteTeam} > Add </Button>
                 </div>
             </Modal>
             {/* End Allote Team of Order */}

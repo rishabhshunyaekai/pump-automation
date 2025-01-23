@@ -92,31 +92,33 @@
         );
     };
     const Discount = () => {
-        const title                         = "Alert history List";
-        const description                   = "Ecommerce Discount Page";
-        const [isConnected, setIsConnected] = useState(SocketIo.connected);
+        const title                           = "Alert history List";
+        const description                     = "Ecommerce Discount Page";
+        const today                           = new Date();
 
-        const today                      = new Date();
-        const [datesearch,SetSearchDate] = useState();
+        const [isConnected, setIsConnected]   = useState(SocketIo.connected);
+        const [datesearch,SetSearchDate]      = useState();
+        const [itemPerPage, setItemPerpage]   = useState(10);
+        const [totalrecord, setTotalrecoard]  = useState(1);
+        const [totalpage, setTotalpage]       = useState(0);
+        const [founddata, setFoundData]       = useState(true);
+        const [data, setNewData]              = useState([]);
+
         // Popup Code start from here
-        const [show, setShow]            = useState(false);
-        const handleClose                = () => setShow(false);
-        const [commentList, setCommentList] = useState([]);
-        const handleShow = (value) => {
-            setShow(true);
-            Commentlist({ 
-                device_id : value, 
-                user_id   : DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id 
-            }, 
-                res => { setCommentList(res.data.result); }
-            )
-        }
+        const [show, setShow]                 = useState(false);
+        const handleClose                     = () => setShow(false);
+        const [commentList, setCommentList]   = useState([]);
+        const handleShow                      = (value) => {
+                                                setShow(true);
+                                                Commentlist({ 
+                                                    device_id : value, 
+                                                    user_id   : DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id 
+                                                }, 
+                                                    res => { setCommentList(res.data.result); }
+                                                )
+                                              }
         // Popup Code End from here
-        const [itemPerPage, setItemPerpage]  = useState(10);
-        const [totalrecord, setTotalrecoard] = useState(1);
-        const [totalpage, setTotalpage]      = useState(0);
-        const [founddata, setFoundData]      = useState(true);
-        const [data, setNewData]             = useState([])
+        
         const [state, setstate]              = React.useState({
             currentPage : 1,
             limit       : itemPerPage
@@ -162,10 +164,10 @@
                     Header          : 'Device Id',
                     accessor        : 'deviceid',
                     sortable        : true,
-                    headerClassName : 'text-muted text-small text-uppercase w-10 px-3',
+                    headerClassName : 'text-dark text-medium text-uppercase w-10 px-3',
                     Cell            : ({ cell }) => {
                         return (
-                            <NavLink to={`/device-information/${cell.row.original.deviceid}`}>
+                            <NavLink to={`/pump-information/${cell.row.original.deviceid}`} style={{color: '#24A6F6'}}>
                                 {cell.row.original.deviceid}
                             </NavLink>
                         );
@@ -175,68 +177,31 @@
                     Header          : 'Device Name', 
                     accessor        : 'devicename', 
                     sortable        : true, 
-                    headerClassName : 'text-muted text-small text-uppercase w-10 px-3', 
-                    cellClassName   : 'text-alternate' 
+                    headerClassName : 'text-dark text-medium text-uppercase w-10 px-3', 
+                    cellClassName   : 'text-dark' 
                 },
                 {
-                    Header   : 'Temperature Alert', 
-                    accessor : 'temperature',
-                    Cell     : (row) => {
-                        return (
-                            <span>
-                            {row.row.original.alertTemp == 1 || row.row.original.alertTemp == '1' ? <span style={{ color: "red" }}> {row.row.original.temperature} &#8451;</span> : <span>   {row.row.original.temperature}  &#8451;</span>}
-                            </span>
-                        );
-                    },
-                    sortable        : true, 
-                    headerClassName : 'text-muted text-small text-uppercase w-10', 
-                    cellClassName   : 'text-alternate'
-                },
-                {
-                    Header: 'Humidity Alert', accessor: 'humidity',
-                    Cell: (row) => {
-                    return (
-                        <span>
-                        {row.row.original.alertHumi == 1 || row.row.original.alertHumi == '1' ? <span style={{ color: "red" }}> {row.row.original.humidity}{'%'}</span> : <span> {row.row.original.humidity}{'%'}</span>}
-                        </span>
+                  Header: 'Fire Alert', accessor: 'fire',
+                  Cell: (row) => {
+                  return (
+                      <>
+                      {row.row.original.fire == 1 || row.row.original.fire == '1' ? <span style={{ color: "red" }}>Detected </span> : "Not Detected"}
 
-                    );
-                    },
-                    sortable: true, headerClassName: 'text-muted text-small text-uppercase w-10', cellClassName: 'text-alternate'
-                },
-                {
-                    Header: 'Moisture Alert', accessor: 'moisture',
-                    Cell: (row) => {
-                    return (
-                        <span>
-                        {row.row.original.alertMoist == 1 || row.row.original.alertMoist == '1' ? <span style={{ color: "red" }}>{row.row.original.moisture}{'%'}</span> : <span>{row.row.original.moisture}{'%'}</span>}
-                        </span>
-                    );
-                    },
-                    sortable: true, headerClassName: 'text-muted text-small text-uppercase w-10', cellClassName: 'text-alternate'
-                },
-                {
-                    Header: 'Fire Alert', accessor: 'fire',
-                    Cell: (row) => {
-                    return (
-                        <>
-                        {row.row.original.fire == 1 || row.row.original.fire == '1' ? <span style={{ color: "red" }}>Detected </span> : "Not Detected"}
-
-                        </>
+                      </>
 
 
-                    );
-                    },
-                    sortable: true, headerClassName: 'text-muted text-small text-uppercase w-10 px-3', cellClassName: 'text-alternate'
+                  );
+                  },
+                  sortable: true, headerClassName: 'text-dark text-medium text-uppercase w-10 px-3', cellClassName: 'text-dark'
                 },
                 {
                     Header: 'Alert Date Time', accessor: 'update_at', sortable: true,
                     Cell: (row) => (
                     <>
-                        <span>{moment(row.row.original.update_at).format('ll')} </span>
+                        <span>{moment(row.row.original.update_at).format('lll')} </span>
                     </>
                     ),
-                    headerClassName: 'text-muted text-small text-uppercase w-10 px-3', cellClassName: 'text-alternate'
+                    headerClassName: 'text-dark text-medium text-uppercase w-10 px-3', cellClassName: 'text-dark'
                 },
 
                 {
@@ -244,12 +209,48 @@
                     accessor: '',
                     sortable: false,
                     Cell: cell => (
-                    <button className="text-primary" style={{ backgroundColor: 'transparent', border: 'none' }} value={"Add"} onClick={() => handleShow(cell.row.original.deviceid)}>  {<RemoveRedEyeOutlinedIcon />}
+                    <button className="btn btn-outline-primary p-2 mx-2" value={"Add"} onClick={() => handleShow(cell.row.original.deviceid)}>  {<RemoveRedEyeOutlinedIcon />}
                     </button>
                     ),
-                    headerClassName: 'text-muted text-small text-uppercase w-10 px-3',
-                    cellClassName: 'text-alternate',
+                    headerClassName: 'text-dark text-medium text-uppercase w-10 px-3',
+                    cellClassName: 'text-dark',
                 },
+                /* {
+                     Header   : 'Temperature Alert', 
+                     accessor : 'temperature',
+                     Cell     : (row) => {
+                         return (
+                             <span>
+                             {row.row.original.alertTemp == 1 || row.row.original.alertTemp == '1' ? <span style={{ color: "red" }}> {row.row.original.temperature} &#8451;</span> : <span>   {row.row.original.temperature}  &#8451;</span>}
+                             </span>
+                         );
+                     },
+                     sortable        : true, 
+                     headerClassName : 'text-muted text-small text-uppercase w-10', 
+                     cellClassName   : 'text-alternate'
+                 },
+                 {
+                     Header: 'Humidity Alert', accessor: 'humidity',
+                     Cell: (row) => {
+                     return (
+                         <span>
+                         {row.row.original.alertHumi == 1 || row.row.original.alertHumi == '1' ? <span style={{ color: "red" }}> {row.row.original.humidity}{'%'}</span> : <span> {row.row.original.humidity}{'%'}</span>}
+                         </span
+                     );
+                     },
+                     sortable: true, headerClassName: 'text-muted text-small text-uppercase w-10', cellClassName: 'text-alternate'
+                 },
+                 {
+                     Header: 'Moisture Alert', accessor: 'moisture',
+                     Cell: (row) => {
+                     return (
+                         <span>
+                         {row.row.original.alertMoist == 1 || row.row.original.alertMoist == '1' ? <span style={{ color: "red" }}>{row.row.original.moisture}{'%'}</span> : <span>{row.row.original.moisture}{'%'}</span>}
+                         </span>
+                     );
+                     },
+                     sortable: true, headerClassName: 'text-muted text-small text-uppercase w-10', cellClassName: 'text-alternate'
+                 },*/
                 ];
         }, []);
 
@@ -279,16 +280,50 @@
               <CsLineIcons icon="chevron-left" size="13" />
               <span className="align-middle text-small ms-1">Dashboard</span>
             </NavLink>
-            <h1 className="mb-0 pb-0 display-4" id="title"  style={{ marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#5ebce3', }}>
+            <h1 className="mb-0 pb-0 display-4" id="title"  style={{ marginLeft: '0.5rem', fontWeight: '400', marginLeft: '0.5rem', fontWeight: '700', fontSize: '1.5rem', color: '#24A6F6', }}>
               {title}
             </h1>
+          </Col>
+
+          <Col md="3" lg="2" xxl="2" className="mb-1">
+              <div className="d-inline-block float-md-start mt-2 search-input-container w-100 border border-separator bg-foreground">
+                  <ControlsSearch tableInstance={tableInstance} />
+                  <span className="search-magnifier-icon" style={{backgroundColor: '#24A6F6', color: '#fff',borderRadius: '10px'}}>
+                      <CsLineIcons icon="search" />
+                  </span>
+              </div>
+          </Col>
+
+          <Col md="3" lg="2" xxl="1" className="mt-2 mx-1">
+              <DatePicker
+              selected={datesearch}
+              placeholderText="Select a date"
+              onChange={(e) => {
+                 console.log(moment(e).format("YYYY-MM-DD"));
+              //   moment(e).format(yyyy/mm/dd)
+                 SetSearchDate(e);
+                SocketIo.emit('ondatahistory', ({ userId: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id, currentPage: currentPage, limit: limit, datewise:moment(e).format("YYYY-MM-DD") }));
+    
+              
+                // setFieldTouched('date');
+              }}
+              className="form-control"
+              maxDate={today}
+              customInput={
+                <input
+                  type="text"
+                  id="validationCustom01"
+                  placeholder="First name"
+                />
+              }
+            />
           </Col>
           {/* Title End */}
         </Row>
       </div>
 
       <Row className="mb-3">
-        <Col className="d-flex justify-content-between items-align-center">
+        {/* <Col className="d-flex justify-content-between items-align-center">
         <Col sm="5" md="5" lg="3" xxl="2" className="mb-1">
             <div className="d-inline-block float-md-start me-1 search-input-container w-100 border border-separator bg-foreground search-sm">
               <ControlsSearch tableInstance={tableInstance} />
@@ -318,7 +353,7 @@
               }
             />
           </Col>
-        </Col>
+        </Col> */}
         <Col xs="12" className="overflow-scroll tab-scroll">
           {data.length !== 0 ?
             <Table className="react-table nowrap responsive" tableInstance={tableInstance} />
@@ -371,7 +406,7 @@
             </div>
           </Modal.Body>
           <div style={{ display: 'flex', justifyContent: 'end', alignItems: 'center', margin: '10px 2rem' }}>
-            <Button variant="primary" onClick={handleClose} >
+            <Button style={{backgroundColor: '#24A6F6', color: '#fff'}} onClick={handleClose} >
               Close
             </Button>
           </div>

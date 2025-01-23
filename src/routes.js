@@ -8,7 +8,11 @@ const area = {
 };
 const pump = {
     addpump   : lazy(() => import("views/Pump/add_pump/AddPump")),
-    pumplist : lazy(() => import("views/Pump/pump_list/PumpList")),
+    pumplist  : lazy(() => import("views/Pump/pump_list/PumpList")),
+};
+const alert = {
+    list   : lazy(() => import("views/Alert/active_alert/Active_Alert")),
+    detail : lazy(() => import("views/Alert/alert_history/AlertHistory")),
 };
 const settings = {
     home : lazy(() => import("views/device_list/DeviceList")),
@@ -62,6 +66,18 @@ const routesAndMenuItems = {
             { path : "/pump_list", label : "Pump List", component : pump.pumplist },
         ],
     },  
+    {
+        path     : `${appRoot}/alert`,
+        exact    : true,
+        redirect : true,
+        to       : `${appRoot}/alert/list`,
+        label    : "Alert",
+        icon     : "warning-hexagon",
+        subs : [
+            { path : "/active_alert",  label : "Active alert",  component : alert.list },
+            { path : "/alert_history", label : "Alert history", component : alert.detail },
+        ],
+    }, 
     {
         path      : `${appRoot}/real_time_data`,
         component : real_time_pump_data,

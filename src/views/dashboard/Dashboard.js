@@ -4,90 +4,92 @@ import { Link, NavLink } from "react-router-dom";
 import HtmlHead from "components/html-head/HtmlHead";
 import DesktopWindowsOutlinedIcon from "@mui/icons-material/DesktopWindowsOutlined";
 import VibrationOutlinedIcon from "@mui/icons-material/VibrationOutlined";
-import PhonelinkEraseOutlinedIcon from "@mui/icons-material/PhonelinkEraseOutlined";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import { GoogleMap, Data, DrawingManager, useJsApiLoader, Circle, Polygon, Marker,MarkerClusterer } from "@react-google-maps/api";
-// const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 import style from './dashboard.module.css';
-
 import { SocketIo, DEFAULT_USER } from "config";
-import RealTimeNotification from "../../@mock-api/data/notifications";
-const containerStyle = {
-  width: "100wv",
-  height: "33rem",
-  borderRadius: '20px',
-};
-const center = {
-  lat: 25.2048,
-  lng: 55.2708,
-};
-let lib = ["places", "geometry", "visualization", "drawing"];
+
+// import PhonelinkEraseOutlinedIcon from "@mui/icons-material/PhonelinkEraseOutlined";
+// const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
+// import { DEFAULT_USER } from "config";
+// import RealTimeNotification from "../../@mock-api/data/notifications";
+// import io from 'socket.io-client';
+// const url     = process.env.REACT_APP_BASEURL;
+// const SocketIo = io(url);
+
+const containerStyle  = {
+                          width        : "100wv",
+                          height       : "33rem",
+                          borderRadius : '20px',
+                        };
+const center          = {
+                         lat  : 25.2048,
+                         lng  : 55.2708,
+                       };
+let lib               = ["places", "geometry", "visualization", "drawing"];
 const googleMapApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const Dashboard = () => {
-  const title = "Dashboard";
-  const description = "Ecommerce Dashboard Page";
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: googleMapApiKey,
-    libraries: lib,
-  });
-  const [coords, setCoords] = React.useState([]);
-  const [map, setMap] = React.useState(null);
 
-  const [markers, setMarker] = React.useState([])
-  const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
-    setMap(map);
-  }, []);
+  const title                         = "Dashboard";
+  const description                   = "Ecommerce Dashboard Page";
+  const [coords, setCoords]           = React.useState([]);
+  const [map, setMap]                 = React.useState(null);
+  const [markers, setMarker]          = React.useState([])
+  const [isConnected, setIsConnected] = React.useState(SocketIo.connected);
+  const [deviceCount, setDeviceCount] = React.useState("");
+  const [deviceList, setDeviceList]   = React.useState([]);
+
+  const { isLoaded }                  = useJsApiLoader({
+                                          id               : "google-map-script",
+                                          googleMapsApiKey : googleMapApiKey,
+                                          libraries        : lib,
+                                        });
+  const onLoad                        = React.useCallback(function callback(map) {
+                                        setMap(map);
+                                      }, []);
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
 
-
-  const [isConnected, setIsConnected] = React.useState(SocketIo.connected);
-  const [deviceCount, setDeviceCount] = React.useState("");
-  const [deviceList, setDeviceList] = React.useState([]);
-
   React.useEffect(() => {
     setDeviceCount("");
     setDeviceList([]);
+
+    SocketIo.emit('ondashboard', ({ userId: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id }));
+    SocketIo.on('dashboardData', (result) => {
+      setDeviceCount(result.data[0]);
+      setDeviceList(result.deviceList)
+    });
   
-    //if (isConnected) {
+    /*if (isConnected) {
     console.log(sessionStorage.getItem("user_id"))
     SocketIo.emit('ondashboard', ({ userId: DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id == null ? sessionStorage.getItem("user_id") : DEFAULT_USER.id }));
     SocketIo.on('dashboardData', (result) => {
-    //  console.log(result);
-      //if (result.length !== 0) {
+     console.log(result);
+      if (result.length !== 0) {
       setDeviceCount(result.data[0]);
       setDeviceList(result.deviceList)
-      // } else {
-      //   setDeviceCount("");
-      //   setDeviceList([])
-
-      // }
-  
-    
+      } else {
+        setDeviceCount("");
+        setDeviceList([])
+      }
     });
-    // }
+    }*/
     return () => {
       SocketIo.off('ondashboard');
       SocketIo.off('dashboardData');
       setDeviceCount("");
       setDeviceList([])
-
     };
   }, []);
-
-
 
 
   return isLoaded ? (
     <>
       <HtmlHead title={title} description={description} />
-      {/* Title Start */}
-      
+      {/* Title Start */}      
       <div className="page-title-container">
         <NavLink
           className="muted-link pb-1 d-inline-block hidden breadcrumb-back"
